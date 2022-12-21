@@ -1,136 +1,200 @@
-import { Delete } from "@mui/icons-material";
-import { Button, Divider, Grid, IconButton, TextField } from "@mui/material";
-import { FlexBox } from "components/flex-box";
-import { H4 } from "components/Typography";
-import { FieldArray, Formik } from "formik";
-import React, { FC, Fragment } from "react";
+import { Box, Button, Grid, styled, TextField } from '@mui/material'
+import { H4 } from 'components/Typography'
+import DropZone from 'components/DropZone'
+import { useState, useEffect } from 'react'
+import { Formik } from 'formik'
 
-const TopbarForm: FC = () => {
+import React, { FC } from 'react'
+import * as yup from 'yup'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+
+const UploadBox = styled(Box)(({ theme }) => ({
+  cursor: 'pointer',
+  padding: '5px 10px',
+  borderRadius: '4px',
+  display: 'inline-block',
+  color: theme.palette.primary.main,
+  border: `1px solid ${theme.palette.primary.main}`
+}))
+
+// form field validation
+const validationSchema = yup.object().shape({
+  nom_vendeur: yup.string().required('Le nom du vendeur est obligatoire'),
+  prenom_vendeur: yup.string().required('Le prénom du vendeur est obligatoire'),
+  email: yup.string().required("L'email du vendeur est obligatoire"),
+  mot_passe: yup
+    .string()
+    .required(' Le mot de passe du vendeur est obligatoire'),
+  phone: yup
+    .number()
+    .required('Le numéro de téléphone  du vendeur est obligatoire')
+})
+
+const GeneralForm: FC = () => {
   const initialValues = {
-    phone: "12345678910",
-    email: "ui.lib.drive@gmail.com",
-    links: [
-      { id: 1, name: "Theme FAQ's", link: "https://www.themefaqs.com" },
-      { id: 2, name: "Help", link: "https://www.help.com" },
-    ],
-  };
+    nom_vendeur: '',
+    prenom_vendeur: '',
+    email: '',
+    mot_passe: '',
+    phone: ''
+  }
 
-  const handleFormSubmit = async (values) => {
-    console.log(values);
-  };
+  const handleFormSubmit = async values => {
+    console.log(values)
+  }
+
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const token =
+      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcyI6ImVzaG9wIiwiZXhwIjoxNjY0NDEwODI2fQ.R9yCge_10pnDkSjL9aospCdvnRBGYFI4dsOsVaW7fkE'
+    fetch('http://5.135.194.236:8181/app/v1/api/get_categories', {
+      method: 'POST',
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response => response.json())
+
+      .then(data => setData(data.data))
+  }, [])
+  console.log(data, 'data')
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleFormSubmit}>
-      {({ values, handleChange, handleBlur, handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+    <Formik
+      onSubmit={handleFormSubmit}
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit
+      }) => (
+        <form onSubmit={handleSubmit} encType='multipart/form-data'>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
-              <H4>Top Bar Left Content</H4>
+              {/* <H4>Top Bar Left Content</H4> */}
             </Grid>
-
-            <Grid item md={6} xs={12}>
+            <DropZone />
+            <Grid item xs={12}>
               <TextField
                 fullWidth
-                name="phone"
-                color="info"
-                size="medium"
-                label="Phone"
+                color='info'
+                size='medium'
+                name='nom_boutique'
+                label='Nom de la boutique '
                 onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.nom_boutique}
+                error={!!touched.nom_boutique && !!errors.nom_boutique}
+                helperText={touched.nom_boutique && errors.nom_boutique}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                rows={4}
+                multiline
+                fullWidth
+                color='info'
+                size='medium'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                name='boutique_description'
+                label='Description de boutique'
+                value={values.boutique_description}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                color='info'
+                size='medium'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                name='responsable_commercial'
+                label='responsable commercial'
+                value={values.responsable_commercial}
+                error={
+                  !!touched.responsable_commercial &&
+                  !!errors.responsable_commercial
+                }
+                helperText={
+                  touched.responsable_commercial &&
+                  errors.responsable_commercial
+                }
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                color='info'
+                size='medium'
+                type='number'
+                name='phone'
+                label='Téléphone du responsable  '
+                onBlur={handleBlur}
+                onChange={handleChange}
                 value={values.phone}
-                onChange={handleChange}
-                placeholder="0000000000"
+                error={!!touched.phone && !!errors.phone}
+                helperText={touched.phone && errors.phone}
               />
             </Grid>
+            <Box sx={{ minWidth: 1090, marginLeft: 3, marginTop: 2 }}>
+               <FormControl fullWidth>
+                <InputLabel id='demo-simple-select-label'>Catégorie</InputLabel>
+                <Select
+                  labelId='demo-simple-select-label'
+                  
+                  id='demo-simple-select'
+                  label='Catégorie'
+                  onChange={handleChange}
+                >
+                  {data?.map(value => (
+                    <div>
+                      <MenuItem value={value.id} > {value.name}</MenuItem>
 
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                color="info"
-                name="email"
-                size="medium"
-                label="Email"
-                onBlur={handleBlur}
-                value={values.email}
-                onChange={handleChange}
-                placeholder="email@example.com"
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Divider />
-            </Grid>
-
-            <FieldArray
-              name="links"
-              render={(arrayHelper) => (
-                <Fragment>
-                  <Grid item xs={12}>
-                    <FlexBox alignItems="center" justifyContent="space-between">
-                      <H4>Top Bar Right</H4>
-
-                      <Button
-                        color="info"
-                        variant="contained"
-                        onClick={() => {
-                          arrayHelper.push({
-                            id: Date.now(),
-                            name: "",
-                            link: "",
-                          });
-                        }}
-                      >
-                        Add Item
-                      </Button>
-                    </FlexBox>
-                  </Grid>
-
-                  {values.links?.map((item, index) => (
-                    <Grid item container spacing={2} key={item.id}>
-                      <Grid item xs={5}>
-                        <TextField
-                          fullWidth
-                          color="info"
-                          size="medium"
-                          label="Name"
-                          value={item.name}
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          name={`links.${index}.name`}
-                        />
-                      </Grid>
-
-                      <Grid item xs={5}>
-                        <TextField
-                          fullWidth
-                          color="info"
-                          size="medium"
-                          label="Link"
-                          value={item.link}
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          name={`links.${index}.link`}
-                        />
-                      </Grid>
-
-                      <Grid item xs={2}>
-                        <IconButton onClick={() => arrayHelper.remove(index)}>
-                          <Delete />
-                        </IconButton>
-                      </Grid>
-                    </Grid>
+                      {value.children.map(value => (
+                        <div>
+                          <MenuItem >{value.name}</MenuItem>
+                          {value.children.map(value => (
+                            <MenuItem >{value.name}</MenuItem>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
                   ))}
-                </Fragment>
-              )}
-            />
+                  {/* <MenuItem value={10}></MenuItem>
+          <MenuItem value={20}></MenuItem>
+          <MenuItem value={30}></MenuItem> */}
+                </Select>
+              </FormControl> 
+              
+
+
+
+
+
+          
+
+
+            </Box>
           </Grid>
 
-          <Button type="submit" color="info" variant="contained" sx={{ mt: 4 }}>
-            Save Changes
+          <Button type='submit' color='info' variant='contained' sx={{ mt: 4 }}>
+            Valider
           </Button>
         </form>
       )}
     </Formik>
-  );
-};
+  )
+}
 
-export default TopbarForm;
+export default GeneralForm

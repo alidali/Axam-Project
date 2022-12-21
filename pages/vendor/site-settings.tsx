@@ -38,12 +38,12 @@ export default function SiteSettings() {
               onChange={(_, value) => setSelectTab(value)}
               variant="scrollable"
             >
-              <Tab label="General" value="general" disableRipple />
-              <Tab label="Topbar" value="topbar" disableRipple />
-              <Tab label="Footer" value="footer" disableRipple />
-              <Tab label="Social Links" value="social-links" disableRipple />
+              <Tab label="Données vendeur" value="general" disableRipple />
+              <Tab label="Données boutique" value="topbar" disableRipple />
+              <Tab label="Données bancaire" value="footer" disableRipple />
+              {/* <Tab label="Social Links" value="social-links" disableRipple />
               <Tab label="Banner Slider" value="banner-slider" disableRipple />
-              <Tab label="Shipping & Vat" value="shipping-vat" disableRipple />
+              <Tab label="Shipping & Vat" value="shipping-vat" disableRipple /> */}
             </StyledTabList>
           </Box>
 

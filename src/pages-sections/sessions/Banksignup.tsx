@@ -1,5 +1,5 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { MenuItem, TextField } from "@mui/material";
+import { MenuItem, TextField,Grid } from "@mui/material";
 import BazaarButton from "components/BazaarButton";
 import BazaarTextField from "components/BazaarTextField";
 import { FlexBox } from "components/flex-box";
@@ -12,8 +12,7 @@ import EyeToggleButton from "./EyeToggleButton";
 import { multiStepContext } from "StepContext";
 import DropZone from "components/DropZone";
 import { Stack } from "@mui/material";
-import { BlueButton, GreenButton } from "ui";
-import { Box, Container, Grid, Card } from "@mui/material";
+import { BlueButton, GreenButton, Spacer } from "ui";
 
 
 const BankSignup = () => {
@@ -31,51 +30,57 @@ const BankSignup = () => {
     useFormik({
       initialValues,
       onSubmit: handleFormSubmit,
+      validationSchema:validationSchema
 
     });
+    
 
     const Context= useContext(multiStepContext)
+    console.log("step",Context.Step)
   return (
 
 
     // <Wrapper elevation={3} passwordVisibility={passwordVisibility}>
     <form onSubmit={()=> Context.setStep(4)}>
-      <H3 textAlign="center" mb={1}>
+      <H3  textAlign="center" mb={3}  marginRight={0} marginTop={0} fontFamily={'open Sans'} fontSize ={20} >
         Coordonnées bancaires
       </H3>
-      <BazaarTextField
-        mb={1.5}
+      <Grid container spacing={5}>
+        <Grid item xs={10}>
+      <TextField
+     
         fullWidth
         required
-        name="pan_number"
+        name="Rib"
         type="number"
         size="small"
         label="RIB"
         variant="outlined"
         onBlur={handleBlur}
-        value={Context.userData['pan_number']}
-        onChange={(e)=>Context.setUserData({...Context.userData, "pan_number" : e.target.value})}
+        value={Context.userData['Rib']}
+        onChange={(e)=>Context.setUserData({...Context.userData, "Rib" : e.target.value})}
         placeholder="RIB"
         error={!!touched.Rib && !!errors.Rib}
         helperText={touched.Rib && errors.Rib}
       />
-      <Stack spacing={3} mb={3}>
-        <DropZone
-          // onChange={(files) => console.log(files)}
-        />
-
-      </Stack>
+      </Grid>
+      <Grid item xs={10}>
+          <Stack spacing={3} mb={3}>
+            <DropZone  />
+          </Stack>
+      </Grid>
+      <Grid item xs={10}>
       <TextField
         select
         fullWidth
         required
         color="info"
         size="medium"
-        name="bank_name"
+        name="Banque"
         placeholder="Banque"
         label="Banque"
-        defaultValue= {Context.userData['bank_name'] ? Context.userData['bank_name'] : "Banque" }
-        onChange={(e)=>Context.setUserData({...Context.userData, "bank_name" : e.target.value})}
+        defaultValue= {Context.userData['Banque'] ? Context.userData['Banque'] : "Banque" }
+        onChange={(e)=>Context.setUserData({...Context.userData, "Banque" : e.target.value})}
 
       >
         <MenuItem value="Banque Internationale Arabe de Tunisie «BIAT»">	Banque Internationale Arabe de Tunisie «  BIAT »</MenuItem>
@@ -103,54 +108,121 @@ const BankSignup = () => {
         <MenuItem value="Banque Arabe Corporation «ABC»">Banque Arabe Corporation «ABC»</MenuItem>
 
       </TextField>
-      <BazaarTextField
-        mb={1.5}
+       </Grid>
+      <Grid item xs={10}>
+      <TextField
         fullWidth
         required
-        name="bank_code"
+        name="Agence"
         size="small"
         label="Agence"
         variant="outlined"
         onBlur={handleBlur}
-        value={Context.userData['bank_code']}
-        onChange={(e)=>Context.setUserData({...Context.userData, "bank_code" : e.target.value})}
+        value={Context.userData['Agence']}
+        onChange={(e)=>Context.setUserData({...Context.userData, "Agence" : e.target.value})}
         placeholder="Agence"
         error={!!touched.Agence && !!errors.Agence}
         helperText={touched.Agence && errors.Agence}
       />
-      <BazaarTextField
-        mb={1.5}
+      </Grid>
+
+       <Grid item xs={10}>
+      <TextField
         fullWidth
+        name="Cin"
+        type="string"
         required
-        name="cin_number"
-        type="number"
+        
         size="small"
         label="CIN"
         variant="outlined"
         onBlur={handleBlur}
-        value={Context.userData['cin_number']}
-        onChange={(e)=>Context.setUserData({...Context.userData, "cin_number" : e.target.value})}
+        value={Context.userData['Cin']}
+        onChange={(e)=>Context.setUserData({...Context.userData, "Cin" : e.target.value})}
         placeholder="CIN"
         error={!!touched.Cin && !!errors.Cin}
         helperText={touched.Cin && errors.Cin}
       />
-      <Stack spacing={3} mb={3}>
-        <DropZone
-          // onChange={(files) => console.log(files)}
-        />
-
-      </Stack>
-      <BlueButton onClick={() => Context.setStep(2)} height="40px" width="150px">Back</BlueButton>
-      <GreenButton onClick={() => Context.setStep(4)} height="40px" width="150px">Next</GreenButton>
+      </Grid>
+      <Grid item xs={10}>
+         <Stack spacing={3} mb={3}>
+            <DropZone />
+         </Stack>
+         </Grid>
+         <Grid item xs={10}>
+        <BazaarButton
+          fullWidth
+          type="submit"
+          color="secondary"
+          variant="contained"
+          sx={{ mt: 3, ml: 1 ,height: 44, width: 100 ,sm:6 , xs:12  }}
+          onClick={()=> Context.setStep(2)}
+        >
+          Back
+        </BazaarButton>
+        </Grid>
+        <Grid item xs={2}>
+        <BazaarButton
+          fullWidth
+          onClick={()=> Context.setStep(4)}
+          color="primary"
+          variant="contained"
+          sx={{ mt: 3, ml:-20 ,height: 44, width: 100 ,sm:6 , xs:12  }}
+        >
+          Next
+        </BazaarButton>
+        </Grid>
+      {/* <Grid item xs={8}>
+      <BazaarButton
+          fullWidth
+          type="submit"
+          color="secondary"
+          variant="contained"
+          onClick={()=> Context.setStep(2)}
+          sx={{mt: 3, ml: 1 ,height: 44, width: 100 ,sm:6 , xs:12 }}
+        >
+          Back
+        </BazaarButton>
+        </Grid>
+        <Grid item xs={8}>
+        <BazaarButton
+          fullWidth
+          
+          onClick={()=> Context.setStep(4)}
+          color="primary"
+          variant="contained"
+      
+          sx={{ mt: 3, ml:-20 ,height: 44, width: 100 ,sm:6 , xs:12  }}
+        >
+          Next
+        </BazaarButton>
+        </Grid> */}
+        </Grid>
+      {/* <BlueButton onClick={() => Context.setStep(2)}>Back</BlueButton>
+      <GreenButton onClick={() => Context.setStep(4)}>Next</GreenButton> */}
+       
     </form>
+    //</Wrapper>
 
   );
 };
 
+
 const initialValues = {
-  name: "",
+  cin: "",
+  rib: "",
+  banque: "",
+  agence: "",
 
 };
+const validationSchema = yup.object().shape({
+  banque: yup.string().required("required"),
+  agence: yup.string().required("required"),
+
+  rib: yup.number().required("required"),
+  cin: yup.number().required("required"),
+ 
+});
 
 
 

@@ -35,6 +35,7 @@ const RecapSignup = () => {
     });
 
   const Context = useContext(multiStepContext)
+  console.log("step",Context.Step)
 
   return (
     <form onSubmit={Context.submitData}>
@@ -48,11 +49,11 @@ const RecapSignup = () => {
         </H5>
         <Text fontSize="1rem">{"Email :"+String(Context.userData['Email'])}
         </Text>
-        <Text fontSize="1rem">{"Nom :"+String(Context.userData['firstName'])}
+        <Text fontSize="1rem">{"Nom :"+String(Context.userData['Nom'])}
         </Text>
-        <Text fontSize="1rem">{"Prénom :"+String(Context.userData['lastName'])}
+        <Text fontSize="1rem">{"Prénom :"+String(Context.userData['Prenom'])}
         </Text>
-        <Text fontSize="1rem">{"Télèphone :"+String(Context.userData['mobile'])}
+        <Text fontSize="1rem">{"Télèphone :"+String(Context.userData['Telephone'])}
         </Text>
       </GreyCard>
       <Spacer height={10}/>
@@ -64,13 +65,13 @@ const RecapSignup = () => {
         </Text>
         <Text fontSize="1rem">{"Matricule Fiscale :"+String(Context.userData['MatriculeFiscale'])}
         </Text>
-        <Text fontSize="1rem">{"RNE :"+String(Context.userData['rne'])}
+        <Text fontSize="1rem">{"RNE :"+String(Context.userData['Rne'])}
         </Text>
         <Text fontSize="1rem">{"Télèphone Fixe :"+String(Context.userData['TelephoneFixe'])}
         </Text>
-        <Text fontSize="1rem">{"Addresse :"+String(Context.userData['addresse'])}
+        <Text fontSize="1rem">{"Addresse :"+String(Context.userData['Addresse'])}
         </Text>
-        <Text fontSize="1rem">{"Code postal :"+String(Context.userData['pincode'])}
+        <Text fontSize="1rem">{"Code postal :"+String(Context.userData['CodePostal'])}
         </Text>
       </GreyCard>
       <Spacer height={10}/>
@@ -78,19 +79,37 @@ const RecapSignup = () => {
         <H5 textAlign="left" mb={1}>
           Coordonnées bancaires
         </H5>
-        <Text fontSize="1rem">{"RIB :"+String(Context.userData['pan_number'])}
+        <Text fontSize="1rem">{"RIB :"+String(Context.userData['Rib'])}
         </Text>
-        <Text fontSize="1rem">{"Banque :"+String(Context.userData['bank_name'])}
+        <Text fontSize="1rem">{"Banque :"+String(Context.userData['Banque'])}
         </Text>
-        <Text fontSize="1rem">{"Agence :"+String(Context.userData['bank_code'])}
+        <Text fontSize="1rem">{"Agence :"+String(Context.userData['Agence'])}
         </Text>
-        <Text fontSize="1rem">{"CIN :"+String(Context.userData['cin_number'])}
+        <Text fontSize="1rem">{"CIN :"+String(Context.userData['Cin'])}
         </Text>
         
       </GreyCard>
       <Spacer height={20}/>
-      <BlueButton onClick={() => Context.setStep(3)} height="40px" width="150px">Back</BlueButton>
-      <GreenButton onClick={Context.submitData} height="40px" width="150px">Submit</GreenButton>
+      <BazaarButton
+        fullWidth
+        onClick={() => Context.setStep(3)}
+        color="secondary"
+        variant="contained"
+        sx={{ mt: 3, mr: 30 ,height: 44, width: 100 ,sm:6 , xs:12 }}
+      >
+        Back
+      </BazaarButton>
+      <BazaarButton
+        fullWidth
+        
+        type="submit"
+        color="primary"
+        variant="contained"
+        sx={{ mt: 3, ml: 1 ,height: 44, width: 100 ,sm:6 , xs:12}}
+      >
+        Submit
+      </BazaarButton>
+      
 
 
     </form>

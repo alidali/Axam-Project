@@ -1,13 +1,15 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Card, styled, Tab } from "@mui/material";
 import VendorDashboardLayout from "components/layouts/vendor-dashboard";
+
+import ShopInfo from "pages-sections/site-settings/ShopInfo";
+import SellerInfo from "pages-sections/site-settings/SellerInfo";
+
+import BankInfo from "pages-sections/site-settings/BankInfo";
+import React, { ReactElement, useState } from "react";
 import BannerSlider from "pages-sections/site-settings/BannerSlider";
-import FooterForm from "pages-sections/site-settings/FooterForm";
-import GeneralForm from "pages-sections/site-settings/GeneralForm";
 import ShippingVatForm from "pages-sections/site-settings/ShippingVatForm";
 import SocialLinksForm from "pages-sections/site-settings/SocialLinksForm";
-import TopbarForm from "pages-sections/site-settings/TopbarForm";
-import React, { ReactElement, useState } from "react";
 
 const StyledTabPanel = styled(TabPanel)(() => ({
   paddingLeft: 0,
@@ -27,7 +29,7 @@ SiteSettings.getLayout = function getLayout(page: ReactElement) {
 // =============================================================================
 
 export default function SiteSettings() {
-  const [selectTab, setSelectTab] = useState("general");
+  const [selectTab, setSelectTab] = useState("vendor");
 
   return (
     <Box py={4}>
@@ -38,28 +40,30 @@ export default function SiteSettings() {
               onChange={(_, value) => setSelectTab(value)}
               variant="scrollable"
             >
-              <Tab label="Données vendeur" value="general" disableRipple />
-              <Tab label="Données boutique" value="topbar" disableRipple />
-              <Tab label="Données bancaire" value="footer" disableRipple />
+              <Tab label="Données vendeur" value="vendor" disableRipple />
+              <Tab label="Données boutique" value="shop" disableRipple />
+              <Tab label="Données bancaire" value="bank" disableRipple />
+             
+              
               {/* <Tab label="Social Links" value="social-links" disableRipple />
               <Tab label="Banner Slider" value="banner-slider" disableRipple />
               <Tab label="Shipping & Vat" value="shipping-vat" disableRipple /> */}
             </StyledTabList>
           </Box>
 
-          <StyledTabPanel value="general">
-            <GeneralForm />
+          <StyledTabPanel value="vendor">
+            <SellerInfo/>
           </StyledTabPanel>
 
-          <StyledTabPanel value="topbar">
-            <TopbarForm />
+          <StyledTabPanel value="bank">
+            <BankInfo/>
           </StyledTabPanel>
 
-          <StyledTabPanel value="footer">
-            <FooterForm />
+          <StyledTabPanel value="shop">
+            <ShopInfo />
           </StyledTabPanel>
 
-          <StyledTabPanel value="social-links">
+          {/* <StyledTabPanel value="social-links">
             <SocialLinksForm />
           </StyledTabPanel>
 
@@ -69,7 +73,7 @@ export default function SiteSettings() {
 
           <StyledTabPanel value="shipping-vat">
             <ShippingVatForm />
-          </StyledTabPanel>
+          </StyledTabPanel> */}
         </TabContext>
       </Card>
     </Box>

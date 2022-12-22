@@ -3,12 +3,13 @@ import { H4 } from 'components/Typography'
 import DropZone from 'components/DropZone'
 import { useState, useEffect } from 'react'
 import { Formik } from 'formik'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
+
 import React, { FC } from 'react'
 import * as yup from 'yup'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
 
 const UploadBox = styled(Box)(({ theme }) => ({
   cursor: 'pointer',
@@ -32,7 +33,7 @@ const validationSchema = yup.object().shape({
     .required('Le numéro de téléphone  du vendeur est obligatoire')
 })
 
-const GeneralForm: FC = () => {
+const ShopInfo: FC = () => {
   const initialValues = {
     nom_vendeur: '',
     prenom_vendeur: '',
@@ -45,7 +46,22 @@ const GeneralForm: FC = () => {
     console.log(values)
   }
 
+  const [data, setData] = useState([])
 
+  useEffect(() => {
+    const token =
+      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcyI6ImVzaG9wIiwiZXhwIjoxNjY0NDEwODI2fQ.R9yCge_10pnDkSjL9aospCdvnRBGYFI4dsOsVaW7fkE'
+    fetch('http://5.135.194.236:8181/app/v1/api/get_categories', {
+      method: 'POST',
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response => response.json())
+
+      .then(data => setData(data.data))
+  }, [])
+  console.log(data, 'data')
 
   return (
     <Formik
@@ -72,14 +88,13 @@ const GeneralForm: FC = () => {
                 fullWidth
                 color='info'
                 size='medium'
-                name='rib'
-                type="number"
-                label='Rib '
+                name='nom_boutique'
+                label='Nom de la boutique '
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.rib}
-                error={!!touched.rib && !!errors.rib}
-                helperText={touched.rib && errors.rib}
+                value={values.nom_boutique}
+                error={!!touched.nom_boutique && !!errors.nom_boutique}
+                helperText={touched.nom_boutique && errors.nom_boutique}
               />
             </Grid>
             <Grid item xs={12}>
@@ -133,7 +148,43 @@ const GeneralForm: FC = () => {
               />
             </Grid>
             <Box sx={{ minWidth: 1090, marginLeft: 3, marginTop: 2 }}>
+               <FormControl fullWidth>
+                <InputLabel id='demo-simple-select-label'>Catégorie</InputLabel>
+                <Select
+                  labelId='demo-simple-select-label'
+                  
+                  id='demo-simple-select'
+                  label='Catégorie'
+                  onChange={handleChange}
+                >
+                  {data?.map(value => (
+                    <div>
+                      <MenuItem value={value.id} > {value.name}</MenuItem>
+
+                      {value.children.map(value => (
+                        <div>
+                          <MenuItem >{value.name}</MenuItem>
+                          {value.children.map(value => (
+                            <MenuItem >{value.name}</MenuItem>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                  {/* <MenuItem value={10}></MenuItem>
+          <MenuItem value={20}></MenuItem>
+          <MenuItem value={30}></MenuItem> */}
+                </Select>
+              </FormControl> 
+              
+
+
+
+
+
           
+
+
             </Box>
           </Grid>
 
@@ -146,4 +197,4 @@ const GeneralForm: FC = () => {
   )
 }
 
-export default GeneralForm
+export default ShopInfo

@@ -23,7 +23,7 @@ const validationSchema = yup.object().shape({
   phone: yup.number().required("Le numéro de téléphone  du vendeur est obligatoire"),
 });
 
-const GeneralForm: FC = () => {
+const SellerInfo: FC = () => {
   const initialValues = {
     nom_vendeur: "",
     prenom_vendeur: "",
@@ -92,8 +92,8 @@ const GeneralForm: FC = () => {
                 size="medium"
                 name="email"
                 label="Email "
-                onBlur={handleBlur}
-                onChange={handleChange}
+               // onBlur={handleBlur}
+                 onChange={handleChange}
                 value={values.email}
                 error={!!touched.email && !!errors.email}
                 helperText={touched.email && errors.email}
@@ -147,4 +147,4 @@ const GeneralForm: FC = () => {
   );
 };
 
-export default GeneralForm;
+export default SellerInfo;

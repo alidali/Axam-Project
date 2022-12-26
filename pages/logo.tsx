@@ -7,9 +7,9 @@ const Logo = () => {
 
 			<div>
 				<Image
-                src="/assets/images/banners/logo.png"
-                height="100"
-                width="190"
+                src="/assets/images/banners/log.png"
+                height="120"
+                width="220"
 			       />
 			</div>
 

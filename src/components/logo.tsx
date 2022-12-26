@@ -8,8 +8,8 @@ const Logo = () => {
 			<div>
 				<Image
 					src="/assets/images/banners/logo.png"
-					height="85"
-					width="110"
+					// height="50"
+					// width="90"
 				/>
 			</div>
 

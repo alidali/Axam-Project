@@ -11,49 +11,58 @@ import EyeToggleButton from "./EyeToggleButton";
 //import { Wrapper } from "./Login";
 import { multiStepContext } from "StepContext";
 import DropZone from "components/DropZone";
-import { Stack } from "@mui/material";
 import { BlueButton, GreenButton, Spacer } from "ui";
-
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const BankSignup = () => {
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
-
-  const togglePasswordVisibility = useCallback(() => {
-    setPasswordVisibility((visible) => !visible);
-  }, []);
-
   const handleFormSubmit = async (values: any) => {
     console.log(values);
   };
-
-  const { values, errors, touched, handleBlur } =
-    useFormik({
-      initialValues,
-      onSubmit: handleFormSubmit,
-      validationSchema:validationSchema
-
-    });
+  const { values, errors, touched, handleBlur, handleChange } =
+  useFormik({
+    initialValues,
+    onSubmit: handleFormSubmit,
+    validationSchema: formSchema2,
+  });
     
 
     const Context= useContext(multiStepContext)
-    console.log("step",Context.Step)
   return (
 
 
     // <Wrapper elevation={3} passwordVisibility={passwordVisibility}>
     <form onSubmit={()=> Context.setStep(4)}>
-      <H3  textAlign="center" mb={3}  marginRight={0} marginTop={0} fontFamily={'open Sans'} fontSize ={20} >
+      {/* <H3  textAlign="center" mb={3}  marginRight={0} marginTop={0} fontFamily={'open Sans'} fontSize ={20} >
         Coordonnées bancaires
-      </H3>
-      <Grid container spacing={5}>
-        <Grid item xs={10}>
+      </H3> */}
+      <Grid container spacing={5} alignItems='center' paddingLeft={30}>
+      <Grid item xs={12}>
       <TextField
-     
+        fullWidth
+        required
+        name="titulaireDuCompte"
+        type="string"
+        size="medium"
+        label="Titulaire du compte"
+        variant="outlined"
+        onBlur={handleBlur}
+        value={Context.userData['titulaireDuCompte']}
+        onChange={(e)=>Context.setUserData({...Context.userData, "titulaireDuCompte" : e.target.value})}
+        placeholder="titulaireDuCompte"
+        error={!!touched.titulaireDuCompte && !!errors.titulaireDuCompte}
+        helperText={touched.titulaireDuCompte && errors.titulaireDuCompte}
+      />
+      </Grid>
+          <Grid item xs={12} >
+      <TextField
         fullWidth
         required
         name="Rib"
         type="number"
-        size="small"
+        size="medium"
         label="RIB"
         variant="outlined"
         onBlur={handleBlur}
@@ -64,12 +73,10 @@ const BankSignup = () => {
         helperText={touched.Rib && errors.Rib}
       />
       </Grid>
-      <Grid item xs={10}>
-          <Stack spacing={3} mb={3}>
-            <DropZone  />
-          </Stack>
-      </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={12} >
+        <DropZone/>
+        </Grid>
+      <Grid item xs={12} sm={6}>
       <TextField
         select
         fullWidth
@@ -109,12 +116,12 @@ const BankSignup = () => {
 
       </TextField>
        </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={12} sm={6}>
       <TextField
         fullWidth
         required
         name="Agence"
-        size="small"
+        size="medium"
         label="Agence"
         variant="outlined"
         onBlur={handleBlur}
@@ -125,15 +132,65 @@ const BankSignup = () => {
         helperText={touched.Agence && errors.Agence}
       />
       </Grid>
-
-       <Grid item xs={10}>
+      <Grid item xs={12} sm={6}>
+        <TextField
+         
+          fullWidth
+          required
+          name="CodeBancaire"
+          size="medium"
+          label="Code bancaire "
+          variant="outlined"
+          type="number"
+          onBlur={handleBlur}
+          value={Context.userData['CodeBancaire']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "CodeBancaire" : e.target.value})}
+          placeholder="Code bancaire"
+          error={!!touched.CodeBancaire && !!errors.CodeBancaire }
+          helperText={touched.CodeBancaire && errors.CodeBancaire }
+        />
+        </Grid>
+      
+       
+      
+        <Grid item xs={12} sm={6}>
+        <TextField
+          fullWidth
+          name="iban"
+          size="medium"
+          label="Iban"
+          variant="outlined"
+          onBlur={handleBlur}
+          value={Context.userData['iban']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "iban" : e.target.value})}
+          placeholder="Iban"
+          error={!!touched.iban && !!errors.iban}
+          helperText={touched.iban && errors.iban}
+        />
+        </Grid>
+        <Grid item xs={12} >
+        <TextField
+          fullWidth
+          
+          name="codeSwift"
+          size="medium"
+          label="Code swift"
+          variant="outlined"
+          onBlur={handleBlur}
+          value={Context.userData['codeSwift']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "codeSwift" : e.target.value})}
+          placeholder="Code swift"
+          error={!!touched.codeSwift && !!errors.codeSwift}
+          helperText={touched.codeSwift && errors.codeSwift}
+        />
+        </Grid>
+       <Grid item xs={12} >
       <TextField
         fullWidth
         name="Cin"
         type="string"
         required
-        
-        size="small"
+        size="medium"
         label="CIN"
         variant="outlined"
         onBlur={handleBlur}
@@ -144,19 +201,18 @@ const BankSignup = () => {
         helperText={touched.Cin && errors.Cin}
       />
       </Grid>
-      <Grid item xs={10}>
-         <Stack spacing={3} mb={3}>
-            <DropZone />
-         </Stack>
-         </Grid>
-         <Grid item xs={10}>
+      <Grid item xs={12} >
+        <DropZone/>
+        </Grid>
+      
+        <Grid item xs={10}>
         <BazaarButton
           fullWidth
           type="submit"
           color="secondary"
           variant="contained"
           sx={{ mt: 3, ml: 1 ,height: 44, width: 100 ,sm:6 , xs:12  }}
-          onClick={()=> Context.setStep(2)}
+           onClick={()=> Context.setStep(2)}
         >
           Back
         </BazaarButton>
@@ -164,63 +220,45 @@ const BankSignup = () => {
         <Grid item xs={2}>
         <BazaarButton
           fullWidth
-          onClick={()=> Context.setStep(4)}
-          color="primary"
-          variant="contained"
-          sx={{ mt: 3, ml:-20 ,height: 44, width: 100 ,sm:6 , xs:12  }}
-        >
-          Next
-        </BazaarButton>
-        </Grid>
-      {/* <Grid item xs={8}>
-      <BazaarButton
-          fullWidth
+          // onClick={()=> Context.setStep(4)}
           type="submit"
-          color="secondary"
-          variant="contained"
-          onClick={()=> Context.setStep(2)}
-          sx={{mt: 3, ml: 1 ,height: 44, width: 100 ,sm:6 , xs:12 }}
-        >
-          Back
-        </BazaarButton>
-        </Grid>
-        <Grid item xs={8}>
-        <BazaarButton
-          fullWidth
-          
-          onClick={()=> Context.setStep(4)}
           color="primary"
           variant="contained"
-      
-          sx={{ mt: 3, ml:-20 ,height: 44, width: 100 ,sm:6 , xs:12  }}
+          sx={{ mt: 3, ml:-5 ,height: 44, width: 100 ,sm:6 , xs:12  }}
         >
           Next
         </BazaarButton>
-        </Grid> */}
         </Grid>
-      {/* <BlueButton onClick={() => Context.setStep(2)}>Back</BlueButton>
-      <GreenButton onClick={() => Context.setStep(4)}>Next</GreenButton> */}
+    
+        </Grid>
+    
        
     </form>
-    //</Wrapper>
+
 
   );
 };
 
 
 const initialValues = {
+  titulaireDuCompte:"",
   cin: "",
   rib: "",
   banque: "",
   agence: "",
-
+  codeSwift:"",
+  iban:"",
+  codeBancaire:"",
 };
-const validationSchema = yup.object().shape({
+const formSchema2 = yup.object().shape({
+  titulaireDuCompte: yup.string().required("required"),
   banque: yup.string().required("required"),
-  agence: yup.string().required("required"),
-
+  agence: yup.string().required("invalid agence").required("agence is required"),
+  codeSwift: yup.string().required("required"),
+  iban: yup.number().required("required"),
+  codeBancaire: yup.number().required("required"),
   rib: yup.number().required("required"),
-  cin: yup.number().required("required"),
+  Cin: yup.number().required("required"),
  
 });
 

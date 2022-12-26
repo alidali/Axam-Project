@@ -1,6 +1,9 @@
 import { FlexRowCenter } from "components/flex-box";
 import SEO from "components/SEO";
+import { H3, H6, Small } from 'components/Typography'
+import Typography from '@mui/material/Typography';
 import { SocialIcon } from 'react-social-icons';
+import Logo from "./logo";
 import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,6 +32,7 @@ const SignUpPage: NextPage = ({ children }) => {
   
   const Context= useContext(multiStepContext)
   console.log("step", Context.currentStep)
+
   
 function showStep(step: number) {
   switch (step) {
@@ -51,75 +55,76 @@ const socialMediaHandlesLinks = {
   twitter: 'https://twitter.com/ImPhaniMurari'
 }
 return (
+
   
  
 
 
 
 <Scrollbar> 
+<div style={{  display: 'flex',justifyContent: 'left', alignItems: 'center'}}>
+        <Logo/>
+        </div>
+<Typography component="h1" variant="h4" align="center">
+Inscrivez-vous
+          </Typography>
+<Grid container  sx={{ height: '100vh' }}>
 
-<Grid container  sx={{ height: '150vh' }}>
-  <Grid item xs paddingLeft='120px'>
+  <Grid item xs paddingLeft='10px'  width={{ xs:"100px",
+      sm:"200px",
+      md:"300px",
+      lg:"400px",
+      xl: "500px"}} >
+  
   <Box
         sx={{
-          my: 8,
-          mx: 4,
+
+           my: 1,
+           mx: 30,
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
         }}
+     
       > 
+      <Card>
   <CssBaseline />
-  <Stepper  activeStep={Context.currentStep-1} orientation="vertical"  >
+
+  <Stepper  activeStep={Context.currentStep-1}  >
   <Step>
-    <StepLabel  style={{height:"100px"}}></StepLabel>
+    <StepLabel  >Données Vendeur</StepLabel>
   </Step>
   <Step>
-    <StepLabel  style={{height:"100px"}}></StepLabel>
+    <StepLabel >Données Boutique</StepLabel>
   </Step>
   <Step>
-    <StepLabel style={{height:"100px"}}></StepLabel>
+    <StepLabel>Données Bancaire</StepLabel>
   </Step>
   <Step>
-    <StepLabel style={{height:"100px"}}></StepLabel>
+    <StepLabel>Résumé</StepLabel>
   </Step>
 </Stepper>
- <Grid item lg={8} md={8} xs={12} >
+ <Grid item lg={9} md={8} xs={12} >
  {showStep(Context.currentStep)}
 
   </Grid>
-  <Grid  style={{display: "flex", alignItems:'flex-end', flexDirection:'column-reverse',justifyContent: 'space-between' ,marginTop:"20%"}} width={{ xs:"25px",
+  <Grid  style={{display: "flex", alignItems:'center',flexDirection:'row' ,marginTop:"20%"}} width={{ xs:"25px",
       sm:"50px",
       md:"1500px",
       lg:"200px",
       xl: "250px"}}>
-        
+{/*         
         <SocialIcon url={socialMediaHandlesLinks.facebook} />
         <SocialIcon url={socialMediaHandlesLinks.instagram} />
-        <SocialIcon url={socialMediaHandlesLinks.twitter} />
+        <SocialIcon url={socialMediaHandlesLinks.twitter} /> */}
         
      
   </Grid>
+  </Card>
   </Box>
   </Grid>
-  <Divider orientation="vertical" flexItem sx={{ mb: 1 }}>
- 
-  </Divider>
-  <Grid item xs={false} sm={8} md={5.5} 
-   width={{ xs:"150px",
-   sm:"200px",
-   md:"250px",
-   lg:"250px",
-   xl: "300px"}} 
-  
-  sx={{
-        backgroundImage: 'url(./assets/images/banners/plante.jpg)',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor: (t) =>
-          t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',}}  
-      />
+
+
   
   </Grid>
 </Scrollbar>

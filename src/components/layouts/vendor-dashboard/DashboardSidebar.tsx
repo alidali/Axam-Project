@@ -175,8 +175,8 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
         <Avatar
           src={
             COMPACT
-              ? "/assets/images/bazaar-white-sm.svg"
-              : "/assets/images/logo.svg"
+            ? "/assets/images/banners/logo.png"
+            : "/assets/images/banners/logo.png"
           }
           sx={{
             borderRadius: 0,

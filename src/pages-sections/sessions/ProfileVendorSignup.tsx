@@ -1,17 +1,21 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { Fragment } from "react";
+import {  Fragment } from "react";
 import BazaarButton from "components/BazaarButton";
 import BazaarTextField from "components/BazaarTextField";
 import { FlexBox } from "components/flex-box";
 import { H3, H6, Small } from "components/Typography";
 import { useFormik } from "formik";
-import React, { useCallback, useState, useContext } from "react";
+import  { useCallback, useState, useContext } from "react";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
-import { GreenButton, Spacer } from "ui";
+// import { Wrapper } from "./Login";
 import { multiStepContext } from "StepContext";
-import Phone from 'components/phone/Phone';
-
+import { GreenButton, Spacer } from "ui";
+import { Button, Divider, Grid, IconButton, TextField  } from "@mui/material";
+  import Phone from 'components/phone/Phone';
+  import { PhoneInput } from "react-contact-number-input";
+  import ContactMailIcon from '@mui/icons-material/ContactMail';
+  import PersonIcon from '@mui/icons-material/Person';
 const ProfileVendorSignup = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
@@ -29,21 +33,23 @@ const ProfileVendorSignup = () => {
       onSubmit: handleFormSubmit,
       validationSchema: formSchema,
     });
-
-  const Context = useContext(multiStepContext)
+  
+    const Context = useContext(multiStepContext)
 
 
   return (
 
     <Fragment>
-      {/* <Wrapper elevation={3} passwordVisibility={passwordVisibility} style={{marginLeft:"-60%"}}> */}
-      <form onSubmit={() => Context.setStep(2)}>
-        <H3 textAlign="center" mb={1}>
-          Données vendeur
+    {/* <Wrapper elevation={3} passwordVisibility={passwordVisibility} style={{marginLeft:"-60%"}}> */}
+      <form onSubmit={()=> Context.setStep(2)}>
+    
+        <H3 textAlign="center" mb={3} marginRight={0} marginTop={0} fontFamily={'open Sans'} fontSize ={20}>
+        Données vendeur
         </H3>
-
-        <BazaarTextField
-          mb={1.5}
+        <Grid container spacing={4} alignItems= "center" >
+        <Grid item xs={10} height={80} marginTop={5}>
+        <TextField
+          
           fullWidth
           required
           name="Email"
@@ -52,76 +58,92 @@ const ProfileVendorSignup = () => {
           variant="outlined"
           onBlur={handleBlur}
           value={Context.userData['Email']}
-          onChange={(e) => Context.setUserData({ ...Context.userData, "Email": e.target.value })}
+          onChange={(e)=>Context.setUserData({...Context.userData, "Email" : e.target.value})}
           label="Email"
           placeholder="exmple@mail.com"
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
+          InputProps={{
+            endAdornment: (
+              < ContactMailIcon  fontSize="small" color='inherit' sx={{ mr: 1 }} />
+            ),
+          }}
         />
-
-
-        <BazaarTextField
-          mb={1.5}
-          fullWidth
+        </Grid>
+        <Grid item xs={10} height={80}>
+        <TextField
+        
           required
-          name="firstName"
+          fullWidth
+          name="Nom"
           size="small"
-          label="First Name"
+          label="Nom"
           variant="outlined"
           onBlur={handleBlur}
-          value={Context.userData['firstName']}
-          onChange={(e) => Context.setUserData({ ...Context.userData, "firstName": e.target.value })}
+          value={Context.userData['Nom']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "Nom" : e.target.value})}
           placeholder="Nom"
           error={!!touched.name && !!errors.name}
           helperText={touched.name && errors.name}
+          InputProps={{
+            endAdornment: (
+              < PersonIcon  fontSize="small" color='inherit' sx={{ mr: 1 }} />
+            ),
+          }}
         />
-
-        <BazaarTextField
-          mb={1.5}
+        </Grid>
+        <Grid item xs={10} height={80}>
+         <TextField
+         
           fullWidth
           required
-          name="lastName"
+          name="Prenom"
           size="small"
-          label="Last Name"
+          label="Prénom"
           variant="outlined"
           onBlur={handleBlur}
-          value={Context.userData['lastName']}
-          onChange={(e) => Context.setUserData({ ...Context.userData, "lastName": e.target.value })}
-          placeholder="Nom"
-          error={!!touched.name && !!errors.name}
-          helperText={touched.name && errors.name}
+          value={Context.userData['Prenom']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "Prenom" : e.target.value})}
+          placeholder="Prénom"
+          error={!!touched.Prénom && !!errors.Prénom}
+          helperText={touched.Prénom && errors.Prénom}
         />
-        <BazaarTextField
-          mb={1.5}
+         </Grid>
+    
+         <Grid item xs={10} height={80} >
+         <TextField
           fullWidth
           required
-          name="mobile"
+          name="Telephone" 
           size="small"
           type="number"
           label="Téléphone"
           variant="outlined"
           onBlur={handleBlur}
-          value={Context.userData['mobile']}
-          onChange={(e) => Context.setUserData({ ...Context.userData, "mobile": e.target.value })}
+          onChange={(e)=>Context.setUserData({...Context.userData, "Telephone" : e.target.value})}
           placeholder="Téléphone"
           error={!!touched.Téléphone && !!errors.Téléphone}
           helperText={touched.Téléphone && errors.Téléphone}
-        />
-
-
-        <BazaarTextField
-          mb={1.5}
-          fullWidth
+        /> 
+        </Grid>
+       
+     {/* <Grid item xs={8} >
+           <Phone/>
+           </Grid> */}
+           <Spacer height={12}/>
+           <Grid item xs={10} height={80}>
+        <TextField
           required
+          fullWidth
           size="small"
-          name="password"
+          name="Password"
           label="Mot de passe"
           variant="outlined"
           autoComplete="on"
           placeholder="*********"
           onBlur={handleBlur}
-          onChange={(e) => Context.setUserData({ ...Context.userData, "password": e.target.value })}
-          value={Context.userData['password']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "Password" : e.target.value})}
+          value={Context.userData['Password']}
           type={passwordVisibility ? "text" : "password"}
           error={!!touched.password && !!errors.password}
           helperText={touched.password && errors.password}
@@ -134,18 +156,19 @@ const ProfileVendorSignup = () => {
             ),
           }}
         />
-
-        <BazaarTextField
-          fullWidth
+</Grid>
+<Grid item xs={10} height={80}>
+        <TextField
           required
+          fullWidth
           size="small"
           autoComplete="on"
-          name="confirm_password"
+          name="RePassword"
           variant="outlined"
           label="Confirmer mot de passe "
           placeholder="*********"
           onBlur={handleBlur}
-          onChange={(e) => Context.setUserData({ ...Context.userData, "confirm_password": e.target.value })}
+          onChange={(e)=>Context.setUserData({...Context.userData, "RePassword" : e.target.value})}
           value={Context.userData['RePassword']}
           type={passwordVisibility ? "text" : "password"}
           error={!!touched.re_password && !!errors.re_password}
@@ -159,8 +182,9 @@ const ProfileVendorSignup = () => {
             ),
           }}
         />
-
-
+        </Grid>
+        
+        <Grid item xs={10} height={80}>
         <FormControlLabel
           name="agreement"
           className="agreement"
@@ -177,11 +201,12 @@ const ProfileVendorSignup = () => {
               flexWrap="wrap"
               alignItems="center"
               justifyContent="flex-start"
+              
             >
               By signing up, you agree to
               <a href="/" target="_blank" rel="noreferrer noopener">
                 <H6 ml={1} borderBottom="1px solid" borderColor="grey.900">
-                  Terms & Condtion
+                  Terms & Condition
                 </H6>
               </a>
             </FlexBox>
@@ -189,13 +214,27 @@ const ProfileVendorSignup = () => {
         />
 
 
-        <Spacer height={10} />
-       
+         </Grid>
+         <Spacer height={10}/>
+        {/* <GreenButton onClick={() => Context.setStep(1)} height="50px" width="150px">Next</GreenButton> */}
+        <Grid item xs={8} height={80}>
+        <BazaarButton
+          fullWidth
+          type="submit"
+          color="primary"
+          variant="contained"
+          sx={{ mt: 3 ,height: 44, width: 140 ,sm:6 , xs:12 ,flexDirection:"center" }}
+         
+        >
+          Next
+        </BazaarButton>
+        </Grid>
+        </Grid>
       </form>
-
-      {/* </Wrapper> */}
+     
+    {/* </Wrapper> */}
     </Fragment>
-
+   
   );
 };
 
@@ -223,7 +262,9 @@ const formSchema = yup.object().shape({
       (value) => value === true
     )
 
-    .required("You have to agree with our Terms and Conditions!"),
+.required("You have to agree with our Terms and Conditions!"),
+
+//</Fragment>
 });
 
 

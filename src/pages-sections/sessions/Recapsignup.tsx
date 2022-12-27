@@ -109,8 +109,6 @@ const RecapSignup = () => {
       >
         Submit
       </BazaarButton>
-      {/* <BlueButton onClick={() => Context.setStep(3)} height="40px" width="150px">Back</BlueButton>
-      <GreenButton onClick={Context.submitData} height="40px" width="150px">Submit</GreenButton> */}
 
 
     </form>

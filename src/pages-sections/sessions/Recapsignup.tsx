@@ -109,7 +109,6 @@ const RecapSignup = () => {
       >
         Submit
       </BazaarButton>
-      
 
 
     </form>

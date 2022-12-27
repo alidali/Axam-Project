@@ -212,7 +212,9 @@ const ProfileVendorSignup = () => {
             </FlexBox>
           }
         />
-        </Grid>
+
+
+         </Grid>
          <Spacer height={10}/>
         {/* <GreenButton onClick={() => Context.setStep(1)} height="50px" width="150px">Next</GreenButton> */}
         <Grid item xs={8} height={80}>

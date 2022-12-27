@@ -7,7 +7,6 @@ import { useFormik } from "formik";
 import React, { useCallback, useState, useContext } from "react";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
-
 import { multiStepContext } from "StepContext";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
@@ -162,8 +161,6 @@ const ShopSignup = () => {
         </Grid>
         
         <Grid item xs={10} height={80}>
-       
-       
            <H6 ml={1}  borderColor="grey.900" fontFamily={'open Sans'} fontSize ={12} color={'inherit'} >
              <ReportProblemIcon fontSize="small" color='inherit' sx={{ mr: 1 }} />
              Les consommateurs, vous reconnaitrons sur Axam à travers votre nom de Boutique.

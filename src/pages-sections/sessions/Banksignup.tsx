@@ -33,11 +33,9 @@ const BankSignup = () => {
   return (
 
 
-    // <Wrapper elevation={3} passwordVisibility={passwordVisibility}>
+ 
     <form onSubmit={()=> Context.setStep(4)}>
-      {/* <H3  textAlign="center" mb={3}  marginRight={0} marginTop={0} fontFamily={'open Sans'} fontSize ={20} >
-        Coordonnées bancaires
-      </H3> */}
+    
       <Grid container spacing={5} alignItems='center' paddingLeft={30}>
       <Grid item xs={12}>
       <TextField

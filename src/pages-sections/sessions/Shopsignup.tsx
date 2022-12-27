@@ -6,13 +6,72 @@ import { H3, H6, Small } from "components/Typography";
 import { useFormik } from "formik";
 import React, { useCallback, useState, useContext } from "react";
 import * as yup from "yup";
-import EyeToggleButton from "./EyeToggleButton";
-import {  Fragment } from "react";
-//import { Wrapper } from "./Login";
+import { GreenButton, Spacer } from 'ui'
 import { multiStepContext } from "StepContext";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import DropZone from "components/DropZone";
+import styled from 'styled-components'
 
+
+const StyledRaison = styled.div`
+  
+  justify-content: space-between;  
+  padding: 20px;
+  margin: 30px;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+  
+`;
+
+const StyledCodePostal = styled.div`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
+
+
+const StyledPays = styled.div`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
+const StyledPhone = styled.div`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
+
+const StyledMatricule = styled.div`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
+const StyledDropzone = styled.div`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
 
 const ShopSignup = () => {
   
@@ -31,14 +90,36 @@ const ShopSignup = () => {
   console.log("step",Context.Step)
 
   return (
-    <Fragment>
+  
       <form onSubmit={()=> Context.setStep(3)}>
-        {/* <H3 textAlign="center" mb={3}  marginRight={10} marginTop={0} fontFamily={'open Sans'} fontSize ={20}>
-       Données Boutique/société
-        </H3> */}
+       < StyledRaison>
+       <TextField
+          fullWidth
+          required
+          name="NomBoutique"
+          size="medium"
+         
+          label="Nom Boutique"
+          variant="outlined"
+          onBlur={handleBlur}
+          // InputProps={{
+          //   endAdornment: (
+          //     <ReportProblemIcon  fontSize="small" color='inherit' sx={{ mr: 1 }} />
+          //   ),
+          // }}
+          value={Context.userData['NomBoutique']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "NomBoutique" : e.target.value})}
+          placeholder="Nom Boutique"
+          error={!!touched.NomBoutique && !!errors.NomBoutique}
+          helperText={touched.NomBoutique && errors.NomBoutique}
+        />
+     
+
+
+<Spacer width={20} />
+
       
-        <Grid container spacing={5} alignItems='center' paddingLeft={30}>
-          <Grid item xs={12}>
+  
         <TextField
           fullWidth
           required
@@ -53,27 +134,52 @@ const ShopSignup = () => {
           error={!!touched.RaisonSocial && !!errors.RaisonSocial}
           helperText={touched.RaisonSocial && errors.RaisonSocial}
         />
-        </Grid>
-        <Grid item xs={12} sm={4}>
+        
+        </StyledRaison>
+        {/* <Grid item xs={10} height={80}>
+       
+       <H6 ml={1}  borderColor="grey.900" fontFamily={'open Sans'} fontSize ={12} color={'inherit'} >
+         <ReportProblemIcon fontSize="small" color='inherit' sx={{ mr: 1 }} />
+         Les consommateurs, vous reconnaitrons sur Axam à travers votre nom de Boutique.
+         Il est strictement interdit d&apos;utiliser un nom de marque déposée sans l&apos;autorisation 
+         de son propriétaire.
+         </H6>
+    
+    </Grid> */}
+        <StyledPays>
         <TextField
          
-          fullWidth
-          required
-          name="gouvernorat"
-          size="medium"
-          label="Gouvernorat"
-          variant="outlined"
-          onBlur={handleBlur}
-          value={Context.userData['gouvernorat']}
-          onChange={(e)=>Context.setUserData({...Context.userData, "gouvernorat" : e.target.value})}
-          placeholder="Gouvernorat"
-          error={!!touched.gouvernorat && !!errors.gouvernorat}
-          helperText={touched.gouvernorat && errors.gouvernorat}
-        />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-        <TextField
+         fullWidth
+         required
+         name="pays"
+         size="medium"
+         label="Pays"
+         variant="outlined"
+         onBlur={handleBlur}
+         value={Context.userData['pays']}
+         onChange={(e)=>Context.setUserData({...Context.userData, "pays" : e.target.value})}
+         placeholder="Pays"
+         error={!!touched.pays && !!errors.pays}
+         helperText={touched.pays && errors.pays}
+       />
+           <Spacer width={20} />
+           <TextField
          
+         fullWidth
+         required
+         name="gouvernorat"
+         size="medium"
+         label="Gouvernorat"
+         variant="outlined"
+         onBlur={handleBlur}
+         value={Context.userData['gouvernorat']}
+         onChange={(e)=>Context.setUserData({...Context.userData, "gouvernorat" : e.target.value})}
+         placeholder="Gouvernorat"
+         error={!!touched.gouvernorat && !!errors.gouvernorat}
+         helperText={touched.gouvernorat && errors.gouvernorat}
+       />
+       <Spacer width={20} />
+        <TextField
           fullWidth
           required
           name="delegation"
@@ -87,27 +193,32 @@ const ShopSignup = () => {
           error={!!touched.delegation && !!errors.delegation }
           helperText={touched.delegation  && errors.delegation }
         />
-        </Grid>
-        <Grid item xs={12} sm={4}>
+     
+        <Spacer width={20} />
+      
+     </StyledPays>
+     
+     <StyledCodePostal>
+       
          <TextField
          
           fullWidth
           required
-          name="codePostal"
+          name="ville"
           size="medium"
           type="number"
         
-          label="Code postal"
+          label="Ville"
           variant="outlined"
           onBlur={handleBlur}
-          value={Context.userData['CodePostal']}
-          onChange={(e)=>Context.setUserData({...Context.userData, "CodePostal" : e.target.value})}
-          placeholder="Code postal"
-          error={!!touched.codePostal && !!errors.codePostal}
-          helperText={touched.codePostal && errors.codePostal}
+          value={Context.userData['ville']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "ville" : e.target.value})}
+          placeholder="ville"
+          error={!!touched.ville && !!errors.ville}
+          helperText={touched.ville && errors.ville}
         />
-        </Grid>
-        <Grid item xs={12} >
+           <Spacer width={20} />
+      
         <TextField
          
           fullWidth
@@ -123,8 +234,43 @@ const ShopSignup = () => {
           error={!!touched.Addresse && !!errors.Addresse}
           helperText={touched.Addresse && errors.Addresse}
         />
-        </Grid>
-        <Grid item xs={12} >
+         </StyledCodePostal>
+         <StyledPhone>
+         <TextField
+          fullWidth
+          required
+          name="telephoneFixe"
+          size="medium"
+          label="Télèphone Fixe"
+          type="number"
+          variant="outlined"
+          onBlur={handleBlur}
+          value={Context.userData['TelephoneFixe']}
+          onChange={(e)=>Context.setUserData({...Context.userData, "TelephoneFixe" : e.target.value})}
+          placeholder="Télèphone Fixe"
+          error={!!touched.telephoneFixe && !!errors.telephoneFixe}
+          helperText={touched.telephoneFixe && errors.telephoneFixe}
+        />
+           <Spacer width={20} />
+        <TextField
+         
+         fullWidth
+         required
+         name="CodePostal"
+         size="medium"
+         label="Code Postal"
+         type="number"
+         variant="outlined"
+         onBlur={handleBlur}
+         value={Context.userData['CodePostal']}
+         onChange={(e)=>Context.setUserData({...Context.userData, "CodePostal" : e.target.value})}
+         placeholder="Code Postal"
+         error={!!touched.CodePostal && !!errors.CodePostal}
+         helperText={touched.CodePostal && errors.CodePostal}
+       />
+        </StyledPhone>
+        
+     <StyledMatricule>
         <TextField
           
           fullWidth
@@ -140,12 +286,13 @@ const ShopSignup = () => {
           error={!!touched.matriculeFiscale && !!errors.matriculeFiscale}
           helperText={touched.matriculeFiscale && errors.matriculeFiscale}
         />
-        </Grid>
-        <Grid item xs={12} >
-        <DropZone/>
-        </Grid>
+      </StyledMatricule>
+      <StyledDropzone>
        
-      <Grid item xs={12} >
+        <DropZone/>
+        </StyledDropzone>
+       
+      <div>
         <TextField
           fullWidth
           required
@@ -160,67 +307,18 @@ const ShopSignup = () => {
           error={!!touched.RNE && !!errors.RNE}
           helperText={touched.RNE && errors.RNE}
         />
-        </Grid>
-        <Grid item xs={12} >
+        </div>
+        <div>
         <DropZone/>
-        </Grid>
+        </div>
      
         
       
        
-        <Grid item xs={12} sm={6}>
-         <TextField
-         
-          fullWidth
-          required
-          name="telephoneFixe"
-          size="medium"
-          label="Télèphone Fixe"
-          type="number"
-          variant="outlined"
-          onBlur={handleBlur}
-          value={Context.userData['TelephoneFixe']}
-          onChange={(e)=>Context.setUserData({...Context.userData, "TelephoneFixe" : e.target.value})}
-          placeholder="Télèphone Fixe"
-          error={!!touched.telephoneFixe && !!errors.telephoneFixe}
-          helperText={touched.telephoneFixe && errors.telephoneFixe}
-        />
-        </Grid>
-   
-        <Grid item xs={12} sm={6}>
-        <TextField
-          fullWidth
-          required
-          name="NomBoutique"
-          size="medium"
-         
-          label="Nom Boutique"
-          variant="outlined"
-          onBlur={handleBlur}
-          InputProps={{
-            endAdornment: (
-              <ReportProblemIcon  fontSize="small" color='inherit' sx={{ mr: 1 }} />
-            ),
-          }}
-          value={Context.userData['NomBoutique']}
-          onChange={(e)=>Context.setUserData({...Context.userData, "NomBoutique" : e.target.value})}
-          placeholder="Nom Boutique"
-          error={!!touched.NomBoutique && !!errors.NomBoutique}
-          helperText={touched.NomBoutique && errors.NomBoutique}
-        />
-        </Grid>
+
         
-        <Grid item xs={10} height={80}>
-       
-           <H6 ml={1}  borderColor="grey.900" fontFamily={'open Sans'} fontSize ={12} color={'inherit'} >
-             <ReportProblemIcon fontSize="small" color='inherit' sx={{ mr: 1 }} />
-             Les consommateurs, vous reconnaitrons sur Axam à travers votre nom de Boutique.
-             Il est strictement interdit d&apos;utiliser un nom de marque déposée sans l&apos;autorisation 
-             de son propriétaire.
-             </H6>
-        
-        </Grid>
-        <Grid item xs={10}>
+     
+        <div>
         <BazaarButton
           fullWidth
          
@@ -231,8 +329,8 @@ const ShopSignup = () => {
         >
           Back
         </BazaarButton>
-        </Grid>
-        <Grid item xs={2}>
+        </div>
+        <div>
         <BazaarButton
           fullWidth
           type="submit"
@@ -243,12 +341,12 @@ const ShopSignup = () => {
         >
           Next
         </BazaarButton>
-        </Grid>
-        </Grid>
+        </div>
+        
         
       </form>
 
-   </Fragment>
+ 
   );
 };
 

@@ -28,37 +28,34 @@ const StyledName = styled.div`
 `;
 
 const StyledProfileInformations = styled.div`
-{
-  
-  justify-content: space-between;  
-  padding: 20px;
-  margin: 30px;
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-  
-}`;
-const StyledPasswords = styled.div`
-{
-  
-  justify-content: space-between;  
-  padding: 20px;
-  margin: 30px;
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-  
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
 
-}`;
+`;
+
+const StyledPasswords = styled.div`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
 
 const StyledSelectStatus = styled.div`
-  justify-content: space-between;  
-  padding: 20px;
-  margin: 30px;
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
 
 
 
@@ -85,7 +82,7 @@ const ProfileVendorSignup = () => {
   })
 
   const Context = useContext(multiStepContext)
-
+  // @refresh reset
   return (
     <form onSubmit={() => Context.setStep(2)}>
       < StyledName>
@@ -153,6 +150,7 @@ const ProfileVendorSignup = () => {
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
         />
+         <Spacer width={20} />
         <TextField
           fullWidth
           required
@@ -204,6 +202,7 @@ const ProfileVendorSignup = () => {
             )
           }}
         />
+         <Spacer width={20} />
         <TextField
           required
           fullWidth
@@ -290,7 +289,7 @@ const ProfileVendorSignup = () => {
       />
       <Spacer height={10} />
       <div>
-        <BazaarButton color='primary' variant='contained'>
+        <BazaarButton color='primary' variant='contained'   type="submit">
           Next
         </BazaarButton>
       </div>

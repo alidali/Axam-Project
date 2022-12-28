@@ -97,7 +97,7 @@ return (
         <SocialIcon url={socialMediaHandlesLinks.facebook} />
         <SocialIcon url={socialMediaHandlesLinks.instagram} />
         <SocialIcon url={socialMediaHandlesLinks.twitter} />
-        
+  
      
   </Grid>
   </Box>

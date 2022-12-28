@@ -1,5 +1,7 @@
 import { Checkbox, FormControlLabel, MenuItem } from '@mui/material'
+import { Fragment } from 'react'
 import BazaarButton from 'components/BazaarButton'
+
 import { FlexBox } from 'components/flex-box'
 import { H3, H6, Small } from 'components/Typography'
 import { useFormik } from 'formik'
@@ -8,56 +10,62 @@ import * as yup from 'yup'
 import EyeToggleButton from './EyeToggleButton'
 // import { Wrapper } from "./Login";
 import { multiStepContext } from 'StepContext'
-import {  Spacer } from 'ui'
-import {  TextField } from '@mui/material'
+import { GreenButton, Spacer } from 'ui'
+import { Grid, IconButton, TextField } from '@mui/material'
 import styled from 'styled-components'
+import Phone from 'components/phone/Phone'
+
 
 const StyledName = styled.div`
-  justify-content: space-between;
+  
+  justify-content: space-between;  
   padding: 20px;
   margin: 30px;
   @media screen and (min-width: 768px) {
     display: flex;
   }
-`
+  
+`;
 
 const StyledProfileInformations = styled.div`
-  justify-content: space-between;
-  padding: 20px;
-  margin: 30px;
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
 
 const StyledPasswords = styled.div`
-  justify-content: space-between;
-  padding: 20px;
-  margin: 30px;
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
 
 const StyledSelectStatus = styled.div`
-  justify-content: space-between;
-  padding: 20px;
-  margin: 30px;
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-`
-const Styledbtn = styled.div`
-  padding: 8px 16px;
-  margin-left: 30px;
-`
-const StyledTerms = styled.div`
-  padding: 8px 16px;
-  margin-left: 30px;
-`
+justify-content: space-between;  
+padding: 20px;
+margin: 30px;
+@media screen and (min-width: 768px) {
+  display: flex;
+}
+
+`;
+
+
 
 const ProfileVendorSignup = () => {
+
+
+
   const [passwordVisibility, setPasswordVisibility] = useState(false)
+
+
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility(visible => !visible)
@@ -77,7 +85,7 @@ const ProfileVendorSignup = () => {
   // @refresh reset
   return (
     <form onSubmit={() => Context.setStep(2)}>
-      <StyledName>
+      < StyledName>
         <TextField
           required
           fullWidth
@@ -116,7 +124,9 @@ const ProfileVendorSignup = () => {
           placeholder='Prénom'
           error={!!touched.Prénom && !!errors.Prénom}
           helperText={touched.Prénom && errors.Prénom}
+
         />
+
       </StyledName>
 
       <StyledProfileInformations>
@@ -140,7 +150,7 @@ const ProfileVendorSignup = () => {
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
         />
-        <Spacer width={20} />
+         <Spacer width={20} />
         <TextField
           fullWidth
           required
@@ -192,13 +202,13 @@ const ProfileVendorSignup = () => {
             )
           }}
         />
-        <Spacer width={20} />
+         <Spacer width={20} />
         <TextField
           required
           fullWidth
           size='medium'
           autoComplete='on'
-          name=' re_password'
+          name='RePassword'
           variant='outlined'
           label='Confirmer mot de passe '
           placeholder='*********'
@@ -206,10 +216,10 @@ const ProfileVendorSignup = () => {
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              re_password: e.target.value
+              RePassword: e.target.value
             })
           }
-          value={Context.userData['re_password']} // TODO
+          value={Context.userData['RePassword']} // TODO
           type={passwordVisibility ? 'text' : 'password'}
           error={!!touched.re_password && !!errors.re_password}
           helperText={touched.re_password && errors.re_password}
@@ -223,24 +233,6 @@ const ProfileVendorSignup = () => {
           }}
         />
       </StyledPasswords>
-      <StyledProfileInformations>
-        <TextField
-          fullWidth
-          name='Cin'
-          required
-          size='medium'
-          label='CIN'
-          variant='outlined'
-          onBlur={handleBlur}
-          value={Context.userData['Cin']}
-          onChange={e =>
-            Context.setUserData({ ...Context.userData, Cin: e.target.value })
-          }
-          placeholder='CIN'
-          error={!!touched.Cin && !!errors.Cin}
-          helperText={touched.Cin && errors.Cin}
-        />
-      </StyledProfileInformations>
 
       <StyledSelectStatus>
         <TextField
@@ -266,7 +258,6 @@ const ProfileVendorSignup = () => {
           <MenuItem value='Entreprise'>Entreprise</MenuItem>
         </TextField>
       </StyledSelectStatus>
-   
 
       <FormControlLabel
         name='agreement'
@@ -276,7 +267,7 @@ const ProfileVendorSignup = () => {
           <Checkbox
             size='small'
             color='secondary'
-            style={{ marginLeft: '50px' }}
+
             checked={values.agreement || false}
           />
         }
@@ -284,11 +275,12 @@ const ProfileVendorSignup = () => {
           <FlexBox
             flexWrap='wrap'
             alignItems='center'
+
             justifyContent='flex-start'
           >
             By signing up, you agree to
             <a href='/' target='_blank' rel='noreferrer noopener'>
-              <H6 borderBottom='1px solid' borderColor='grey.900'>
+              <H6 ml={1} borderBottom='1px solid' borderColor='grey.900'>
                 Terms & Condition
               </H6>
             </a>
@@ -296,18 +288,17 @@ const ProfileVendorSignup = () => {
         }
       />
       <Spacer height={10} />
-      <Styledbtn>
-        <BazaarButton color='primary' variant='contained' type='submit'>
+      <div>
+        <BazaarButton color='primary' variant='contained'   type="submit">
           Next
         </BazaarButton>
-      </Styledbtn>
+      </div>
     </form>
   )
 }
 
 const initialValues = {
-  Nom: '',
-  Prenom: '',
+  name: '',
   email: '',
   password: '',
   re_password: '',
@@ -315,8 +306,7 @@ const initialValues = {
 }
 
 const formSchema = yup.object().shape({
-  Nom: yup.string().required('Name is required'),
-  Prenom: yup.string().required('Prenom is required'),
+  name: yup.string().required('Name is required'),
   email: yup
     .string()
     .email('invalid email')
@@ -325,7 +315,7 @@ const formSchema = yup.object().shape({
 
   re_password: yup
     .string()
-    .oneOf([yup.ref(' re_password'), null], 'Passwords must match')
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required('Please re-type password'),
   agreement: yup
     .bool()

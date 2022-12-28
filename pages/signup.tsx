@@ -28,6 +28,20 @@ import styled from 'styled-components'
 const StyledStepper = styled(Stepper)`
 `
 
+
+const StyledCard = styled.div`
+
+  padding: 10%;
+  margin: 1px;
+  display: 'flex',
+  justifyContent: 'left',
+  alignItems: 'center'
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+`
+
 /**
  *  Used:
  *  1. cart page
@@ -37,6 +51,13 @@ const StyledStepper = styled(Stepper)`
 const SignUpPage: NextPage = ({ children }) => {
   const Context = useContext(multiStepContext)
   console.log('step', Context.currentStep)
+
+  const steps = [
+    'Données vendeur',
+    'Données boutique',
+    'Données bancaire',
+    'Résumé',
+  ];
 
   function showStep (step: number) {
     switch (step) {
@@ -51,31 +72,30 @@ const SignUpPage: NextPage = ({ children }) => {
     }
   }
 
-  const socialMediaHandlesLinks = {
-    facebook: 'https://facebook.com/phanimurari',
-    instagram: 'https://www.instagram.com/im_phani_murari/?hl=en',
+  // const socialMediaHandlesLinks = {
+  //   facebook: 'https://facebook.com/phanimurari',
+  //   instagram: 'https://www.instagram.com/im_phani_murari/?hl=en',
 
-    twitter: 'https://twitter.com/ImPhaniMurari'
-  }
+  //   twitter: 'https://twitter.com/ImPhaniMurari'
+  // }
   return (
-    <div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'left',
-          alignItems: 'center'
-        }}
-      >
+    <StyledCard>
+      
         <Logo />
-      </div>
-
-      <Card>
         <Typography component='h1' variant='h4' align='center'>
           Inscrivez-vous
         </Typography>
+        <Stepper activeStep={Context.currentStep - 1} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+            
+          </Step>
+        ))}
+      </Stepper>
         {/* <CssBaseline /> */}
 
-        <StyledStepper activeStep={Context.currentStep - 1}>
+        {/* <StyledStepper activeStep={Context.currentStep - 1}>
           <Step>
             <StepLabel>Données Vendeur</StepLabel>
           </Step>
@@ -88,12 +108,13 @@ const SignUpPage: NextPage = ({ children }) => {
           <Step>
             <StepLabel>Résumé</StepLabel>
           </Step>
-        </StyledStepper>
+        </StyledStepper> */}
         {/* <Grid item lg={12} md={8} xs={12}> */}
         {showStep(Context.currentStep)}
         {/* </Grid> */}
-      </Card>
-    </div>
+     
+      </StyledCard>
+    
   )
 }
 export default SignUpPage

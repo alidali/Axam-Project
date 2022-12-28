@@ -73,4 +73,3 @@ const DropZone: FC<DropZoneProps> = ({
 };
 
 export default DropZone;
-

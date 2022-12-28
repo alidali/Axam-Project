@@ -1,5 +1,5 @@
 import { ForkLeft } from "@mui/icons-material";
-import { Card, CardProps,Grid,TextField } from "@mui/material";
+import { Card, CardProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import BazaarButton from "components/BazaarButton";
 import BazaarTextField from "components/BazaarTextField";
@@ -8,7 +8,8 @@ import { useFormik } from "formik";
 import React, { useCallback, useState } from "react";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
-import {  Fragment } from "react";
+import SocialButtons from "./SocialButtons";
+
 const fbStyle = { background: "#3B5998", color: "white" };
 const googleStyle = { background: "#4285F4", color: "white" };
 
@@ -19,8 +20,7 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
     <Card {...rest}>{children}</Card>
   )
 )<CardProps>(({ theme, passwordVisibility }) => ({
-  width: 600,
-  height:700,
+  width: 500,
   padding: "0.1rem 3rem",
   [theme.breakpoints.down("sm")]: { width: "100%" },
   ".passwordEye": {
@@ -30,7 +30,7 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
   },
   ".facebookButton": { marginBottom: 10, ...fbStyle, "&:hover": fbStyle },
   ".googleButton": { ...googleStyle, "&:hover": googleStyle },
-  ".agreement": { marginTop: 12, marginBottom: 35 },
+  ".agreement": { marginTop: 12, marginBottom: 24 },
 }));
 
 const Login = () => {
@@ -52,29 +52,25 @@ const Login = () => {
     });
 
   return (
-    <Fragment>
-   
+    
+    <Wrapper elevation={4} passwordVisibility={passwordVisibility}  >
       <form onSubmit={handleSubmit}>
-        <H3 textAlign="center" mb={3} marginRight={20} marginTop={10} fontFamily={'open Sans'} fontSize ={30}>
+        <H3 textAlign="center" mb={1}>
          Se connecter
         </H3>
         <Small
-        marginRight={20}
           mb={4.5}
           display="block"
-          fontSize="14px"
+          fontSize="12px"
           fontWeight="600"
           color="grey.800"
           textAlign="center"
-          fontFamily="open Sans" 
-          
         >
           Acceder à votre compte Axam
         </Small>
-        <Grid container spacing={5} >
-        <Grid item xs={10} >
-        <TextField
-         required
+
+        <BazaarTextField
+          mb={1.5}
           fullWidth
           name="email"
           size="small"
@@ -88,10 +84,9 @@ const Login = () => {
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
         />
-         </Grid>
-         <Grid item xs={10}>
-        <TextField
-         required
+
+        <BazaarTextField
+          mb={2}
           fullWidth
           size="small"
           name="password"
@@ -114,25 +109,20 @@ const Login = () => {
             ),
           }}
         />
-          </Grid>
-          <Grid item xs={12} >
+
         <BazaarButton
           fullWidth
           type="submit"
           color="primary"
           variant="contained"
-          sx={{ mt: 3, ml: 35 ,height: 44, width: 140 ,sm:6 , xs:12 ,flexDirection:"center" }}
-         
+          sx={{ mb: "1.65rem", height: 44 }}
         >
-          Next
+          Login
         </BazaarButton>
-        </Grid>
-        </Grid>
       </form>
 
-      
-   
-    </Fragment>
+      <SocialButtons redirect="/signup" redirectText="Sign Up" />
+    </Wrapper>
   );
 };
 

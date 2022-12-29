@@ -25,9 +25,12 @@ import styled from 'styled-components'
 //     orientation: vertical;
 //   }
 // `
-const StyledStepper = styled(Stepper)``
+const StyledStepper = styled(Stepper)`
+`
+
 
 const StyledCard = styled.div`
+
   padding: 10%;
   margin: 1px;
   display: 'flex',
@@ -53,8 +56,8 @@ const SignUpPage: NextPage = ({ children }) => {
     'Données vendeur',
     'Données boutique',
     'Données bancaire',
-    'Résumé'
-  ]
+    'Résumé',
+  ];
 
   function showStep (step: number) {
     switch (step) {
@@ -69,21 +72,49 @@ const SignUpPage: NextPage = ({ children }) => {
     }
   }
 
+  // const socialMediaHandlesLinks = {
+  //   facebook: 'https://facebook.com/phanimurari',
+  //   instagram: 'https://www.instagram.com/im_phani_murari/?hl=en',
+
+  //   twitter: 'https://twitter.com/ImPhaniMurari'
+  // }
   return (
     <StyledCard>
-      <Logo />
-      <Typography component='h1' variant='h4' align='center'>
-        Inscrivez-vous
-      </Typography>
-      <Stepper activeStep={Context.currentStep - 1} alternativeLabel>
-        {steps.map(label => (
+      
+        <Logo />
+        <Typography component='h1' variant='h4' align='center'>
+          Inscrivez-vous
+        </Typography>
+        <Stepper activeStep={Context.currentStep - 1} alternativeLabel>
+        {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
+            
           </Step>
         ))}
       </Stepper>
-      {showStep(Context.currentStep)}
-    </StyledCard>
+        {/* <CssBaseline /> */}
+
+        {/* <StyledStepper activeStep={Context.currentStep - 1}>
+          <Step>
+            <StepLabel>Données Vendeur</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Données Boutique</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Données Bancaire</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Résumé</StepLabel>
+          </Step>
+        </StyledStepper> */}
+        {/* <Grid item lg={12} md={8} xs={12}> */}
+        {showStep(Context.currentStep)}
+        {/* </Grid> */}
+     
+      </StyledCard>
+    
   )
 }
 export default SignUpPage

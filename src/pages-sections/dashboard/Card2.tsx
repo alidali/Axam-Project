@@ -1,7 +1,7 @@
 import { ArrowDropUp } from "@mui/icons-material";
 import { Box, Card } from "@mui/material";
 import { FlexBox } from "components/flex-box";
-import { H3, H6, Paragraph } from "components/Typography";
+import { H3, H6, H7, H8, Paragraph } from "components/Typography";
 import React, { FC } from "react";
 
 // =========================================================
@@ -31,14 +31,18 @@ const Card2: FC<Card2Props> = ({ children, title, amount, percentage }) => {
           justifyContent="space-between"
           height="inherit"
         >
-          <H6 color="grey.600">{title}</H6>
+          <H7 color="grey.600">{title}</H7>
 
           <Box>
+          <div style={{display:"flex"}} >
             <H3>{amount}</H3>
-            <FlexBox mt={0.3} alignItems="center" color="info.main">
+            </div>
+            <FlexBox mt={0.3} alignItems="center"  marginLeft={18} color="info.main">
               <ArrowDropUp />
-              <Paragraph fontSize={12}>{percentage}</Paragraph>
+              <Paragraph fontSize={12}  >{percentage} </Paragraph>
             </FlexBox>
+            
+            <H8 marginLeft={12}> Taux evolution par du mois </H8>
           </Box>
         </FlexBox>
       </Box>

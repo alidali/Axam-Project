@@ -92,7 +92,7 @@ export const H3: React.FC<BoxProps & Props> = ({
       mt={0}
       component="h3"
       fontSize="20px"
-      fontWeight="700"
+      fontWeight="500"
       lineHeight="1.5"
       ellipsis={ellipsis ? 1 : undefined}
       textTransformStyle={textTransform}
@@ -173,8 +173,61 @@ export const H6: React.FC<BoxProps & Props> = ({
       component="h6"
       mb={0}
       mt={0}
-      fontSize="14px"
+      fontSize="12px"
       fontWeight="600"
+      lineHeight="1.5"
+      marginLeft={1.5}
+      {...props}
+    >
+      {children}
+    </StyledBox>
+  );
+};
+export const H7: React.FC<BoxProps & Props> = ({
+  children,
+  className,
+  ellipsis,
+  textTransform,
+  ...props
+}) => {
+  return (
+    <StyledBox
+      textTransformStyle={textTransform}
+      ellipsis={ellipsis ? 1 : undefined}
+      className={clsx({
+        [className || ""]: true,
+      })}
+      component="h7"
+      mb={0}
+      mt={0}
+      fontSize="11px"
+      fontWeight="600"
+      lineHeight="1.5"
+      {...props}
+    >
+      {children}
+    </StyledBox>
+  );
+};
+export const H8: React.FC<BoxProps & Props> = ({
+  children,
+  className,
+  ellipsis,
+  textTransform,
+  ...props
+}) => {
+  return (
+    <StyledBox
+      textTransformStyle={textTransform}
+      ellipsis={ellipsis ? 1 : undefined}
+      className={clsx({
+        [className || ""]: true,
+      })}
+    component="h8"
+      mb={0}
+      mt={0}
+      fontSize="9px"
+      fontWeight="500"
       lineHeight="1.5"
       {...props}
     >

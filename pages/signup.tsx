@@ -31,7 +31,7 @@ const StyledStepper = styled(Stepper)`
 
 const StyledCard = styled.div`
 
-  padding: 10%;
+  padding: 20px 100px 100px 100px;   //top right bottom left
   margin: 1px;
   display: 'flex',
   justifyContent: 'left',
@@ -59,7 +59,7 @@ const SignUpPage: NextPage = ({ children }) => {
     'Résumé',
   ];
 
-  function showStep (step: number) {
+  function showStep(step: number) {
     switch (step) {
       case 1:
         return <ProfileVendorSignup />
@@ -79,42 +79,28 @@ const SignUpPage: NextPage = ({ children }) => {
   //   twitter: 'https://twitter.com/ImPhaniMurari'
   // }
   return (
-    <StyledCard>
-      
-        <Logo />
-        <Typography component='h1' variant='h4' align='center'>
-          Inscrivez-vous
-        </Typography>
-        <Stepper activeStep={Context.currentStep - 1} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            
-          </Step>
-        ))}
-      </Stepper>
-        {/* <CssBaseline /> */}
 
-        {/* <StyledStepper activeStep={Context.currentStep - 1}>
-          <Step>
-            <StepLabel>Données Vendeur</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Données Boutique</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Données Bancaire</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Résumé</StepLabel>
-          </Step>
-        </StyledStepper> */}
-        {/* <Grid item lg={12} md={8} xs={12}> */}
-        {showStep(Context.currentStep)}
-        {/* </Grid> */}
-     
+    <div>
+      <Logo />
+      <Typography component='h1' variant='h4' align='center'>
+        Inscrivez-vous
+      </Typography>
+      <StyledCard>
+        <Stepper activeStep={Context.currentStep - 1} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+
+            </Step>
+          ))}
+        </Stepper>
+
+      {showStep(Context.currentStep)}
       </StyledCard>
-    
+    </div>
+
+
+
   )
 }
 export default SignUpPage

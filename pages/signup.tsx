@@ -72,6 +72,12 @@ const SignUpPage: NextPage = ({ children }) => {
     }
   }
 
+  // const socialMediaHandlesLinks = {
+  //   facebook: 'https://facebook.com/phanimurari',
+  //   instagram: 'https://www.instagram.com/im_phani_murari/?hl=en',
+
+  //   twitter: 'https://twitter.com/ImPhaniMurari'
+  // }
   return (
     <StyledCard>
       
@@ -87,8 +93,25 @@ const SignUpPage: NextPage = ({ children }) => {
           </Step>
         ))}
       </Stepper>
+        {/* <CssBaseline /> */}
+
+        {/* <StyledStepper activeStep={Context.currentStep - 1}>
+          <Step>
+            <StepLabel>Données Vendeur</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Données Boutique</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Données Bancaire</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Résumé</StepLabel>
+          </Step>
+        </StyledStepper> */}
+        {/* <Grid item lg={12} md={8} xs={12}> */}
         {showStep(Context.currentStep)}
-        
+        {/* </Grid> */}
      
       </StyledCard>
     

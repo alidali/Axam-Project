@@ -51,85 +51,85 @@ const Login = () => {
       validationSchema: formSchema,
     });
 
-    return (
-      
-      <Wrapper elevation={4} passwordVisibility={passwordVisibility}  >
-        <form onSubmit={handleSubmit}>
-          <H3 textAlign="center" mb={1}>
-           Se connecter
-          </H3>
-          <Small
-            mb={4.5}
-            display="block"
-            fontSize="12px"
-            fontWeight="600"
-            color="grey.800"
-            textAlign="center"
-          >
-            Acceder à votre compte Axam
-          </Small>
-  
-          <BazaarTextField
-            mb={1.5}
-            fullWidth
-            name="email"
-            size="small"
-            type="email"
-            variant="outlined"
-            onBlur={handleBlur}
-            value={values.email}
-            onChange={handleChange}
-            label="Email"
-            placeholder="exmple@mail.com"
-            error={!!touched.email && !!errors.email}
-            helperText={touched.email && errors.email}
-          />
-  
-          <BazaarTextField
-            mb={2}
-            fullWidth
-            size="small"
-            name="password"
-            label="Mot de passe "
-            autoComplete="on"
-            variant="outlined"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.password}
-            placeholder="*********"
-            type={passwordVisibility ? "text" : "password"}
-            error={!!touched.password && !!errors.password}
-            helperText={touched.password && errors.password}
-            InputProps={{
-              endAdornment: (
-                <EyeToggleButton
-                  show={passwordVisibility}
-                  click={togglePasswordVisibility}
-                />
-              ),
-            }}
-          />
-  
-          <BazaarButton
-            fullWidth
-            type="submit"
-            color="primary"
-            variant="contained"
-            sx={{ mb: "1.65rem", height: 44 }}
-          >
-            Login
-          </BazaarButton>
-        </form>
-  
-        <SocialButtons redirect="/signup" redirectText="Sign Up" />
-      </Wrapper>
-    );
-  };
-  
-  const initialValues = {
-    email: "",
-    password: "",
-  };
+  return (
+    
+    <Wrapper elevation={4} passwordVisibility={passwordVisibility}  >
+      <form onSubmit={handleSubmit}>
+        <H3 textAlign="center" mb={1}>
+         Se connecter
+        </H3>
+        <Small
+          mb={4.5}
+          display="block"
+          fontSize="12px"
+          fontWeight="600"
+          color="grey.800"
+          textAlign="center"
+        >
+          Acceder à votre compte Axam
+        </Small>
+
+        <BazaarTextField
+          mb={1.5}
+          fullWidth
+          name="email"
+          size="small"
+          type="email"
+          variant="outlined"
+          onBlur={handleBlur}
+          value={values.email}
+          onChange={handleChange}
+          label="Email"
+          placeholder="exmple@mail.com"
+          error={!!touched.email && !!errors.email}
+          helperText={touched.email && errors.email}
+        />
+
+        <BazaarTextField
+          mb={2}
+          fullWidth
+          size="small"
+          name="password"
+          label="Mot de passe "
+          autoComplete="on"
+          variant="outlined"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={values.password}
+          placeholder="*********"
+          type={passwordVisibility ? "text" : "password"}
+          error={!!touched.password && !!errors.password}
+          helperText={touched.password && errors.password}
+          InputProps={{
+            endAdornment: (
+              <EyeToggleButton
+                show={passwordVisibility}
+                click={togglePasswordVisibility}
+              />
+            ),
+          }}
+        />
+
+        <BazaarButton
+          fullWidth
+          type="submit"
+          color="primary"
+          variant="contained"
+          sx={{ mb: "1.65rem", height: 44 }}
+        >
+          Login
+        </BazaarButton>
+      </form>
+
+      <SocialButtons redirect="/signup" redirectText="Sign Up" />
+    </Wrapper>
+  );
+};
+
+const initialValues = {
+  email: "",
+  password: "",
+};
 
 const formSchema = yup.object().shape({
   password: yup.string().required("Password is required"),

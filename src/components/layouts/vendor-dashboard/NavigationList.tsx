@@ -26,16 +26,15 @@ export const navigations = [
     icon: duotone.Order,
     children: [
       { name: "Liste des commandes", path: "/admin/orders", },
-     
-       
+      
           { name: "Commandes en attentes", path: "/admin/orders/1" },
-          { name: "Commandes prêtes ", path: "/admin/orders/1" },
+          { name: "Commandes prêtes", path: "/admin/orders/1" },
           { name: "Commandes  en cours ", path: "/admin/orders/1" },
           { name: "Commandes livrées", path: "/admin/orders/1" },
           { name: "Commandes payées", path: "/admin/orders/1" },
           { name: "Commandes retournées", path: "/admin/orders/1" },
         
-     ],
+      ],
   },
 
   {

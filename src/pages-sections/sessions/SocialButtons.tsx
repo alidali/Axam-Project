@@ -18,18 +18,18 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
 
   return (
     <Fragment>
-      <Box mb={2} mt={3.3}>
-        <Box width="200px" mx="auto">
-          <Divider />
-        </Box>
+      {/* <Box mb={2} mt={3.3}> */}
+        {/* <Box width="200px" mx="auto"> */}
+          {/* <Divider /> */}
+        {/* </Box> */}
 
-        <FlexBox justifyContent="center" mt={-1.625}>
+        {/* <FlexBox justifyContent="center" mt={-1.625}> */}
           {/* <Box color="grey.600" bgcolor="background.paper" px={2}>
             or
           </Box> */}
-        </FlexBox>
+        {/* </FlexBox> */}
         
-      </Box>
+      {/* </Box> */}
 
       {/* <BazaarButton
         className="facebookButton"
@@ -58,29 +58,26 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
         </Box>
       </BazaarButton> */}
 
-      <FlexRowCenter my="1.25rem">
+      <FlexBox my="2rem" mr="100px"  fontFamily={'open Sans'} fontSize ={13}>
         <Box>Vous n &apos; avez pas de compte?</Box>
         <Link href={redirect}>
           <a>
-            <H6 ml={1} borderBottom="1px solid" borderColor="grey.900">
+            <H6 ml={1} borderBottom="1px solid" borderColor="grey.900" fontFamily={'open Sans'} fontSize ={13}>
               {redirectText}
             </H6>
           </a>
         </Link>
-      </FlexRowCenter>
+      </FlexBox>
 
       <FlexBox
-        justifyContent="center"
-      
-        borderRadius="4px"
-        py={2.5} 
+       my="2" mr="100px"   fontFamily={'open Sans'} fontSize ={13}
         
       >
         Mot de passe oublié?
         <Link href="/">
           <a>
-            <H6 ml={1} borderBottom="1px solid" >
-              Reset It
+            <H6 ml={1} borderBottom="1px solid" fontFamily={'open Sans'} fontSize ={13} >
+            réinitialiser
             </H6>
           </a>
         </Link>

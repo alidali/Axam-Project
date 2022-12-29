@@ -8,8 +8,8 @@ import * as yup from 'yup'
 import EyeToggleButton from './EyeToggleButton'
 // import { Wrapper } from "./Login";
 import { multiStepContext } from 'StepContext'
-import { Spacer } from 'ui'
-import { TextField } from '@mui/material'
+import {  Spacer } from 'ui'
+import {  TextField } from '@mui/material'
 import styled from 'styled-components'
 
 const StyledName = styled.div`
@@ -266,7 +266,7 @@ const ProfileVendorSignup = () => {
           <MenuItem value='Entreprise'>Entreprise</MenuItem>
         </TextField>
       </StyledSelectStatus>
-
+   
 
       <FormControlLabel
         name='agreement'
@@ -337,7 +337,7 @@ const formSchema = yup.object().shape({
 
     .required('You have to agree with our Terms and Conditions!')
 
-
+  //</Fragment>
 })
 
 export default ProfileVendorSignup

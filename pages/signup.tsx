@@ -28,7 +28,7 @@ import styled from 'styled-components'
 const StyledStepper = styled(Stepper)``
 
 const StyledCard = styled.div`
-  padding: 15px 60px 100px 60px;
+  padding: 10%;
   margin: 1px;
   display: 'flex',
   justifyContent: 'left',
@@ -70,23 +70,20 @@ const SignUpPage: NextPage = ({ children }) => {
   }
 
   return (
-    <div>
+    <StyledCard>
       <Logo />
-      <StyledCard>
-        <Typography component='h1' variant='h4' align='center'>
-          Inscrivez-vous
-        </Typography>
-        <Stepper activeStep={Context.currentStep - 1} alternativeLabel>
-          {steps.map(label => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-
-        {showStep(Context.currentStep)}
-      </StyledCard>
-    </div>
+      <Typography component='h1' variant='h4' align='center'>
+        Inscrivez-vous
+      </Typography>
+      <Stepper activeStep={Context.currentStep - 1} alternativeLabel>
+        {steps.map(label => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      {showStep(Context.currentStep)}
+    </StyledCard>
   )
 }
 export default SignUpPage

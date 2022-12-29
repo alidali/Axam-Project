@@ -236,7 +236,7 @@ const BankSignup = () => {
           helperText={touched.codeSwift && errors.codeSwift}
         />
       </StyledBank>
-    
+
       {/* <Grid item xs={12} >
         <DropZone/>
         </Grid> */}

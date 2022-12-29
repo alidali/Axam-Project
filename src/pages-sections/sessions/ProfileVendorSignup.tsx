@@ -336,6 +336,7 @@ const formSchema = yup.object().shape({
 
     .required('You have to agree with our Terms and Conditions!')
 
+  //</Fragment>
 })
 
 export default ProfileVendorSignup

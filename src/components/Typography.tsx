@@ -197,7 +197,7 @@ export const H7: React.FC<BoxProps & Props> = ({
       className={clsx({
         [className || ""]: true,
       })}
-      component="h7"
+      component="h6"
       mb={0}
       mt={0}
       fontSize="11px"
@@ -223,7 +223,7 @@ export const H8: React.FC<BoxProps & Props> = ({
       className={clsx({
         [className || ""]: true,
       })}
-    component="h8"
+    component="h6"
       mb={0}
       mt={0}
       fontSize="9px"

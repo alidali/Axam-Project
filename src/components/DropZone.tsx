@@ -13,7 +13,7 @@ type DropZoneProps = {
 
 const DropZone: FC<DropZoneProps> = ({
   onChange,
-  title = "Drag & drop product image here",
+  title = "Drag & drop  image here",
   imageSize = "Upload 280*280 image",
 }) => {
   const onDrop = useCallback(
@@ -51,7 +51,7 @@ const DropZone: FC<DropZoneProps> = ({
       </H5>
 
       <Divider
-        sx={{ "::before, ::after": { borderColor: "grey.300", width: 70 } }}
+        sx={{ "::before, ::after": { borderColor: "grey.300", width: 150 } }}
       >
         <Small color="text.disabled" px={1}>
           OR

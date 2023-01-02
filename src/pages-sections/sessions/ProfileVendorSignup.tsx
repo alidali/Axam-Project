@@ -1,6 +1,9 @@
-import { Checkbox, FormControlLabel, MenuItem } from '@mui/material'
+import { Checkbox, FormControlLabel, MenuItem,Box,Grid } from '@mui/material'
 import BazaarButton from 'components/BazaarButton'
 import { FlexBox } from 'components/flex-box'
+import DropZone from "components/DropZone";
+import { Clear } from "@mui/icons-material";
+import NextImage from "next/image";
 import { H3, H6, Small } from 'components/Typography'
 import { useFormik } from 'formik'
 import { useCallback, useState, useContext } from 'react'
@@ -11,6 +14,9 @@ import { multiStepContext } from 'StepContext'
 import {  Spacer } from 'ui'
 import {  TextField } from '@mui/material'
 import styled from 'styled-components'
+
+
+
 
 const StyledName = styled.div`
   justify-content: space-between;
@@ -51,13 +57,21 @@ const Styledbtn = styled.div`
   padding: 8px 16px;
   margin-left: 30px;
 `
-const StyledTerms = styled.div`
-  padding: 8px 16px;
-  margin-left: 30px;
+const StyledDropzone = styled.div`
+  justify-content: space-between;
+  padding: 20px;
+  margin: 30px;
+  widh
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
 `
+
 
 const ProfileVendorSignup = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
+  
+
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility(visible => !visible)
@@ -72,8 +86,34 @@ const ProfileVendorSignup = () => {
     onSubmit: handleFormSubmit,
     validationSchema: formSchema
   })
+  interface FileType extends File {
+    preview: string;
+  }
+
+
+  const [newFiles, setNewFiles] = useState<FileType[]>([]);
+  const deleteNewImage = (name: string) => {
+    setNewFiles((state) => state.filter((item) => item.name !== name));
+  };
+
 
   const Context = useContext(multiStepContext)
+  const StyledClear = styled(Clear)`
+    top: 5,
+    right: 5,
+    fontSize: 14,
+    color: "red",
+    cursor: "pointer",
+    position: "absolute",
+    `
+    const UploadBox = styled(Box)`
+      width: 170,
+      height: "auto",
+      overflow: "hidden",
+      borderRadius: "8px",
+      position: "relative",
+      `
+
   // @refresh reset
   return (
     <form onSubmit={() => Context.setStep(2)}>
@@ -241,7 +281,34 @@ const ProfileVendorSignup = () => {
           helperText={touched.Cin && errors.Cin}
         />
       </StyledProfileInformations>
+      <StyledDropzone>
+     
+          <DropZone
+      
+            onChange={(files) => {
+              const uploadFiles = files.map((file) =>
+                Object.assign(file, { preview: URL.createObjectURL(file) })
+              );
+              setNewFiles(uploadFiles);
+            }}
+          />
 
+          <FlexBox gap={1} mt={2}>
+            {newFiles.map((file, index) => (
+              <UploadBox key={index}>
+                <NextImage
+                  width={540}
+                  height={200}
+                  objectFit="cover"
+                  src={file.preview}
+                  layout="responsive"
+                />
+                <StyledClear onClick={() => deleteNewImage(file.name)} />
+              </UploadBox>
+            ))}
+          </FlexBox>
+       
+          </StyledDropzone>
       <StyledSelectStatus>
         <TextField
           select
@@ -286,10 +353,10 @@ const ProfileVendorSignup = () => {
             alignItems='center'
             justifyContent='flex-start'
           >
-            By signing up, you agree to
+           En vous inscrivant, vous acceptez les 
             <a href='/' target='_blank' rel='noreferrer noopener'>
               <H6 borderBottom='1px solid' borderColor='grey.900'>
-                Terms & Condition
+              termes& Conditions
               </H6>
             </a>
           </FlexBox>

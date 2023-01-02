@@ -1,4 +1,5 @@
-import { MenuItem, TextField, Grid } from '@mui/material'
+import { MenuItem, TextField, Box } from '@mui/material'
+import NextImage from "next/image";
 import BazaarButton from 'components/BazaarButton'
 import { useFormik } from 'formik'
 import React, { useCallback, useState, useContext } from 'react'
@@ -6,9 +7,37 @@ import * as yup from 'yup'
 import EyeToggleButton from './EyeToggleButton'
 //import { Wrapper } from "./Login";
 import { multiStepContext } from 'StepContext'
-// import DropZone from "components/DropZone";
+ import DropZone from "components/DropZone";
 import { Spacer } from 'ui'
 import styled from 'styled-components'
+import { Clear } from "@mui/icons-material";
+import { FlexBox } from 'components/flex-box'
+
+const StyledClear = styled(Clear)`
+top: 5,
+right: 5,
+fontSize: 14,
+color: "red",
+cursor: "pointer",
+position: "absolute",
+`
+const StyledDropzone = styled.div`
+  justify-content: space-between;
+  padding: 20px;
+  margin: 30px;
+  widh
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+`
+const UploadBox = styled(Box)`
+      width: 170,
+      height: "auto",
+      overflow: "hidden",
+      borderRadius: "8px",
+      position: "relative",
+      `
+
 
 const StyledBank = styled.div`
   justify-content: space-between;
@@ -32,7 +61,14 @@ const BankSignup = () => {
     onSubmit: handleFormSubmit,
     validationSchema: formSchema2
   })
-
+  interface FileType extends File {
+    preview: string;
+  }
+  
+  const [newFiles, setNewFiles] = useState<FileType[]>([]);
+  const deleteNewImage = (name: string) => {
+    setNewFiles((state) => state.filter((item) => item.name !== name));
+  };
   const Context = useContext(multiStepContext)
   return (
     <form onSubmit={() => Context.setStep(4)}>
@@ -78,9 +114,34 @@ const BankSignup = () => {
           helperText={touched.Rib && errors.Rib}
         />
       </StyledBank>
-      {/* <Grid item xs={12} >
-        <DropZone/>
-        </Grid> */}
+      <StyledDropzone>
+     
+     <DropZone
+ 
+       onChange={(files) => {
+         const uploadFiles = files.map((file) =>
+           Object.assign(file, { preview: URL.createObjectURL(file) })
+         );
+         setNewFiles(uploadFiles);
+       }}
+     />
+
+     <FlexBox gap={1} mt={2}>
+       {newFiles.map((file, index) => (
+         <UploadBox key={index}>
+           <NextImage
+             width={240}
+             height={100}
+             objectFit="cover"
+             src={file.preview}
+             layout="responsive"
+           />
+           <StyledClear onClick={() => deleteNewImage(file.name)} />
+         </UploadBox>
+       ))}
+     </FlexBox>
+  
+     </StyledDropzone>
       <StyledBank>
         <TextField
           select

@@ -1,8 +1,13 @@
 import {
  
-  TextField,
+  TextField,Box
  
 } from '@mui/material'
+import { Clear } from "@mui/icons-material";
+import DropZone from "components/DropZone";
+import { FlexBox } from 'components/flex-box'
+
+import NextImage from "next/image";
 import BazaarButton from 'components/BazaarButton'
 import { useFormik } from 'formik'
 import React, { useCallback, useState, useContext } from 'react'
@@ -12,6 +17,28 @@ import { multiStepContext } from 'StepContext'
 import ReportProblemIcon from '@mui/icons-material/ReportProblem'
 //import DropZone from "components/DropZone";
 import styled from 'styled-components'
+
+
+const StyledClear = styled(Clear)`
+top: 5,
+right: 5,
+fontSize: 14,
+color: "red",
+cursor: "pointer",
+position: "absolute",
+`
+const UploadBox = styled(Box)`
+width: 170,
+height: "auto",
+overflow: "hidden",
+borderRadius: "8px",
+position: "relative",
+`
+
+interface FileType extends File {
+  preview: string;
+}
+
 
 const StyledRaison = styled.div`
   justify-content: space-between;
@@ -26,6 +53,15 @@ const StyledCodePostal = styled.div`
   justify-content: space-between;
   padding: 20px;
   margin: 30px;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+`
+const StyledDropzone = styled.div`
+  justify-content: space-between;
+  padding: 20px;
+  margin: 30px;
+  widh
   @media screen and (min-width: 768px) {
     display: flex;
   }
@@ -82,6 +118,14 @@ const ShopSignup = () => {
     onSubmit: handleFormSubmit,
     validationSchema: formSchema
   })
+  interface FileType extends File {
+    preview: string;
+  }
+  
+  const [newFiles, setNewFiles] = useState<FileType[]>([]);
+  const deleteNewImage = (name: string) => {
+    setNewFiles((state) => state.filter((item) => item.name !== name));
+  };
 
   const Context = useContext(multiStepContext)
   console.log('step', Context.Step)
@@ -330,6 +374,35 @@ const ShopSignup = () => {
           helperText={touched.RNE && errors.RNE}
         />
       </StyledRne>
+
+      <StyledDropzone>
+     
+     <DropZone
+ 
+       onChange={(files) => {
+         const uploadFiles = files.map((file) =>
+           Object.assign(file, { preview: URL.createObjectURL(file) })
+         );
+         setNewFiles(uploadFiles);
+       }}
+     />
+
+     <FlexBox gap={1} mt={1}>
+       {newFiles.map((file, index) => (
+         <UploadBox key={index}>
+           <NextImage
+             width={240}
+             height={100}
+             objectFit="cover"
+             src={file.preview}
+             layout="responsive"
+           />
+           <StyledClear onClick={() => deleteNewImage(file.name)} />
+         </UploadBox>
+       ))}
+     </FlexBox>
+  
+     </StyledDropzone>
 
       <Styledbtn>
         <BazaarButton

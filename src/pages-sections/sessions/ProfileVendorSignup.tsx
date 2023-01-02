@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, MenuItem,Box,Grid } from '@mui/material'
+import { Checkbox, FormControlLabel, MenuItem, Box, Grid } from '@mui/material'
 import BazaarButton from 'components/BazaarButton'
 import { FlexBox } from 'components/flex-box'
 import DropZone from "components/DropZone";
@@ -11,8 +11,8 @@ import * as yup from 'yup'
 import EyeToggleButton from './EyeToggleButton'
 // import { Wrapper } from "./Login";
 import { multiStepContext } from 'StepContext'
-import {  Spacer } from 'ui'
-import {  TextField } from '@mui/material'
+import { Spacer } from 'ui'
+import { TextField } from '@mui/material'
 import styled from 'styled-components'
 
 
@@ -66,11 +66,26 @@ const StyledDropzone = styled.div`
     display: flex;
   }
 `
+const StyledClear = styled(Clear)`
+  top: 5,
+  right: 5,
+  fontSize: 14,
+  color: "red",
+  cursor: "pointer",
+  position: "absolute",
+`
+const UploadBox = styled(Box)`
+  width: 170,
+  height: "auto",
+  overflow: "hidden",
+  borderRadius: "8px",
+  position: "relative",
+`
 
 
 const ProfileVendorSignup = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
-  
+
 
 
   const togglePasswordVisibility = useCallback(() => {
@@ -98,21 +113,7 @@ const ProfileVendorSignup = () => {
 
 
   const Context = useContext(multiStepContext)
-  const StyledClear = styled(Clear)`
-    top: 5,
-    right: 5,
-    fontSize: 14,
-    color: "red",
-    cursor: "pointer",
-    position: "absolute",
-    `
-    const UploadBox = styled(Box)`
-      width: 170,
-      height: "auto",
-      overflow: "hidden",
-      borderRadius: "8px",
-      position: "relative",
-      `
+
 
   // @refresh reset
   return (
@@ -282,33 +283,33 @@ const ProfileVendorSignup = () => {
         />
       </StyledProfileInformations>
       <StyledDropzone>
-     
-          <DropZone
-      
-            onChange={(files) => {
-              const uploadFiles = files.map((file) =>
-                Object.assign(file, { preview: URL.createObjectURL(file) })
-              );
-              setNewFiles(uploadFiles);
-            }}
-          />
 
-          <FlexBox gap={1} mt={2}>
-            {newFiles.map((file, index) => (
-              <UploadBox key={index}>
-                <NextImage
-                  width={540}
-                  height={200}
-                  objectFit="cover"
-                  src={file.preview}
-                  layout="responsive"
-                />
-                <StyledClear onClick={() => deleteNewImage(file.name)} />
-              </UploadBox>
-            ))}
-          </FlexBox>
-       
-          </StyledDropzone>
+        <DropZone
+
+          onChange={(files) => {
+            const uploadFiles = files.map((file) =>
+              Object.assign(file, { preview: URL.createObjectURL(file) })
+            );
+            setNewFiles(uploadFiles);
+          }}
+        />
+
+        <FlexBox gap={1} mt={2}>
+          {newFiles.map((file, index) => (
+            <UploadBox key={index}>
+              <NextImage
+                width={540}
+                height={200}
+                objectFit="cover"
+                src={file.preview}
+                layout="responsive"
+              />
+              <StyledClear onClick={() => deleteNewImage(file.name)} />
+            </UploadBox>
+          ))}
+        </FlexBox>
+
+      </StyledDropzone>
       <StyledSelectStatus>
         <TextField
           select
@@ -333,7 +334,7 @@ const ProfileVendorSignup = () => {
           <MenuItem value='Entreprise'>Entreprise</MenuItem>
         </TextField>
       </StyledSelectStatus>
-   
+
 
       <FormControlLabel
         name='agreement'
@@ -353,10 +354,10 @@ const ProfileVendorSignup = () => {
             alignItems='center'
             justifyContent='flex-start'
           >
-           En vous inscrivant, vous acceptez les 
+            En vous inscrivant, vous acceptez les
             <a href='/' target='_blank' rel='noreferrer noopener'>
               <H6 borderBottom='1px solid' borderColor='grey.900'>
-              termes& Conditions
+                termes& Conditions
               </H6>
             </a>
           </FlexBox>

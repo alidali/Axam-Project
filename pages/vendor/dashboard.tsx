@@ -14,6 +14,20 @@ import api from "utils/api/dashboard";
 import styled from 'styled-components'
 import { Spacer } from "ui";
 
+const StyleAll = styled.div`
+
+`
+const StyleFirst =styled.div`
+display: inline-flex;
+
+`
+const StyleSecond =styled.div`
+
+display: inline-flex;
+`
+const StyleThrid =styled.div`
+display: inline-flex;
+`
 
 // =============================================================================
 VendorDashboard.getLayout = function getLayout(page: ReactElement) {
@@ -29,34 +43,28 @@ type DashboardProps = {
 
 // =============================================================================
 
-const AllSectionStyle = styled.div`
-  display = flex;
- 
-`
-const FirstSectionStyle = styled.div`
-display= flex-start;
- @media screen and (min-width: 768px) 
-`
+
 
 export default function VendorDashboard(props: DashboardProps) {
   // const { cardList, recentPurchase, stockOutProducts } = props;
 
   return (
-    <AllSectionStyle>
-    <FirstSectionStyle>
-
+    <StyleAll>
+  
+    
      <Section3 />  
-     <Spacer height={12}/>
-   
+  
+      {/* <Spacer height={12}/> */}
+  
         <WishCard  />
-      
-       <Spacer height={12}/>
-         <WishCard1 />      
-    </FirstSectionStyle> 
+     
+       {/* <Spacer height={12}/> */}
 
+         <WishCard1 />        
+  
   
 
-    </AllSectionStyle>
+    </StyleAll>
 
   );
 }

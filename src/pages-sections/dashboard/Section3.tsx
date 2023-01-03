@@ -3,14 +3,51 @@ import dynamic from "next/dynamic";
 import React from "react";
 import Card2 from "./Card2";
 import { H6 } from "components/Typography";
- import styled from 'styled-components'
-
+import styled from 'styled-components';
+import { Spacer } from 'ui'
 import { totalOrderChartOptions, } from "./chartsOptions";
+//  @refresh reset
 
-// export const GridStyled = styled.div`
+const StyleTout = styled.div`
 
-// paddingTop=3;
-// `
+@media screen and (max-width: 768px) {
+  display: flex-block;
+}
+
+`
+const StyleOne = styled.div`
+
+display: inline-block;
+justify-content: space-between;
+margin-right:14px;
+@media screen and (max-width: 768px) {
+  display: flex-block;
+}
+
+`
+const StyleSecond = styled.div`
+display: inline-block;
+justify-content: space-between;
+margin-right:15px;
+@media screen and (max-width: 768px) {
+  display: flex-block;
+}
+`
+const StyleThird = styled.div`
+display: inline-block;
+justify-content: space-between;
+margin-right:15px;
+@media screen and (max-width: 768px) {
+  display: flex-block;
+}
+`
+const StyleFour = styled.div`
+display: inline-block;
+justify-content: space-between;
+@media screen and (max-width: 768px) {
+  display: flex-block;
+}
+`
 
 
 
@@ -25,41 +62,25 @@ const Section3 = () => {
   ];
 
   return (
-    <Box>
-      <Grid container spacing={2}>
+    <StyleTout >
 
-
-        <Grid item xl={2} lg={3} md={6} xs={12} >
-          <Card2 title="Nombre des commandes lors du mois" percentage="10.25%" amount="39">
-
-          </Card2>
-        </Grid>
-
-        <Grid item xl={2} lg={3} md={6} xs={12}>
-          <Card2 title="Produit référencés" percentage="2.65%" amount="12,26">
-
-          </Card2>
-        </Grid>
-
-        <Grid item xl={2} lg={3} md={6} xs={12}>
-          <Card2 title="Chiffre d'affaire" percentage="2.65%" amount="24">
-
-          </Card2>
-        </Grid>
-        <Grid item xl={2} lg={3} md={6} xs={12}>
-          <Card>
-            <H6 color="grey.600"> courbe CA par mois</H6>
-            <ReactApexChart
-              type="area"
-              height={130}
-              series={totalOrderseries}
-              options={totalOrderChartOptions(theme)}
-            />
-
-          </Card>
-        </Grid>
-      </Grid>
-    </Box>
+      <StyleOne >
+        <Card2 title="Nombre des commandes lors du mois" percentage="10.25%" amount="39">
+        </Card2>
+      </StyleOne>
+      <StyleSecond>
+        <Card2 title="Produit référencés" percentage="2.65%" amount="12,26">
+        </Card2>
+      </StyleSecond>
+      <StyleThird >
+        <Card2 title="Chiffre d'affaire" percentage="2.65%" amount="24">
+        </Card2>
+      </StyleThird>
+      <StyleFour>
+        <Card2 title="Chiffre d'affaire" percentage="2.65%" amount="24">
+        </Card2>
+      </StyleFour>
+    </StyleTout>
   );
 };
 

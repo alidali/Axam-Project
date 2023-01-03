@@ -27,25 +27,33 @@ const StepContext = () => {
         console.log("here", finalData);
 
         const bodyFormData = new FormData()
+        //ProfileVendorSignup
         bodyFormData.append('email', userData['email'])
-        // bodyFormData.append('firstName', userData['firstName'])
-        // bodyFormData.append('lastName', userData['lastName'])
+        bodyFormData.append('firstName', userData['firstName'])
+        bodyFormData.append('lastName', userData['lastName'])
         bodyFormData.append('mobile', userData['mobile'])
         bodyFormData.append('password', userData['password'])
         bodyFormData.append('confirm_password', userData['confirm_password'])
-        bodyFormData.append('name', userData['RaisonSocial'])
-        bodyFormData.append('tax_name', userData['MatriculeFiscale'])
-        // bodyFormData.append('tax_name_proof', "Low Resolution Logo - White Background.png")
-        bodyFormData.append('rne', userData['rne'])
-        // bodyFormData.append('rne_proof', "Low Resolution Logo - White Background.png")
-        bodyFormData.append('addresse', userData['addresse'])
+        bodyFormData.append('cin_number', userData['cin_number'])
+        bodyFormData.append('national_identity_card', userData['cin_number'])
+
+        bodyFormData.append('nameOfShop', userData['nameOfShop'])
+        bodyFormData.append('raisonSocial', userData['raisonSocial'])
+        bodyFormData.append('pays', userData['pays'])
+        bodyFormData.append('gouvernorat', userData['gouvernorat'])
+        bodyFormData.append('ville', userData['ville'])
+        bodyFormData.append('address', userData['address'])
+        bodyFormData.append('telephoneFixe', userData['telephoneFixe'])
         bodyFormData.append('pincode', userData['pincode'])
+        bodyFormData.append('tax_name', userData['matriculeFiscale'])
+        bodyFormData.append('tax_name_proof', userData['tax_name_proof'])
+        bodyFormData.append('rne', userData['rne'])
+        bodyFormData.append('rne_proof', userData['rne_proof'])
+        
         bodyFormData.append('pan_number', userData['pan_number'])
-        // bodyFormData.append('pan_proof', "Low Resolution Logo - White Background.png")
+        bodyFormData.append('pan_proof', userData['pan_proof'])
         bodyFormData.append('bank_name', userData['bank_name'])
         bodyFormData.append('bank_code', userData['bank_code'])
-        bodyFormData.append('cin_number', userData['cin_number'])
-        // bodyFormData.append('national_identity_card', "Low Resolution Logo - White Background.png")
 
 
         const config = {
@@ -55,37 +63,15 @@ const StepContext = () => {
                 'Accept': "*/*"
             },
         }
-        // try {
+        try {
         const response = await axios.post("http://5.135.194.236:8181/seller/app/v1/api/register", bodyFormData, config)
-        // body: JSON.stringify({
-        //     email: userData['email'],
-        //     // first_name: userData['firstName'],
-        //     // last_name: userData['lastName'],
-        //     mobile: userData['mobile'],
-        //     password: userData['password'],
-        //     confirm_password: userData['confirm_password'],
-        //     name: userData['RaisonSocial'],
-        //     tax_name: userData['MatriculeFiscale'],
-        //     // tax_name_proof: userData['tax_name_proof'],
-        //     rne: userData['rne'],
-        //     // rne_proof: userData['rne_proof'],
-        //     adresse: userData['addresse'],
-        //     pincode: userData['pincode'],
-        //     pan_number: userData['pan_number'],
-        //     // pan_proof: userData['pan_proof'],
-        //     bank_name: userData['bank_name'],
-        //     bank_code: userData['bank_code'],
-        //     cin_number: userData['cin_number'],
-        //     // national_identity_card: userData['national_identity_card'],
-        // }),
-        // });
         const content = await response.data;
         console.log("🚀 ~ file: Signup.tsx ~ line 84 ~ submit ~ content", content);
         return content
-        // } catch (error) {
-        //     console.log(error)
+        } catch (error) {
+            console.log(error)
 
-        // }
+        }
     };
 
     if (redirect) {

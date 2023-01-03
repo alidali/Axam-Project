@@ -1,7 +1,7 @@
 import {
- 
-  TextField,Box
- 
+
+  TextField, Box
+
 } from '@mui/material'
 import { Clear } from "@mui/icons-material";
 import DropZone from "components/DropZone";
@@ -121,10 +121,14 @@ const ShopSignup = () => {
   interface FileType extends File {
     preview: string;
   }
-  
-  const [newFiles, setNewFiles] = useState<FileType[]>([]);
-  const deleteNewImage = (name: string) => {
-    setNewFiles((state) => state.filter((item) => item.name !== name));
+
+  const [newFilesTaxName, setNewFilesTaxName] = useState<FileType[]>([]);
+  const [newFilesRne, setNewFilesRne] = useState<FileType[]>([]);
+  const deleteNewImageTaxName = (name: string) => {
+    setNewFilesTaxName((state) => state.filter((item) => item.name !== name));
+  };
+  const deleteNewImageRne = (name: string) => {
+    setNewFilesRne((state) => state.filter((item) => item.name !== name));
   };
 
   const Context = useContext(multiStepContext)
@@ -141,21 +145,16 @@ const ShopSignup = () => {
           label='Nom Boutique'
           variant='outlined'
           onBlur={handleBlur}
-          // InputProps={{
-          //   endAdornment: (
-          //     <ReportProblemIcon  fontSize="small" color='inherit' sx={{ mr: 1 }} />
-          //   ),
-          // }}
-          value={Context.userData['NomBoutique']}
+          value={Context.userData['nameOfShop']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              NomBoutique: e.target.value
+              nameOfShop: e.target.value
             })
           }
           placeholder='Nom Boutique'
-          error={!!touched.NomBoutique && !!errors.NomBoutique}
-          helperText={touched.NomBoutique && errors.NomBoutique}
+          error={!!touched.nameOfShop && !!errors.nameOfShop}
+          helperText={touched.nameOfShop && errors.nameOfShop}
         />
 
         <Spacer width={20} />
@@ -163,33 +162,23 @@ const ShopSignup = () => {
         <TextField
           fullWidth
           required
-          name='Raisonsocial'
+          name='raisonSocial'
           size='medium'
           label='Raison social'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['RaisonSocial']}
+          value={Context.userData['raisonSocial']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              RaisonSocial: e.target.value
+              raisonSocial: e.target.value
             })
           }
           placeholder='Raison social'
-          error={!!touched.RaisonSocial && !!errors.RaisonSocial}
-          helperText={touched.RaisonSocial && errors.RaisonSocial}
+          error={!!touched.raisonSocial && !!errors.raisonSocial}
+          helperText={touched.raisonSocial && errors.raisonSocial}
         />
       </StyledRaison>
-      {/* <Grid item xs={10} height={80}>
-       
-       <H6 ml={1}  borderColor="grey.900" fontFamily={'open Sans'} fontSize ={12} color={'inherit'} >
-         <ReportProblemIcon fontSize="small" color='inherit' sx={{ mr: 1 }} />
-         Les consommateurs, vous reconnaitrons sur Axam à travers votre nom de Boutique.
-         Il est strictement interdit d&apos;utiliser un nom de marque déposée sans l&apos;autorisation 
-         de son propriétaire.
-         </H6>
-    
-    </Grid> */}
       <StyledPays>
         <TextField
           fullWidth
@@ -228,27 +217,6 @@ const ShopSignup = () => {
           helperText={touched.gouvernorat && errors.gouvernorat}
         />
         <Spacer width={20} />
-        <TextField
-          fullWidth
-          required
-          name='delegation'
-          size='medium'
-          label='Délégation '
-          variant='outlined'
-          onBlur={handleBlur}
-          value={Context.userData['delegation']}
-          onChange={e =>
-            Context.setUserData({
-              ...Context.userData,
-              delegation: e.target.value
-            })
-          }
-          placeholder='Délégation '
-          error={!!touched.delegation && !!errors.delegation}
-          helperText={touched.delegation && errors.delegation}
-        />
-
-        <Spacer width={20} />
       </StyledPays>
 
       <StyledCodePostal>
@@ -273,21 +241,21 @@ const ShopSignup = () => {
         <TextField
           fullWidth
           required
-          name='Addresse'
+          name='address'
           size='medium'
-          label='Addresse'
+          label='address'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['Addresse']}
+          value={Context.userData['address']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              Addresse: e.target.value
+              address: e.target.value
             })
           }
           placeholder='Addresse'
-          error={!!touched.Addresse && !!errors.Addresse}
-          helperText={touched.Addresse && errors.Addresse}
+          error={!!touched.address && !!errors.address}
+          helperText={touched.address && errors.address}
         />
       </StyledCodePostal>
       <StyledPhone>
@@ -300,11 +268,11 @@ const ShopSignup = () => {
           type='number'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['TelephoneFixe']}
+          value={Context.userData['telephoneFixe']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              TelephoneFixe: e.target.value
+              telephoneFixe: e.target.value
             })
           }
           placeholder='Télèphone Fixe'
@@ -315,22 +283,22 @@ const ShopSignup = () => {
         <TextField
           fullWidth
           required
-          name='CodePostal'
+          name='codePostal'
           size='medium'
           label='Code Postal'
           type='number'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['CodePostal']}
+          value={Context.userData['codePostal']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              CodePostal: e.target.value
+              codePostal: e.target.value
             })
           }
           placeholder='Code Postal'
-          error={!!touched.CodePostal && !!errors.CodePostal}
-          helperText={touched.CodePostal && errors.CodePostal}
+          error={!!touched.codePostal && !!errors.codePostal}
+          helperText={touched.codePostal && errors.codePostal}
         />
       </StyledPhone>
 
@@ -338,16 +306,16 @@ const ShopSignup = () => {
         <TextField
           fullWidth
           required
-          name='MatriculeFiscale'
+          name='matriculeFiscale'
           size='medium'
           label='Matricule Fiscale'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['MatriculeFiscale']}
+          value={Context.userData['matriculeFiscale']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              MatriculeFiscale: e.target.value
+              matriculeFiscale: e.target.value
             })
           }
           placeholder='Matricule Fiscale'
@@ -355,19 +323,48 @@ const ShopSignup = () => {
           helperText={touched.matriculeFiscale && errors.matriculeFiscale}
         />
       </StyledMatricule>
+      <StyledDropzone>
+
+        <DropZone
+
+          onChange={(files) => {
+            const uploadFiles = files.map((file) =>
+              Object.assign(file, { preview: URL.createObjectURL(file) })
+            );
+            setNewFilesTaxName(uploadFiles);
+          }}
+        />
+
+        <FlexBox gap={0} mt={1}>
+          {newFilesTaxName.map((file, index) => (
+            <UploadBox key={index}>
+              <NextImage
+                width={240}
+                height={100}
+                objectFit="cover"
+                src={file.preview}
+                layout="responsive"
+              />
+              <StyledClear onClick={() => deleteNewImageTaxName(file.name)} />
+            </UploadBox>
+          ))}
+        </FlexBox>
+
+      </StyledDropzone>
+
 
       <StyledRne>
         <TextField
           fullWidth
           required
-          name='Rne'
+          name='rne'
           size='medium'
           label='RNE'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['Rne']}
+          value={Context.userData['rne']}
           onChange={e =>
-            Context.setUserData({ ...Context.userData, Rne: e.target.value })
+            Context.setUserData({ ...Context.userData, rne: e.target.value })
           }
           placeholder='RNE'
           error={!!touched.RNE && !!errors.RNE}
@@ -376,33 +373,33 @@ const ShopSignup = () => {
       </StyledRne>
 
       <StyledDropzone>
-     
-     <DropZone
- 
-       onChange={(files) => {
-         const uploadFiles = files.map((file) =>
-           Object.assign(file, { preview: URL.createObjectURL(file) })
-         );
-         setNewFiles(uploadFiles);
-       }}
-     />
 
-     <FlexBox gap={1} mt={1}>
-       {newFiles.map((file, index) => (
-         <UploadBox key={index}>
-           <NextImage
-             width={240}
-             height={100}
-             objectFit="cover"
-             src={file.preview}
-             layout="responsive"
-           />
-           <StyledClear onClick={() => deleteNewImage(file.name)} />
-         </UploadBox>
-       ))}
-     </FlexBox>
-  
-     </StyledDropzone>
+        <DropZone
+
+          onChange={(files) => {
+            const uploadFiles = files.map((file) =>
+              Object.assign(file, { preview: URL.createObjectURL(file) })
+            );
+            setNewFilesRne(uploadFiles);
+          }}
+        />
+
+        <FlexBox gap={1} mt={1}>
+          {newFilesRne.map((file, index) => (
+            <UploadBox key={index}>
+              <NextImage
+                width={240}
+                height={100}
+                objectFit="cover"
+                src={file.preview}
+                layout="responsive"
+              />
+              <StyledClear onClick={() => deleteNewImageRne(file.name)} />
+            </UploadBox>
+          ))}
+        </FlexBox>
+
+      </StyledDropzone>
 
       <Styledbtn>
         <BazaarButton
@@ -430,29 +427,29 @@ const ShopSignup = () => {
 }
 
 const initialValues = {
-  raisonsocial: '',
-  NomBoutique: '',
+  nameOfShop: '',
+  raisonSocial: '',
   pays: '',
   gouvernorat: '',
-  delegation: '',
   ville: '',
-  Addresse: '',
+  address: '',
   telephoneFixe: '',
   codePostal: '',
+  matriculeFiscale: '',
+  tax_name_proof: '',
   rne: '',
-  matriculeFiscale: ''
+  rne_proof: '',
 }
 const formSchema = yup.object().shape({
-  NomBoutique: yup.string().required('required'),
-  raisonsocial: yup.string().required('required'),
-  pays: yup.string().required('required'),
-  gouvernorat: yup.string().required('required'),
-  delegation: yup.string().required('required'),
-  ville: yup.string().required('required'),
+  nameOfShop: yup.string().required('required'),
+  RaisonSocial: yup.string().required('required'),
+  Pays: yup.string().required('required'),
+  Gouvernorat: yup.string().required('required'),
+  Ville: yup.string().required('required'),
   Addresse: yup.string().required('required'),
   TelephoneFixe: yup.number().required('required'),
-  codePostal: yup.number().required('required'),
+  CodePostal: yup.number().required('required'),
   rne: yup.string().required('required'),
-  matriculeFiscale: yup.string().required('required')
+  MatriculeFiscale: yup.string().required('required')
 })
 export default ShopSignup

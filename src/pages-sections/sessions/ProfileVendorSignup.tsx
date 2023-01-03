@@ -58,10 +58,11 @@ const Styledbtn = styled.div`
   margin-left: 30px;
 `
 const StyledDropzone = styled.div`
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 20px;
   margin: 30px;
-  widh
   @media screen and (min-width: 768px) {
     display: flex;
   }
@@ -75,11 +76,12 @@ const StyledClear = styled(Clear)`
   position: "absolute",
 `
 const UploadBox = styled(Box)`
-  width: 170,
-  height: "auto",
+  display: flex;
+  flex-direction: row;
+  width: 100px,
+  height: 100px,
   overflow: "hidden",
   borderRadius: "8px",
-  position: "relative",
 `
 
 
@@ -122,41 +124,41 @@ const ProfileVendorSignup = () => {
         <TextField
           required
           fullWidth
-          name='Nom'
+          name='firstName'
           size='medium'
           label='Nom'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['Nom']}
+          value={Context.userData['firstName']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              Nom: e.target.value
+              firstName: e.target.value
             })
           }
           placeholder='Nom'
-          error={!!touched.name && !!errors.name}
-          helperText={touched.name && errors.name}
+          error={!!touched.firstName && !!errors.firstName}
+          helperText={touched.firstName && errors.firstName}
         />
         <Spacer width={20} />
         <TextField
           fullWidth
           required
-          name='Prenom'
+          name='lastName'
           size='medium'
           label='Prénom'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['Prenom']}
+          value={Context.userData['lastName']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              Prenom: e.target.value
+              lastName: e.target.value
             })
           }
           placeholder='Prénom'
-          error={!!touched.Prénom && !!errors.Prénom}
-          helperText={touched.Prénom && errors.Prénom}
+          error={!!touched.lastName && !!errors.lastName}
+          helperText={touched.lastName && errors.lastName}
         />
       </StyledName>
 
@@ -164,16 +166,16 @@ const ProfileVendorSignup = () => {
         <TextField
           fullWidth
           required
-          name='Email'
+          name='email'
           size='medium'
-          type='email'
+          type='Email'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['Email']}
+          value={Context.userData['email']}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              Email: e.target.value
+              email: e.target.value
             })
           }
           label='Email'
@@ -185,7 +187,7 @@ const ProfileVendorSignup = () => {
         <TextField
           fullWidth
           required
-          name='Telephone'
+          name='mobile'
           size='medium'
           type='number'
           label='Téléphone'
@@ -194,12 +196,13 @@ const ProfileVendorSignup = () => {
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              Telephone: e.target.value
+              mobile: e.target.value
             })
           }
           placeholder='Téléphone'
-          error={!!touched.Téléphone && !!errors.Téléphone}
-          helperText={touched.Téléphone && errors.Téléphone}
+          value={Context.userData['mobile']}
+          error={!!touched.mobile && !!errors.mobile}
+          helperText={touched.mobile && errors.mobile}
         />
       </StyledProfileInformations>
 
@@ -217,10 +220,10 @@ const ProfileVendorSignup = () => {
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              Password: e.target.value
+              password: e.target.value
             })
           }
-          value={Context.userData['Password']}
+          value={Context.userData['password']}
           type={passwordVisibility ? 'text' : 'password'}
           error={!!touched.password && !!errors.password}
           helperText={touched.password && errors.password}
@@ -239,21 +242,21 @@ const ProfileVendorSignup = () => {
           fullWidth
           size='medium'
           autoComplete='on'
-          name=' re_password'
+          name=' confirm_password'
           variant='outlined'
-          label='Confirmer mot de passe '
+          label='Confirmer mot de passe'
           placeholder='*********'
           onBlur={handleBlur}
           onChange={e =>
             Context.setUserData({
               ...Context.userData,
-              re_password: e.target.value
+              confirm_password: e.target.value
             })
           }
-          value={Context.userData['re_password']} // TODO
+          value={Context.userData['confirm_password']} // TODO 
           type={passwordVisibility ? 'text' : 'password'}
-          error={!!touched.re_password && !!errors.re_password}
-          helperText={touched.re_password && errors.re_password}
+          error={!!touched.confirm_password && !!errors.confirm_password}
+          helperText={touched.confirm_password && errors.confirm_password}
           InputProps={{
             endAdornment: (
               <EyeToggleButton
@@ -267,47 +270,46 @@ const ProfileVendorSignup = () => {
       <StyledProfileInformations>
         <TextField
           fullWidth
-          name='Cin'
+          name='cin_number'
           required
           size='medium'
           label='CIN'
           variant='outlined'
           onBlur={handleBlur}
-          value={Context.userData['Cin']}
+          value={Context.userData['cin_number']}
           onChange={e =>
-            Context.setUserData({ ...Context.userData, Cin: e.target.value })
+            Context.setUserData({ ...Context.userData, cin_number: e.target.value })
           }
           placeholder='CIN'
-          error={!!touched.Cin && !!errors.Cin}
-          helperText={touched.Cin && errors.Cin}
+          error={!!touched.cin_number && !!errors.cin_number}
+          helperText={touched.cin_number && errors.cin_number}
         />
       </StyledProfileInformations>
       <StyledDropzone>
 
         <DropZone
-
           onChange={(files) => {
             const uploadFiles = files.map((file) =>
               Object.assign(file, { preview: URL.createObjectURL(file) })
             );
             setNewFiles(uploadFiles);
+            Context.setUserData({ ...Context.userData, cin_number_proof: uploadFiles })
           }}
         />
+        {/* <FlexBox gap={1} mt={2}> */}
+        {newFiles.map((file, index) => (
+          <UploadBox key={index}>
+            <NextImage
+              width={250}
+              height={170}
+              src={file.preview}
+            // layout="responsive"
+            />
+            <StyledClear onClick={() => deleteNewImage(file.name)} />
+          </UploadBox>
+        ))}
+        {/* </FlexBox> */}
 
-        <FlexBox gap={1} mt={2}>
-          {newFiles.map((file, index) => (
-            <UploadBox key={index}>
-              <NextImage
-                width={540}
-                height={200}
-                objectFit="cover"
-                src={file.preview}
-                layout="responsive"
-              />
-              <StyledClear onClick={() => deleteNewImage(file.name)} />
-            </UploadBox>
-          ))}
-        </FlexBox>
 
       </StyledDropzone>
       <StyledSelectStatus>
@@ -346,6 +348,7 @@ const ProfileVendorSignup = () => {
             color='secondary'
             style={{ marginLeft: '50px' }}
             checked={values.agreement || false}
+            required
           />
         }
         label={
@@ -374,9 +377,12 @@ const ProfileVendorSignup = () => {
 }
 
 const initialValues = {
-  Nom: '',
-  Prenom: '',
+  firstName: '',
+  lastName: '',
   email: '',
+  mobile: '',
+  cin_number: '',
+  cin_number_proof: '',
   password: '',
   re_password: '',
   agreement: false
@@ -385,10 +391,7 @@ const initialValues = {
 const formSchema = yup.object().shape({
   Nom: yup.string().required('Name is required'),
   Prenom: yup.string().required('Prenom is required'),
-  email: yup
-    .string()
-    .email('invalid email')
-    .required('Email is required'),
+  Email: yup.string().email('invalid email').required('Email is required'),
   password: yup.string().required('Password is required'),
 
   re_password: yup

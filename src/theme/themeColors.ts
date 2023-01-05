@@ -29,7 +29,7 @@ declare module "@mui/material/styles" {
 // =================================================================
 
 export const grey = {
-  900: "#2B3445", // Main Text
+  900: "#00706A", // Main Text
   800: "#373F50", // Paragraph
   700: "#4B566B",
   600: "#7D879C", // Low Priority form Title/Text

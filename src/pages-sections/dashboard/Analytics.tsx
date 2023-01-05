@@ -6,9 +6,10 @@ import {
   SelectChangeEvent,
   styled,
   useTheme,
+  Box,
 } from "@mui/material";
 import { FlexBetween } from "components/flex-box";
-import { H5 } from "components/Typography";
+import { H4 } from "components/Typography";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { analyticsChartOptions } from "./chartsOptions";
@@ -64,30 +65,39 @@ const Analytics = () => {
   ];
 
   return (
-    <Card sx={{ p: 3 }}>
+   
+    <Card sx={{
+      pr:2,
+      width:"100%",
+      height: "100%",}}>   
       <FlexBetween>
-        <H5>Analytics</H5>
+        <H4    color="#2B3445" style={{ alignItems: 'flex-end'}}>Analytics</H4>
 
         <StyledSelect
+       
+       style={{ alignItems: 'flex-end'}}
           value={selectType}
           IconComponent={() => <KeyboardArrowDown />}
           onChange={(e: SelectChangeEvent<string>) =>
             setSelectType(e.target.value)
+
           }
+          
         >
           <MenuItem value="yearly">Yearly</MenuItem>
           <MenuItem value="monthly">Monthly</MenuItem>
           <MenuItem value="Weekily">Weekily</MenuItem>
         </StyledSelect>
-      </FlexBetween>
+        </FlexBetween>
 
       <ReactApexChart
         type="bar"
-        height={300}
+        height={400}
         series={series}
         options={analyticsChartOptions(theme, categories)}
-      />
+        />
     </Card>
+       
   );
 };
 

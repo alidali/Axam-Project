@@ -69,7 +69,8 @@ export const H2: React.FC<BoxProps & Props> = ({
       component="h2"
       mb={0}
       mt={0}
-      fontSize="25px"
+  
+      fontSize="23px"
       fontWeight="700"
       lineHeight="1.5"
       {...props}
@@ -114,11 +115,12 @@ export const H4: React.FC<BoxProps & Props> = ({
   return (
     <StyledBox
       mb={0}
-      mt={0}
+      mt={2}
+      ml={2}
       component="h4"
       fontSize="17px"
       fontWeight="600"
-      lineHeight="1.5"
+      lineHeight="22.1px"
       ellipsis={ellipsis ? 1 : undefined}
       textTransformStyle={textTransform}
       className={clsx({ [className || ""]: true })}
@@ -146,6 +148,7 @@ export const H5: React.FC<BoxProps & Props> = ({
       component="h5"
       mb={0}
       mt={0}
+     
       fontSize="16px"
       fontWeight="600"
       lineHeight="1.5"
@@ -176,7 +179,7 @@ export const H6: React.FC<BoxProps & Props> = ({
       fontSize="12px"
       fontWeight="600"
       lineHeight="1.5"
-      marginLeft={1.5}
+      // marginLeft={1}
       {...props}
     >
       {children}

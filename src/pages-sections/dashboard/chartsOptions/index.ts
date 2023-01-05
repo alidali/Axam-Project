@@ -7,6 +7,7 @@ export const weeklyChartOptions = (theme: Theme): ApexOptions => ({
     background: "transparent",
     toolbar: { show: false },
     fontFamily: theme.typography.fontFamily,
+    
   },
   colors: [theme.palette.info.main],
   dataLabels: { enabled: false },
@@ -20,7 +21,7 @@ export const weeklyChartOptions = (theme: Theme): ApexOptions => ({
     axisTicks: { show: false },
     labels: {
       show: false,
-      style: { fontWeight: 500, colors: theme.palette.text.disabled },
+      style: { fontWeight: 300, colors: theme.palette.text.disabled },
     },
   },
   yaxis: {
@@ -39,7 +40,8 @@ export const weeklyChartOptions = (theme: Theme): ApexOptions => ({
   },
   plotOptions: {
     bar: { columnWidth: "50%", borderRadius: 5 },
-  },
+  }, 
+
 });
 
 export const productShareChartOptions = (theme: Theme): ApexOptions => ({
@@ -83,7 +85,7 @@ export const totalOrderChartOptions = (theme: Theme): ApexOptions => ({
     axisTicks: { show: false },
     labels: {
       show: false,
-      style: { fontWeight: 500, colors: theme.palette.text.disabled },
+      style: { fontWeight: 500, colors: theme.palette.text.disabled, },
     },
   },
   yaxis: {
@@ -92,7 +94,7 @@ export const totalOrderChartOptions = (theme: Theme): ApexOptions => ({
     show: false,
     tickAmount: 4,
     labels: {
-      style: { fontWeight: 500, colors: theme.palette.text.disabled },
+      style: { fontWeight: 500, colors: theme.palette.text.disabled ,},
     },
   },
   tooltip: {
@@ -164,7 +166,7 @@ export const analyticsChartOptions = (
     min: 0,
     show: true,
     max: 100000,
-    tickAmount: 6,
+    tickAmount: 4,
     opposite: theme.direction === "rtl",
     labels: {
       style: { fontSize: "14px", colors: theme.palette.grey[600] },
@@ -174,7 +176,7 @@ export const analyticsChartOptions = (
   tooltip: { x: { show: false } },
   stroke: { width: 7, colors: ["transparent"] },
   plotOptions: {
-    bar: { borderRadius: 5, columnWidth: "45%" },
+    bar: { borderRadius: 6, columnWidth: "75%" },
   },
   legend: {
     position: "top",

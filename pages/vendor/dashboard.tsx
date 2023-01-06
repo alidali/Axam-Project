@@ -3,13 +3,13 @@ import VendorDashboardLayout from "components/layouts/vendor-dashboard";
 import { GetStaticProps } from "next";
 import Analytics from "pages-sections/dashboard/Analytics";
 import Card1 from "pages-sections/dashboard/Card1";
-import Card2 from "pages-sections/dashboard/Card2";
 import Section3 from "pages-sections/dashboard/Section3";
 import WishCard from "pages-sections/dashboard/WishCard";
 import WishCard1 from "pages-sections/dashboard/WishCard1";
 import { ReactElement } from "react";
 import api from "utils/api/dashboard";
 import { Spacer } from 'ui';
+
 // =============================================================================
 VendorDashboard.getLayout = function getLayout(page: ReactElement) {
   return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
@@ -70,8 +70,8 @@ export default function VendorDashboard(props: DashboardProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const cardList = await api.getAllCard();
-  const recentPurchase = await api.recentPurchase();
-  const stockOutProducts = await api.stockOutProducts();
+  // const recentPurchase = await api.recentPurchase();
+  // const stockOutProducts = await api.stockOutProducts();
 
-  return { props: { cardList, recentPurchase, stockOutProducts } };
+  return { props: { cardList } };
 };

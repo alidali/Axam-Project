@@ -78,7 +78,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <NavItemButton key={item.name} name="child" active={0}>
+            <NavItemButton key={item.name} name="child" active={0} >
               {item.icon ? (
                 <ListIconWrapper>
                   <item.icon />

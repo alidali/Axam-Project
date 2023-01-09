@@ -11,12 +11,13 @@ import { useRouter } from "next/router";
 import { FC } from "react";
 import AccountPopover from "./popovers/AccountPopover";
 import NotificationsPopover from "./popovers/NoficationPopover";
-
+import {  Paragraph } from "components/Typography";
 // custom styled components
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   zIndex: 11,
-  paddingTop: "1rem",
-  paddingBottom: "1rem",
+  paddingTop: "1.5rem",
+  
+  paddingBottom: "1.5rem",
   backgroundColor: "#ffffff",
   boxShadow: theme.shadows[2],
   color: theme.palette.text.primary,
@@ -40,7 +41,8 @@ const ToggleWrapper = styled(FlexRowCenter)(({ theme }) => ({
 }));
 
 const CustomButton = styled(Button)(({ theme }) => ({
-  minHeight: 40,
+  height: "40px",
+  width:"190px",
   flexShrink: 0,
   marginLeft: 16,
   padding: "0 20px",
@@ -53,9 +55,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: 200,
   padding: "5px 10px",
   borderRadius: "8px",
-  color: theme.palette.grey[500],
-  backgroundColor: theme.palette.grey[100],
-  [theme.breakpoints.down("md")]: { display: "none" },
+  color: "theme.palette.grey[300]",
+  backgroundColor:"#FFFFFF",
+  border: "1px solid #00706a",
+  [theme.breakpoints.down("md")]:{ display: "none" },
 }));
 
 // ===================================================================
@@ -71,26 +74,48 @@ const DashboardNavbar: FC<DashboardNavbarProps> = ({ handleDrawerToggle }) => {
   return (
     <DashboardNavbarRoot position="sticky">
       <Container maxWidth="xl">
-        <StyledToolBar disableGutters>
-          {downLg && (
-            <ToggleWrapper onClick={handleDrawerToggle}>
-              <Toggle />
-            </ToggleWrapper>
-          )}
+         <StyledToolBar disableGutters>
+          {/* {downLg && (
+          //  <ToggleWrapper onClick={handleDrawerToggle}>
+          //     {/* <Toggle /> */}
+          {/* //   </ToggleWrapper> */}
+          {/* )}   */}
 
           <CustomButton
             onClick={() => router.push("/")}
-            startIcon={<Globe sx={{ color: "grey.900" }} />}
+            startIcon={<Globe sx={{ color: "#2B3445",width:"14px",height:"14px" }} />}
           >
+            <Paragraph  style={{color: "#2B3445"}}>
             Browse Website
+            </Paragraph>
           </CustomButton>
+          <Button
+          variant="outlined"
+       
+
+            style={{color:"white",backgroundColor:"#E09351",width:"91px",
+            height:"40px", marginLeft:"12px", borderRadius:"8px"}}
+        >
+          <Paragraph >Contact</Paragraph>
+        </Button>
+        <Button
+          variant="outlined"
+       
+
+            style={{color:"white",backgroundColor:"#00706A",width:"180px",
+            height:"40px",padding: "9px 16px", marginLeft: "12px", borderRadius:"8px"}}
+        >
+          <Paragraph >Création de contenu</Paragraph>
+        </Button>
 
           <Box flexGrow={1} />
 
           <FlexBox alignItems="center" gap={2}>
             <StyledInputBase
               placeholder="Search anything..."
-              startAdornment={<Search sx={{ color: "grey.500", mr: 1 }} />}
+              style={{color: "#7D879C"}}
+              startAdornment={<Search sx={{ color: "#00706A", mr: 1,width:"16px" ,height:"16px" }} />}
+              
             />
 
             <NotificationsPopover />

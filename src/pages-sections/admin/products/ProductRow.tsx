@@ -1,4 +1,4 @@
-import { Delete, Edit, RemoveRedEye } from '@mui/icons-material'
+import { Delete, Edit } from '@mui/icons-material'
 import { Avatar, Box, IconButton, useTheme, styled } from '@mui/material'
 import { Done } from '@mui/icons-material'
 import ClearIcon from '@mui/icons-material/Clear'
@@ -24,12 +24,7 @@ type ProductRowProps = { product: any }
 
 const ProductRow: FC<ProductRowProps> = ({ product }) => {
   const {
-    category,
-    name,
-    price,
-    image,
-    qty,
-    purchaseDate,
+   
     id,
     published,
     payment,
@@ -60,36 +55,43 @@ const ProductRow: FC<ProductRowProps> = ({ product }) => {
 
   return (
     <StyledTableRow tabIndex={-1} role='checkbox'>
-      <StyledTableCell align='left'>
+      <StyledTableCell align='center'>
      
         <FlexBox alignItems='center' gap={1.5}>
         <Avatar src={product.image} sx={{ borderRadius: "8px" }} />
           <Box>
-            <Paragraph>{product.name}</Paragraph>
+            <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>{product.name}</Paragraph>
           </Box>
         </FlexBox>
       </StyledTableCell>
 
-      <StyledTableCell align='left'>
-      <Paragraph>{product.variants?.map(product=>(product.date_added))}</Paragraph>
+      <StyledTableCell  align='center'>
+      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>{product.variants?.map(product=>(product.date_added))}</Paragraph>
       </StyledTableCell>
 
-      <StyledTableCell align='left'>{product.total_allowed_quantity}</StyledTableCell>
+      <StyledTableCell  align='center'>
+      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>
+        {product.total_allowed_quantity}</Paragraph></StyledTableCell>
       
-      <StyledTableCell align='left'> {product.variants?.map(product=>(product.price))}</StyledTableCell>                           
+      <StyledTableCell align='center'>
+      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>
+         {product.variants?.map(product=>(product.price))}</Paragraph></StyledTableCell>                           
          
-      <StyledTableCell align='left'>{product.variants?.map(product=>(product.special_price))} </StyledTableCell> 
+       
+      <StyledTableCell align='center'>
+      <Paragraph color="black"  fontSize={'16px'}fontWeight={'bold'}>
+        {product.variants?.map(product=>(product.special_price))}  </Paragraph></StyledTableCell> 
 
 
 
-      <StyledTableCell align='left'>
+      <StyledTableCell align='center'>
         <BazaarSwitch
-          color='info'
+          color="default"
           checked={productPulish}
           onChange={() => setProductPublish(state => !state)}
         />
       </StyledTableCell>
-      <StyledTableCell align='left'>
+      <StyledTableCell align='center'>
         <StatusWrapper
           gap={1}
           alignItems='center'
@@ -109,10 +111,8 @@ const ProductRow: FC<ProductRowProps> = ({ product }) => {
         >
           <EditTwoToneIcon fontSize='small' />
         </IconButton>
-        <StyledIconButton>
-          <RemoveRedEye />
-        </StyledIconButton>
-        <IconButton color='primary' sx={{ ml: 2, p: 1 }}>
+       
+        <IconButton color='primary' sx={{ ml: 1, p: 1 }}>
           <DeleteTwoToneIcon />
         </IconButton>
       </StyledTableCell>

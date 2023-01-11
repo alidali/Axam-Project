@@ -11,7 +11,9 @@ import { ChangeEvent, FC } from "react";
 
 // styled components
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  fontWeight: 600,
+ 
+  fontWeight:"bold",
+fontSize:"17px",
   padding: "16px 20px",
   color: theme.palette.grey[900],
 }));
@@ -42,10 +44,10 @@ const TableHeader: FC<TableHeaderProps> = (props) => {
   } = props;
 
   return (
-    <TableHead sx={{ backgroundColor: "grey.200" }}>
+    <TableHead sx={{ backgroundColor: "white"}}>
       <TableRow>
         {!hideSelectBtn && (
-          <StyledTableCell align="left">
+          <StyledTableCell align="center">
             <Checkbox
               color="info"
               checked={rowCount > 0 && numSelected === rowCount}

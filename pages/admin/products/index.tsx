@@ -1,7 +1,7 @@
-import { Box, Card, Stack, Table, TableContainer } from '@mui/material'
+import { Box, Card, Stack, Table, TableContainer, Button } from '@mui/material'
 import TableBody from '@mui/material/TableBody'
 import { TextField, Grid } from '@mui/material'
-
+import { Add } from "@mui/icons-material";
 import SearchArea from 'components/dashboard/SearchArea'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
@@ -20,16 +20,17 @@ import { ProductRow } from 'pages-sections/admin'
 import React, { ReactElement } from 'react'
 
 import api from 'utils/api/dashboard'
+import { fontSize, height } from '@mui/system'
 //import { DataCategories } from "utils/api/getcategory";
 
 const tableHeading = [
-  { id: 'name', label: 'Nom produit', align: 'left' },
-  { id: 'date_added', label: 'Date de référencement', align: 'left' },
-  { id: 'total_allowed_quantity', label: 'Quantité', align: 'left' },
-  { id: 'price', label: 'Prix', align: 'left' },
-  { id: 'amount', label: 'Prix Promo', align: 'left' },
-  { id: 'published', label: 'Publié', align: 'left' },
-  { id: 'payment', label: 'Validation', align: 'left' },
+  { id: 'name', label: 'Nom produit', align: 'center' },
+  { id: 'date_added', label: 'Date de référencement', align: 'center' },
+  { id: 'total_allowed_quantity', label: 'Quantité', align: 'center' },
+  { id: 'price', label: 'Prix', align: 'center' },
+  { id: 'amount', label: 'Prix Promo', align: 'center' },
+  { id: 'published', label: 'Publié', align: 'center' },
+  { id: 'payment', label: 'Validation', align: 'center' },
   { id: 'action', label: 'Action', align: 'center' }
 ]
 
@@ -86,27 +87,35 @@ export default function ProductList (props: ProductListProps) {
     handleRequestSort
   } = useMuiTable({ listData: products })
 
+
+
   return (
     <Box py={4}>
-      <H3 mb={2}>Liste des produits</H3>
+      <H3  style={{color:"black",fontStyle: "normal",fontWeight: 700,fontSize:20}} mb={2}>Liste des produits</H3>
     
 
-      <Grid container spacing={9}>
-        <Grid item xs={4}>
-          <SearchArea
-            handleSearch={() => {}}
-            buttonText='Ajout Produit'
-            handleBtnClick={() => {}}
-            searchPlaceholder='Search Product'
-          />
-        </Grid>
+      <Grid container spacing={7}>
+     
+        <Grid item xs={3}>
+       
+          <SearchArea 
 
+            handleSearch={() => {}}
+          
+            buttonText='Ajouter un produit'
+            handleBtnClick={() => {}}
+            searchPlaceholder='Recherche produit'
+          
+          />
+     
+        </Grid>
+     
         <Grid item xs={3}>
         <FormControl fullWidth>
                 <InputLabel id='demo-simple-select-label'>Catégorie</InputLabel>
                 <Select
                   labelId='demo-simple-select-label'
-                  
+                  sx={{marginRight:"3%"}}
                   id='demo-simple-select'
                   label='Catégorie'
                   
@@ -142,6 +151,12 @@ export default function ProductList (props: ProductListProps) {
                    </Select>
          </FormControl> 
         </Grid>
+        <Grid item xs={3}>
+        <Button   variant='contained' type='submit' style={{fontSize:'16px',fontWeight:'bold',color:"white",backgroundColor:"#236C68",width:"220px",height:"50px",marginLeft:"15%"}} >
+         <Add/>Ajouter un produit
+        </Button>
+          
+        </Grid>
        
       </Grid>
 
@@ -151,6 +166,7 @@ export default function ProductList (props: ProductListProps) {
             <TableContainer sx={{ minWidth: 900 }}>
               <Table>
                 <TableHeader
+             
                   order={order}
                   hideSelectBtn
                   orderBy={orderBy}

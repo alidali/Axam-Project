@@ -19,24 +19,18 @@ const SearchArea: FC<SearchAreaProps> = (props) => {
 
   return (
     <FlexBox mb={2} gap={2} justifyContent="space-between" flexWrap="wrap">
-      <SearchInput   placeholder={searchPlaceholder} />
+      <SearchInput sx={{border: `2px solid #D8E0E9`,width:'250px',color:"black", placeholderTextColor:"red",height:"55px"}} placeholder={searchPlaceholder} />
 
-      <Button
-      
-        fullWidth={downSM}
-        variant="contained"
-        startIcon={<Add />}
-        sx={{ minHeight: 44 }}
-      >
-        {buttonText}
-      </Button>
+     
     </FlexBox>
   );
 };
 
-SearchArea.defaultProps = {
-  buttonText: "Add Product",
-  searchPlaceholder: "Search Product...",
-};
+// SearchArea.defaultProps = {
+//   buttonText: "Add Product",
+ 
+//   searchPlaceholder: "Search Product...",
+
+// };
 
 export default SearchArea;

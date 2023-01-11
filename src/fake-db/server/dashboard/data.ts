@@ -1,7 +1,7 @@
 export const cardList = [
   {
     id: 1,
-    title: "Order",
+    title: "Commandes recues",
     amount1: "32,350",
     amount2: "$9,350",
     color: "info.main",
@@ -9,7 +9,7 @@ export const cardList = [
   },
   {
     id: 2,
-    title: "Sold Items",
+    title: "Nb.d'article par commandes",
     amount1: "2,360",
     amount2: "$1,350",
     color: "error.main",
@@ -18,7 +18,7 @@ export const cardList = [
   },
   {
     id: 3,
-    title: "Gross Sale",
+    title: "Panier Moyen",
     amount1: "$12,460.25",
     amount2: "$11,350",
     color: "success.main",
@@ -26,7 +26,7 @@ export const cardList = [
   },
   {
     id: 4,
-    title: "Total Shipping Cost",
+    title: "Total frais de livraison",
     amount1: "$6,240",
     amount2: "$4,350",
     color: "error.main",

@@ -9,6 +9,7 @@ type Card2Props = {
   title: string;
   percentage: string;
   amount: string | number;
+  
 };
 // =========================================================
 

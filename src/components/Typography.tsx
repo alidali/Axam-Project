@@ -92,8 +92,8 @@ export const H3: React.FC<BoxProps & Props> = ({
       mb={0}
       mt={0}
       component="h3"
-      fontSize="20px"
-      fontWeight="500"
+      fontSize="24px"
+      fontWeight="600"
       lineHeight="1.5"
       ellipsis={ellipsis ? 1 : undefined}
       textTransformStyle={textTransform}
@@ -176,9 +176,9 @@ export const H6: React.FC<BoxProps & Props> = ({
       component="h6"
       mb={0}
       mt={0}
-      fontSize="12px"
+      fontSize="14px"
       fontWeight="600"
-      lineHeight="1.5"
+      lineHeight="22px"
       // marginLeft={1}
       {...props}
     >

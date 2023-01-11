@@ -219,7 +219,7 @@ const ProductForm: FC<ProductFormProps> = props => {
                 <BazaarSwitch color='info' />
               </Grid>
               <Grid item md={3} xs={12}>
-                <label> Possibilité d'annulation</label>
+                <label> Possibilité d &apos;annulation</label>
                 <BazaarSwitch color='info' />
               </Grid>
               <Grid item md={3} xs={12}>

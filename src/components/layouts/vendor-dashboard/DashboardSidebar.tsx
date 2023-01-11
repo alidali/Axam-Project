@@ -1,4 +1,4 @@
-import { Avatar, Box, Theme, useMediaQuery } from "@mui/material";
+import { Avatar, Box, Theme, useMediaQuery, Button } from "@mui/material";
 import { FlexBetween } from "components/flex-box";
 import Scrollbar from "components/Scrollbar";
 import Image from "next/image";
@@ -119,7 +119,12 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
               {/* <Box mx="auto" /> */}
 
               {item.badge && (
-                <BadgeValue compact={COMPACT}>{item.badge.value}</BadgeValue>
+                <BadgeValue compact={COMPACT}>
+                   <Button style={{color:"white",backgroundColor:"#E09351",height:"16px",width:"50px",marginLeft:"56px"}}>
+                  { item.badge.value}
+                  </Button>
+                  {/* { item.badge.value} */}
+                 </BadgeValue>
               )}
             </NavItemButton>
           </Box>
@@ -129,18 +134,19 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
   };
 
   const content = (
-    <Scrollbar
-      autoHide
-      clickOnTrack={false}
-      sx={{
-        overflowX: "hidden",
-        maxHeight: `calc(100vh - ${TOP_HEADER_AREA}px)`,
-      }}
-    >
+    // <Scrollbar
+    //   autoHide
+    //   clickOnTrack={false}
+    //   sx={{
+    //     overflowX: "hidden",
+    //     maxHeight: `calc(100vh - ${TOP_HEADER_AREA}px)`,
+    //   }}
+    // >
       <NavWrapper compact={sidebarCompact}>
         {renderLevels(navigations)}
       </NavWrapper>
-    </Scrollbar>
+      
+    // </Scrollbar>
   );
 
   if (downLg) {
@@ -175,8 +181,8 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
         <Avatar
           src={
             COMPACT
-            ? "/assets/images/banners/logo.png"
-            : "/assets/images/banners/logo.png"
+              ? "/assets/images/banners/logo.png"
+              : "/assets/images/banners/logo.png"
           }
           sx={{
             borderRadius: 0,
@@ -191,6 +197,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
           onClick={setSidebarCompact}
           sidebarcompact={sidebarCompact ? 1 : undefined}
         />
+
       </FlexBetween>
 
       {content}

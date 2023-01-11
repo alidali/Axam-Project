@@ -1,22 +1,23 @@
 import BazaarButton from 'components/BazaarButton'
+import { Edit } from "@mui/icons-material";
 import { Grid } from '@mui/material'
-import { H3, H5, Small } from 'components/Typography'
-import { useFormik } from 'formik'
-import styled from 'styled-components'
-import React, { useCallback, useState, useContext } from 'react'
-//import { Wrapper } from "./Login";
-import { multiStepContext } from 'StepContext'
 
+
+import { useFormik } from 'formik'
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import styled from 'styled-components'
+import { CardHeader,Card ,CardContent} from '@mui/material';
+import React, { useCallback, useState, useContext } from 'react'
+import { multiStepContext } from 'StepContext'
 import { GreyCard, Spacer, Text } from 'ui'
+
 const Styledbtn1 = styled.div`
   display: inline-block;
-
   padding: 8px 16px;
   margin-left: 40%;
 `
 const Styledbtn2 = styled.div`
   display: inline-block;
-
   padding: 8px 16px;
   margin-left: 10%;
 `
@@ -56,108 +57,144 @@ const RecapSignup = () => {
   const Context = useContext(multiStepContext)
   console.log('step', Context.Step)
 
+  const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+
+      "& .MuiCardHeader-root": {
+        backgroundColor: "#236C68",
+      
+      },
+     
+    
+    },
+    header: {},
+   
+  })
+  );
+
+  const classes = useStyles();
   return (
     <form onSubmit={Context.submitData}>
       <Grid alignItems='center'>
-        <H3 textAlign='center' mb={1}>
-          Résumé
-        </H3>
+      
 
         <StyledRecap>
-          <GreyCard>
-            <H5 textAlign='left' mb={1}>
-              Données vendeur
-            </H5>
+          
+        <Card className={classes.root}  style={{ border: "2px solid green" }}>
+        <CardHeader  className={classes.header}  
+       action={<Edit  onClick={() => Context.setStep(1)}/>}
+     title ={" Données vendeur "}
+     style={{color:"white",fontSize:"10"}}
+    
+        />
 
-            <Text fontSize='1rem'>
+            <CardContent>
+            <Text isBold>
+              {'Type :' + String(Context.userData['Type'])}
+              </Text>
+            <Text isBold>
               {'Nom :' + String(Context.userData['Nom'])}
-            </Text>
-            <Text fontSize='1rem'>
+              </Text>
+            <Text  isBold>
               {'Prénom :' + String(Context.userData['Prenom'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Email :' + String(Context.userData['Email'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Télèphone :' + String(Context.userData['Telephone'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'CIN :' + String(Context.userData['Cin'])}
             </Text>
-            <Text fontSize='1rem'>
-              {'type :' + String(Context.userData['type'])}
-            </Text>
-          </GreyCard>
-          <GreyCard>
-            <H5 textAlign='left' mb={1}>
-              Données boutique
-            </H5>
-            <Text fontSize='1rem'>
+          
+            </CardContent>
+          </Card>
+
+          <Card className={classes.root}  style={{ border: "2px solid green" }}>
+        <CardHeader  className={classes.header}  
+    action={<Edit onClick={() => Context.setStep(2)}/>}
+     title={" Données boutique "}
+     style={{color:"white"}}
+        />
+            <Text isBold>
               {'NomBoutique :' + String(Context.userData['NomBoutique'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Raison social :' + String(Context.userData['RaisonSocial'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Pays :' + String(Context.userData['pays'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'gouvernorat :' + String(Context.userData['gouvernorat'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Délégation :' + String(Context.userData['delegation'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Ville:' + String(Context.userData['ville'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Addresse :' + String(Context.userData['Addresse'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Télèphone Fixe :' + String(Context.userData['TelephoneFixe'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Code postal :' + String(Context.userData['CodePostal'])}
             </Text>
 
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Matricule Fiscale :' +
                 String(Context.userData['MatriculeFiscale'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'RNE :' + String(Context.userData['Rne'])}
             </Text>
-          </GreyCard>
+          </Card>
 
-          <GreyCard>
-            <H5 textAlign='left' mb={1}>
-              Coordonnées bancaires
-            </H5>
-            <Text fontSize='1rem'>
+          <Card className={classes.root}  style={{ border: "2px solid green" }}>
+        <CardHeader  className={classes.header}  
+       action={<Edit onClick={() => Context.setStep(3)}/>}
+     title={" Données bancaire "}
+     style={{color:"white"}}
+        />
+            <Text isBold>
               {'titulaireDuCompte :' +
                 String(Context.userData['titulaireDuCompte'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'RIB :' + String(Context.userData['Rib'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Banque :' + String(Context.userData['Banque'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'Agence :' + String(Context.userData['Agence'])}
             </Text>
 
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'CodeBancaire :' + String(Context.userData['CodeBancaire'])}
             </Text>
 
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'iban :' + String(Context.userData['iban'])}
             </Text>
-            <Text fontSize='1rem'>
+            <Text isBold>
               {'codeSwift:' + String(Context.userData['codeSwift'])}
             </Text>
-          </GreyCard>
+          </Card>
+
+          <Card className={classes.root}  style={{ border: "2px solid green" }}>
+        <CardHeader  className={classes.header}  
+       action={<Edit />}
+     title={"Images"}
+     style={{color:"white"}}
+        />
+           
+          </Card>
         </StyledRecap>
 
         <Styledbtn1>
@@ -166,8 +203,9 @@ const RecapSignup = () => {
             onClick={() => Context.setStep(3)}
             color='secondary'
             variant='contained'
+            style={{color:"white",backgroundColor:"#2B3445",maxWidth:"120px"}}
           >
-            Back
+            retour
           </BazaarButton>
         </Styledbtn1>
 
@@ -177,8 +215,9 @@ const RecapSignup = () => {
             type='submit'
             color='primary'
             variant='contained'
+            style={{color:"white",backgroundColor:"#236C68",maxWidth:"120px"}}
           >
-            Submit
+            Suivant
           </BazaarButton>
         </Styledbtn2>
       </Grid>

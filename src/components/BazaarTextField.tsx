@@ -1,7 +1,9 @@
 import { Box, BoxProps, TextField, TextFieldProps } from "@mui/material";
+import { white } from "theme/themeColors";
 import { Small } from "./Typography";
 
 export interface BazaarTextFieldProps {}
+
 
 const BazaarTextField: React.FC<TextFieldProps & BoxProps> = ({
   label,
@@ -21,21 +23,35 @@ const BazaarTextField: React.FC<TextFieldProps & BoxProps> = ({
     <Box {...boxProps}>
       {label && (
         <Small
+       
           display="block"
           mb={1}
-          textAlign="left"
+          color="#FFFFFF"
+          textAlign="center"
           fontWeight="600"
-          color="grey.700"
+        
+          fontSize={20}
+          
+         
         >
           {label}
         </Small>
       )}
-      <TextField
+      <TextField 
+      
         InputProps={{
           ...InputProps,
+          
           style: {
+           
             ...InputProps?.style,
+          
+            border: "1px solid white ",
             height: 44,
+            width:344,
+            marginLeft:"20%",
+            color:"white"
+         
           },
         }}
         {...textFieldProps}

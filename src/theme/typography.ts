@@ -1,5 +1,7 @@
 export const fontSize = 14;
 export const fontFamily = [
+  
+"Poppins",
   "Open Sans",
   "Roboto",
   "-apple-system",

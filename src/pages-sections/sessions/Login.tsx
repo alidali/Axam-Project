@@ -1,5 +1,7 @@
-import { ForkLeft } from "@mui/icons-material";
-import { Card, CardProps } from "@mui/material";
+
+import { useRouter } from "next/router";
+import Logo from "components/logo";
+import { Card, CardProps ,Grid,Paper} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import BazaarButton from "components/BazaarButton";
 import BazaarTextField from "components/BazaarTextField";
@@ -9,6 +11,7 @@ import React, { useCallback, useState } from "react";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import SocialButtons from "./SocialButtons";
+
 
 const fbStyle = { background: "#3B5998", color: "white" };
 const googleStyle = { background: "#4285F4", color: "white" };
@@ -33,9 +36,14 @@ export const Wrapper = styled<React.FC<WrapperProps & CardProps>>(
   ".agreement": { marginTop: 12, marginBottom: 24 },
 }));
 
+
+
+const paperStyle={padding :20,height:'719',width:594, margin:"20px auto", backgroundColor:"#236C68" ,marginTop:"15%"}
+
 const Login = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
+  
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
@@ -51,55 +59,68 @@ const Login = () => {
       validationSchema: formSchema,
     });
 
+    const router = useRouter();
+  
   return (
     
-    <Wrapper elevation={4} passwordVisibility={passwordVisibility}  >
-      <form onSubmit={handleSubmit}>
-        <H3 textAlign="center" mb={1}>
+    <Grid>
+    <Paper elevation={10} style={paperStyle}>
+    <div >
+    <Logo/>
+   
+    </div>      
+      <form onSubmit={handleSubmit} >
+        <H3 textAlign="center" mb={1} color={"#FFFFFF"}  fontSize={"34px"} fontWeight={700} lineHeight={"30px"}>
          Se connecter
         </H3>
+      
         <Small
           mb={4.5}
           display="block"
-          fontSize="12px"
-          fontWeight="600"
-          color="grey.800"
+          fontSize="17px"
+          fontWeight="400"
+          color="white"
           textAlign="center"
         >
-          Acceder à votre compte Axam
+         C'est simple et rapide!
         </Small>
+<label style={{color:'white',  marginLeft:"20%",fontSize:20}}>Email </label>
 
         <BazaarTextField
-          mb={1.5}
+
           fullWidth
           name="email"
-          size="small"
-          type="email"
+          size="medium"
           variant="outlined"
+          type="email"
+          
           onBlur={handleBlur}
           value={values.email}
-          onChange={handleChange}
-          label="Email"
+          onChange={handleChange}  
           placeholder="exmple@mail.com"
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
+         
         />
+<label style={{color:'white', marginLeft:"20%", fontSize:20,marginBottom:'10%' }}>Mot de passe </label>
 
         <BazaarTextField
-          mb={2}
+        
+         
           fullWidth
-          size="small"
+          size="medium"
           name="password"
-          label="Mot de passe "
           autoComplete="on"
           variant="outlined"
-          onBlur={handleBlur}
+           onBlur={handleBlur}
           onChange={handleChange}
           value={values.password}
           placeholder="*********"
           type={passwordVisibility ? "text" : "password"}
+       
           error={!!touched.password && !!errors.password}
           helperText={touched.password && errors.password}
+         
           InputProps={{
             endAdornment: (
               <EyeToggleButton
@@ -113,16 +134,29 @@ const Login = () => {
         <BazaarButton
           fullWidth
           type="submit"
-          color="primary"
-          variant="contained"
-          sx={{ mb: "1.65rem", height: 44 }}
+          style={{color:"#236C68",backgroundColor:"white",width:344,marginTop:"4%", height: 44, fontSize:"16px",marginBottom:"30px",marginLeft:"20%"}}
+        
         >
-          Login
+       Se connecter
+      
         </BazaarButton>
+     
       </form>
 
-      <SocialButtons redirect="/signup" redirectText="Sign Up" />
-    </Wrapper>
+      <SocialButtons redirect="/signup" redirectText="Sign Up" /> 
+      <BazaarButton
+     
+          fullWidth
+      
+          style={{color:"white",backgroundColor:"#2B3445", height: 44, fontSize:"16px",marginLeft:"20%",width:344,marginBottom:"10px"}}
+          onClick={() => router.push("/")}
+        >
+     Créer un compte
+      
+        </BazaarButton>
+      </Paper>
+    </Grid>
+    
   );
 };
 
@@ -132,8 +166,8 @@ const initialValues = {
 };
 
 const formSchema = yup.object().shape({
-  password: yup.string().required("Password is required"),
-  email: yup.string().email("invalid email").required("Email is required"),
+ password: yup.string().required ("Mot de passe est obligatoire"),
+  email: yup.string().email("Email est obligatoire").required("Email est obligatoire"),
 });
 
 export default Login;

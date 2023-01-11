@@ -1,6 +1,7 @@
 import { FC, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { Box, Button, Divider } from "@mui/material";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { H5, Small } from "./Typography";
 
 // ========================================================
@@ -12,17 +13,13 @@ type DropZoneProps = {
 // ========================================================
 
 const DropZone: FC<DropZoneProps> = ({
-  onChange,
-  title = "Drag & drop  image here",
-  imageSize = "Upload 280*280 image",
+
+
 }) => {
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => onChange(acceptedFiles),
-    [onChange]
-  );
+ 
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
+   
     maxFiles: 10,
     multiple: true,
     accept: { "image/*": [".png", ".gif", ".jpeg", ".jpg"] },
@@ -30,44 +27,30 @@ const DropZone: FC<DropZoneProps> = ({
 
   return (
     <Box
-      py={4}
-      px={{ md: 10, xs: 4 }}
+     
       display="flex"
-      minHeight="200px"
-      alignItems="center"
-      borderRadius="10px"
-      border="1.5px dashed"
       flexDirection="column"
-      borderColor="grey.300"
-      justifyContent="center"
-      textAlign="center"
-      bgcolor={isDragActive ? "grey.200" : "grey.100"}
+      justifyContent="left"
+      textAlign="left"
+     
+    
       sx={{ transition: "all 250ms ease-in-out", outline: "none" }}
       {...getRootProps()}
     >
-      <input {...getInputProps()} />
-      <H5 mb={1} color="grey.600">
-        {title}
-      </H5>
-
-      <Divider
-        sx={{ "::before, ::after": { borderColor: "grey.300", width: 150 } }}
-      >
-        <Small color="text.disabled" px={1}>
-          OR
-        </Small>
-      </Divider>
-
-      <Button
+     
+      <Button 
+       sx={{height: 44, textAlign:"left" }}
         type="button"
         variant="outlined"
-        color="info"
-        sx={{ px: 4, my: 4 }}
+      
       >
-        Select files
-      </Button>
 
-      <Small color="grey.600">{imageSize}</Small>
+      Upload
+      <CloudUploadIcon fontSize="small" color='inherit' sx={{ mr: 3}} />
+      </Button>
+     
+
+     
     </Box>
   );
 };

@@ -48,9 +48,10 @@ const StyledBank = styled.div`
   }
 `
 const Styledbtn = styled.div`
-  display: inline-block;
-  padding: 8px 16px;
-  margin-left: 30px;
+display: inline-block;
+padding: 4px 48px;
+float:right
+
 `
 const BankSignup = () => {
   const handleFormSubmit = async (values: any) => {
@@ -298,10 +299,19 @@ const BankSignup = () => {
         />
       </StyledBank>
     
-      {/* <Grid item xs={12} >
-        <DropZone/>
-        </Grid> */}
-
+     
+ <Styledbtn>
+        <BazaarButton
+          fullWidth
+          style={{color:"white",backgroundColor:"#236C68",maxWidth:"120px"}}
+           onClick={()=> Context.setStep(4)}
+          type='submit'
+          color='primary'
+          variant='contained'
+        >
+          Suivant
+        </BazaarButton>
+      </Styledbtn>
       <Styledbtn>
         <BazaarButton
           fullWidth
@@ -309,21 +319,12 @@ const BankSignup = () => {
           color='secondary'
           variant='contained'
           onClick={() => Context.setStep(2)}
+          style={{color:"white",backgroundColor:"#2B3445",maxWidth:"120px"}}
         >
-          Back
+          retour
         </BazaarButton>
       </Styledbtn>
-      <Styledbtn>
-        <BazaarButton
-          fullWidth
-          // onClick={()=> Context.setStep(4)}
-          type='submit'
-          color='primary'
-          variant='contained'
-        >
-          Next
-        </BazaarButton>
-      </Styledbtn>
+     
     </form>
   )
 }

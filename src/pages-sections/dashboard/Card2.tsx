@@ -33,7 +33,7 @@ const Card2: FC<Card2Props> = ({ children, title, amount, percentage }) => {
           <H6 color="#00706A">{title}</H6>
 
           <Box>
-            <H3 color="#2B3445">{amount}</H3>
+            <H3>{amount}</H3>
             <FlexBox mt={0.1} alignItems="center" color="info.main">
               <ArrowDropUp />
               <Paragraph fontSize={12}>{percentage}</Paragraph>

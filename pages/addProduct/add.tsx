@@ -13,6 +13,7 @@ const StyledTabPanel = styled(TabPanel)(() => ({
   paddingLeft: 0,
   paddingRight: 0,
   paddingBottom: 0,
+  
 }));
 
 const StyledTabList = styled(TabList)(({ theme }) => ({
@@ -39,11 +40,11 @@ export default function Add() {
               variant="scrollable"
               
             >
-              <Tab label="Informations" value="Informations"  disableRipple />
-              <Tab label="Description" value="DescriptionPage" disableRipple />
-              <Tab label="Catégories" value="Categories" disableRipple />
-              <Tab label="Images" value="Image" disableRipple />
-              <Tab label="Slider" value="Slider" disableRipple />
+              <Tab label="Informations" value="Informations"  sx={{fontWeight:'bold'}} disableRipple />
+              <Tab label="Description" value="DescriptionPage"  sx={{fontWeight:'bold'}} disableRipple />
+              <Tab label="Catégories" value="Categories" sx={{fontWeight:'bold'}} disableRipple />
+              <Tab label="Images" value="Image" sx={{fontWeight:'bold'}} disableRipple />
+              <Tab label="Slider" value="Slider" sx={{fontWeight:'bold'}} disableRipple />
             </StyledTabList>
           </Box>
 

@@ -17,12 +17,16 @@ import {
   import { FlexBox, FlexRowCenter } from "components/flex-box";
   import InputBase from "@mui/material/InputBase";
   import { Search } from "@mui/icons-material";
+  import { Spacer } from 'ui';
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: "800px",
     padding: "5px 10px",
-    borderRadius: "8px",
-    color: theme.palette.grey[500],
-    backgroundColor: theme.palette.grey[100],
+    Height:"58px",
+    borderRadius: "5px",
+    border: "1px solid #D8E0E9",
+    
+    
+    backgroundColor: "#ffff",
     [theme.breakpoints.down("md")]: { display: "none" },
   }));
   const validationSchema = yup.object().shape({
@@ -55,32 +59,35 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             handleSubmit
           }) => (
             <form onSubmit={handleSubmit} encType="multipart/form-data">
-                  <Grid container spacing={2} paddingTop={3} paddingLeft={5}>
+                  <Grid container spacing={2} paddingTop={3} paddingLeft={20}>
                   <FlexBox alignItems="center" gap={2}>
             <StyledInputBase
               placeholder="Cherche catégorie/sous catégorie..."
-              startAdornment={<Search sx={{ color: "grey.500", mr: 1 }} />}
+              style={{color: "black"}}
+              startAdornment={<Search sx={{ color: "#00706A", mr: 1 }} />}
             />
+             
              </FlexBox>
                 <Grid item  xs={12}>
+                <H4> Catégories recentes</H4>
+                <Spacer height={10}/>
+                <Grid item  xs={12}>
                 <H4> Catégories</H4>
-
+                </Grid>
               
                 <Scrolllist /> 
               </Grid>
               <Grid item xs={10}>
-                <H6
-                  borderColor='grey.900'
-                  fontFamily={'open Sans'}
-                  fontSize={12}
-                  color={'inherit'}
-                >
+                <H4>Autre</H4>
+              </Grid>
+                <Grid item xs={10}>
+                <H6 color="#2B3445">
                   Dans le cas où les catégories présentées ne correspondant pas
                   à notre catégorie de produits veuillez proposer une autre
                   catégorie
                 </H6>
               </Grid>
-              <Grid item xs={3.5}>
+              <Grid item xs={3.5} sm={6}>
                 <TextField
                   fullWidth
                   name='add_category'
@@ -93,22 +100,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                   onBlur={handleBlur}
                   error={!!touched.add_category && !!errors.add_category}
                   helperText={touched.add_category && errors.add_category}
-                  InputProps={{
-                    startAdornment: (
-                      <AddBoxIcon
-                        fontSize='small'
-                        color='inherit'
-                        sx={{ mr: 1 }}
-                      />
-                    )
-                  }}
+                 
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
-                <Button variant='contained' color='info' type='submit'>
-                  Valider
-                </Button>
-              </Grid>
+                  <Button variant='contained' color='info' type='submit'  style={{color:"white",backgroundColor:"#236C68"}}  sx={{  ml:15 ,height: 44, width: 210 ,sm:6 , xs:12, Radius:'5px'}}>
+                 Enregister
+                  </Button>
+                </Grid>
               </Grid>
               
             </form>

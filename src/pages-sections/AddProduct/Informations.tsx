@@ -18,12 +18,14 @@ import {
   import * as yup from 'yup'
   import { Spacer } from 'ui';
   import { Assign, ObjectShape } from 'yup/lib/object'
+  import makeStyles from "@material-ui/core/styles/makeStyles";
   
+
   const validationSchema = yup.object().shape({
     nom_produit: yup.string().required("Le nom du vendeur est obligatoire"),
     guarantee: yup.string().required("Le prénom du vendeur est obligatoire"),
   });
-
+ 
   const Informations:FC = () => {
     const initialValues = {
     nom_produit:"",
@@ -33,7 +35,9 @@ import {
     const handleFormSubmit = async (values) => {
       console.log(values);
     };
+  
     return (
+      
       // <Card sx={{ p: 6 }}>
         <Formik
           onSubmit={handleFormSubmit}
@@ -77,6 +81,7 @@ import {
                     fullWidth
                     name='guarantee'
                     color='info'
+               
                     size='medium'
                     label=' période de garantie'
                     type='number'
@@ -208,25 +213,28 @@ import {
                   />
                 </Grid>
                 <Grid item md={5} xs={12}>
-                  <label>Possibilité de retour</label>
-                  <BazaarSwitch color='default' />
+                  <label style={{fontWeight:'bold'}}>Possibilité de retour</label>
+                  <BazaarSwitch color='default'  sx={{marginLeft:'38%'}}/>
                 </Grid>
                 <Grid item md={5} xs={12}>
-                  <label> Possibilité d&apos;annulation</label>
-                  <BazaarSwitch color='default' />
+                  <label style={{fontWeight:'bold'}}> Possibilité d&apos;annulation</label>
+                  <BazaarSwitch color='default' sx={{marginLeft:'33%'}} />
                 </Grid>
                 <Grid item md={5} xs={12}>
-                  <label>Paiement à la livraison</label>
-                  <BazaarSwitch color='default' />
+               
+                  <label style={{fontWeight:'bold'}}>Paiement à la livraison</label>
+                  
+                  <BazaarSwitch color='default' sx={{marginLeft:'33%'}} />
+                
                 </Grid>
                 <Grid item md={5} xs={12}  >
-                  <label>Produit fragile</label>
-                  <BazaarSwitch color='default' />
+                  <label style={{fontWeight:'bold'}}>Produit fragile</label>
+                  <BazaarSwitch color='default' sx={{marginLeft:'52%'}}/>
                 </Grid>          
   
                 <Grid item sm={6} xs={12}>
-                  <Button variant='contained' color='info' type='submit'>
-                 Valider
+                  <Button variant='contained' color='info' type='submit'  style={{color:"white",backgroundColor:"#236C68"}}  sx={{  ml:30 ,height: 44, width: 210 ,sm:6 , xs:12, Radius:'5px'}}>
+                 Enregister
                   </Button>
                 </Grid>
               </Grid>

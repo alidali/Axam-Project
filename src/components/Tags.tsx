@@ -14,6 +14,7 @@ export default function Tag() {
         value={selected}
         name="tag"
         placeHolder="Entrer Tags"
+        
       />
       
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
+
 export default function Description() {
   const handleEditorChange = (content, editor) => {
     console.log("Content was updated:", content);
@@ -9,7 +10,7 @@ export default function Description() {
 
     return (
       <Editor
-        initialValue="<p>This is the initial content of the editor</p>"
+        initialValue=""
         init={{
           plugins:
             "print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons",
@@ -81,7 +82,8 @@ export default function Description() {
           ],
           template_cdate_format: "[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]",
           template_mdate_format: "[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]",
-          height: 600,
+         
+          height: 400,
           image_caption: true,
           quickbars_selection_toolbar:
             "bold italic | quicklink h2 h3 blockquote quickimage quicktable",

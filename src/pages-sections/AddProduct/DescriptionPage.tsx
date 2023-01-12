@@ -11,7 +11,7 @@ import {
   import React, { FC } from 'react'
   import * as yup from 'yup'
   import Description from 'components/Description'
-
+  import { Spacer } from 'ui';
   
   const validationSchema = yup.object().shape({
     nom_produit: yup.string().required("Le nom du vendeur est obligatoire"),
@@ -44,27 +44,37 @@ import {
             handleSubmit
           }) => (
             <form onSubmit={handleSubmit} encType="multipart/form-data">
-              <Grid container spacing={3} paddingTop={3}>
-              <Grid item xs={12}>
+              <Grid container spacing={3} paddingTop={3} paddingLeft={20} paddingRight={25}>
+              <Grid item xs={12}  >
+              <label style={{fontSize:'24',fontWeight:'bold',color:'black',lineHeight:"22.1px"}}> Brève description </label>
                 <TextField
-                  rows={2}
+                
+                  rows={4}
                   multiline
                   fullWidth
                   color='info'
                   size='medium'
                   name='description'
-                  label='Brève description'
+                  // label='Brève description'
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  placeholder='Brève description'
+                  // placeholder='Brève description'
                   value={values.description}
                   error={!!touched.description && !!errors.description}
                   helperText={touched.description && errors.description}
                 />
               </Grid>
+             
               <Grid item xs={12}>
-                <label>Description </label>
-                <Description />
+                <label style={{fontSize:'24',color:'black', fontWeight:'bold',lineHeight:"22.1px"}}>Description détaillée </label>
+                <Spacer height={10}/>
+                <Description  />
+                </Grid>
+
+                <Grid item sm={6} xs={12}>
+                  <Button variant='contained' style={{color:"white",backgroundColor:"#236C68"}} type='submit' sx={{  ml:30 ,height: 44, width: 210 ,sm:6 , xs:12, Radius:'5px'}}>
+                 Enregister
+                  </Button>
                 </Grid>
                 </Grid>
                 

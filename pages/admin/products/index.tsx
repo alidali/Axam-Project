@@ -1,5 +1,6 @@
 import { Box, Card, Stack, Table, TableContainer, Button } from '@mui/material'
 import TableBody from '@mui/material/TableBody'
+import { useRouter } from "next/router";
 import { TextField, Grid } from '@mui/material'
 import { Add } from "@mui/icons-material";
 import SearchArea from 'components/dashboard/SearchArea'
@@ -7,7 +8,6 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-
 import { useState, useEffect } from 'react'
 import TableHeader from 'components/data-table/TableHeader'
 import TablePagination from 'components/data-table/TablePagination'
@@ -50,6 +50,7 @@ export default function ProductList (props: ProductListProps) {
   const [data, setData] = useState([])
   const [data2, setData2] = useState([])
 
+
   useEffect(() => {
     const token =
       'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcyI6ImVzaG9wIiwiZXhwIjoxNjY0NDEwODI2fQ.R9yCge_10pnDkSjL9aospCdvnRBGYFI4dsOsVaW7fkE'
@@ -86,7 +87,7 @@ export default function ProductList (props: ProductListProps) {
     handleChangePage,
     handleRequestSort
   } = useMuiTable({ listData: products })
-
+  const router = useRouter();
 
 
   return (
@@ -104,6 +105,7 @@ export default function ProductList (props: ProductListProps) {
           
             buttonText='Ajouter un produit'
             handleBtnClick={() => {}}
+
             searchPlaceholder='Recherche produit'
           
           />
@@ -152,7 +154,7 @@ export default function ProductList (props: ProductListProps) {
          </FormControl> 
         </Grid>
         <Grid item xs={3}>
-        <Button   variant='contained' type='submit' style={{fontSize:'16px',fontWeight:'bold',color:"white",backgroundColor:"#236C68",width:"220px",height:"50px",marginLeft:"15%"}} >
+        <Button onClick={() => router.push("./products/create")} variant='contained' type='submit' style={{fontSize:'16px',fontWeight:'bold',color:"white",backgroundColor:"#236C68",width:"220px",height:"50px",marginLeft:"15%"}} >
          <Add/>Ajouter un produit
         </Button>
           
@@ -177,7 +179,7 @@ export default function ProductList (props: ProductListProps) {
                 />
 
                 <TableBody>
-                  {data2.map((product, index) => (
+                  {data2?.map((product, index) => (
                     <ProductRow product={product} key={index} />
                   ))}
                 </TableBody>

@@ -57,10 +57,10 @@ const ProductRow: FC<ProductRowProps> = ({ product }) => {
     <StyledTableRow tabIndex={-1} role='checkbox'>
       <StyledTableCell align='center'>
      
-        <FlexBox alignItems='center' gap={1.5}>
+        <FlexBox alignItems='center' gap={2}>
         <Avatar src={product.image} sx={{ borderRadius: "8px" }} />
           <Box>
-            <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>{product.name}</Paragraph>
+            <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'} textAlign='left'>{product.name}</Paragraph>
           </Box>
         </FlexBox>
       </StyledTableCell>
@@ -75,12 +75,12 @@ const ProductRow: FC<ProductRowProps> = ({ product }) => {
       
       <StyledTableCell align='center'>
       <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>
-         {product.variants?.map(product=>(product.price))}</Paragraph></StyledTableCell>                           
+      {product.variants[0].price}</Paragraph></StyledTableCell>                           
          
        
       <StyledTableCell align='center'>
       <Paragraph color="black"  fontSize={'16px'}fontWeight={'bold'}>
-        {product.variants?.map(product=>(product.special_price))}  </Paragraph></StyledTableCell> 
+        {product.variants[0].special_price}  </Paragraph></StyledTableCell> 
 
 
 

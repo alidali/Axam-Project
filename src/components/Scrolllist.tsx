@@ -8,12 +8,14 @@ import { useState, useEffect } from 'react';
 import { Spacer } from 'ui';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
-
+import { Theme, createStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/styles";
+import { red } from '@mui/material/colors';
 export default function PinnedSubheaderList() {
   const [data, setData] = useState(null);
   const [subCat, setSubCat] = useState(null);
   const [subSubCat, setSubSubCat] = useState(null);
-  const [hiddenElement2, setHiddenElement2] = useState(true);
+  const [hiddenElement2, setHiddenElement2] = useState(false);
   const [hiddenElement3, setHiddenElement3] = useState(false);
   useEffect(() => {
     const token =
@@ -41,14 +43,25 @@ export default function PinnedSubheaderList() {
     console.log('sub category' , subCat[index].name)
     console.log('sub sub category', item.children);
   }
+  
+  const useStyles = makeStyles((theme:Theme) => ({
+    listItemText:{
+      fontSize:'16px',//Insert your required size
+      fontWeight:'bold',
+      color: "#2B3445",
+      "&:hover": { color: '#236C68'},
+    },
+  }));
+  const classes = useStyles(); 
   return (
     <div style={{ display: 'flex', justifyContent: 'normal' }}>
-      <div style={{ border:'1px solid', borderRadius: "8px",borderColor: "grey.300",}}>
+      <div >
         <List
           sx={{
             width: '100%',
-            maxWidth: 360,
-            bgcolor: 'background.paper',
+            height:'100%',
+            maxWidth: 300,
+            bgcolor: '#fff3e6',
             justifyContent: 'normal',
             overflow: 'auto',
             maxHeight: 300,
@@ -63,7 +76,7 @@ export default function PinnedSubheaderList() {
                   data?.map((item, index) => (
                     <div key={Math.random()}>
                       <ListItem key={`item-${sectionId}-${item}`}>
-                        <ListItemText primary={` ${item.name}`} onClick={() => handleClick(item, index)} />
+                        <ListItemText   classes={{primary:classes.listItemText}}  primary={` ${item.name}`} onClick={() => handleClick(item, index)} />
                       </ListItem>
                     </div>
                   ))}
@@ -74,13 +87,14 @@ export default function PinnedSubheaderList() {
         </List>
       </div>
       <Spacer width={20} />
-      <div style={{ border:'1px solid', borderRadius: "8px",borderColor: "grey.300",}}>
+      <div >
         {hiddenElement2 ? (
           <List
             sx={{
               width: '100%',
-              maxWidth: 360,
-              bgcolor: 'background.paper',
+              height:'100%',
+              maxWidth: 300,
+              bgcolor: '#fff3e6',
               position: 'relative',
               overflow: 'auto',
               marginLeft: '2px',
@@ -94,7 +108,7 @@ export default function PinnedSubheaderList() {
                 <ul>
                   <div key={Math.random()}>
                     <ListItem key={Math.random()}>
-                      <ListItemText primary={` ${sectionId.name}`} onClick={() => handleClick2(sectionId, index)}/>
+                      <ListItemText  classes={{primary:classes.listItemText}}  primary={` ${sectionId.name}`} onClick={() => handleClick2(sectionId, index)}/>
                     </ListItem>
                   </div>
                 </ul>
@@ -107,13 +121,14 @@ export default function PinnedSubheaderList() {
         )}
       </div>
       <Spacer width={25} />
-      <div style={{ border:'1px solid', borderRadius: "8px",borderColor: "grey.300",}}>
+      <div >
         {hiddenElement3 ? (
           <List
             sx={{
               width: '100%',
-              maxWidth: 360,
-              bgcolor: 'background.paper',
+              height:'100%',
+              maxWidth: 300,
+              bgcolor: '#fff3e6',
               position: 'relative',
               overflow: 'auto',
               maxHeight: 300,
@@ -127,7 +142,7 @@ export default function PinnedSubheaderList() {
                 <ul>
                   <div key={Math.random()}>
                     <ListItem key={Math.random()}>
-                      <ListItemText primary={` ${sectionId.name}`}/>
+                      <ListItemText classes={{primary:classes.listItemText}}  primary={` ${sectionId.name}`}/>
                     </ListItem>
                   </div>
                 </ul>

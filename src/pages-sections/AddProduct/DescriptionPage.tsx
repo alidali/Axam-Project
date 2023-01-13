@@ -46,13 +46,18 @@ import {
             <form onSubmit={handleSubmit} encType="multipart/form-data">
               <Grid container spacing={3} paddingTop={3} paddingLeft={20} paddingRight={25}>
               <Grid item xs={12}  >
-              <label style={{fontSize:'24',fontWeight:'bold',color:'black',lineHeight:"22.1px"}}> Brève description </label>
+              <label style={{fontSize:'18px',fontWeight:'bold',color:'black',lineHeight:"22.1px"}}> Brève description </label>
                 <TextField
-                
+                 sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }
+              }}
+                 required
                   rows={4}
                   multiline
                   fullWidth
-                  color='info'
+                 
                   size='medium'
                   name='description'
                   // label='Brève description'
@@ -66,14 +71,14 @@ import {
               </Grid>
              
               <Grid item xs={12}>
-                <label style={{fontSize:'24',color:'black', fontWeight:'bold',lineHeight:"22.1px"}}>Description détaillée </label>
+                <label style={{fontSize:'18px',color:'black', fontWeight:'bold',lineHeight:"22.1px"}}>Description détaillée </label>
                 <Spacer height={10}/>
                 <Description  />
                 </Grid>
 
                 <Grid item sm={6} xs={12}>
                   <Button variant='contained' style={{color:"white",backgroundColor:"#236C68"}} type='submit' sx={{  ml:30 ,height: 44, width: 210 ,sm:6 , xs:12, Radius:'5px'}}>
-                 Enregister
+                  Suivant
                   </Button>
                 </Grid>
                 </Grid>

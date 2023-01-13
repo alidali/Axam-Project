@@ -14,11 +14,14 @@ const StyledTabPanel = styled(TabPanel)(() => ({
   paddingRight: 0,
   paddingBottom: 0,
   
+ 
+  
 }));
 
 const StyledTabList = styled(TabList)(({ theme }) => ({
-  "& .MuiTab-root.Mui-selected": { color: theme.palette.info.main },
-  "& .MuiTabs-indicator": { background: theme.palette.info.main },
+  "& .MuiTab-root.Mui-selected": { color: "#00706A" },
+  "& .MuiTabs-indicator": { background: "#00706A" },
+  marginTop:"1%",
 }));
 
 // =============================================================================
@@ -34,17 +37,18 @@ export default function Add() {
     <Box py={6}>
       <Card sx={{ px: 3, py: 2 }}> 
         <TabContext value={selectTab}>
-          <Box sx={{ borderBottom: 2, borderColor: "grey.300" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "grey.300" }}>
+            <label style={{fontSize:'24px',color:'#2B3445',fontFamily:'Poppins', fontWeight:'bold'}}> Ajout Produit</label>
             <StyledTabList
               onChange={(_, value) => setSelectTab(value)}
               variant="scrollable"
-              
+        
             >
               <Tab label="Informations" value="Informations"  sx={{fontWeight:'bold'}} disableRipple />
               <Tab label="Description" value="DescriptionPage"  sx={{fontWeight:'bold'}} disableRipple />
               <Tab label="Catégories" value="Categories" sx={{fontWeight:'bold'}} disableRipple />
               <Tab label="Images" value="Image" sx={{fontWeight:'bold'}} disableRipple />
-              <Tab label="Slider" value="Slider" sx={{fontWeight:'bold'}} disableRipple />
+
             </StyledTabList>
           </Box>
 
@@ -62,9 +66,7 @@ export default function Add() {
             <Photo/>
           </StyledTabPanel> 
          
-          <StyledTabPanel value="Slider">
-            <Sliders/>
-          </StyledTabPanel> 
+        
         </TabContext>
      </Card> 
     </Box>

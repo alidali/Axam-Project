@@ -31,7 +31,26 @@ Add.getLayout = function getLayout(page: ReactElement) {
 // =============================================================================
 
 export default function Add() {
-  const [selectTab, setSelectTab] = useState("AddProduct");
+  const [selectTab, setSelectTab] = useState("InformationsPage");
+  const [disabledDescriptionPage, setDisabledDescriptionPage] = useState(true);
+  const [disabledCategoriesPage, setDisabledCategoriesPage] = useState(true);
+  const [disabledImagePage, setDisabledImagePage] = useState(true);
+
+  const onClickNextInforamtionsPage = () => {
+    setDisabledDescriptionPage(false)
+    setSelectTab("DescriptionPage")
+  }
+
+  const onClickNextDescriptionPage = () => {
+    setDisabledCategoriesPage(false)
+    setSelectTab("CategoriesPage")
+  }
+
+  const onClickNextCategoriesPage = () => {
+    setDisabledImagePage(false)
+    setSelectTab("ImagePage")
+  }
+
 
   return (
     <Box py={6}>
@@ -42,28 +61,28 @@ export default function Add() {
             <StyledTabList
               onChange={(_, value) => setSelectTab(value)}
               variant="scrollable"
-        
+              
             >
-              <Tab label="Informations" value="Informations"  sx={{fontWeight:'bold'}} disableRipple />
-              <Tab label="Description" value="DescriptionPage"  sx={{fontWeight:'bold'}} disableRipple />
-              <Tab label="Catégories" value="Categories" sx={{fontWeight:'bold'}} disableRipple />
-              <Tab label="Images" value="Image" sx={{fontWeight:'bold'}} disableRipple />
+              <Tab label="Informations" value="InformationsPage"  sx={{fontWeight:'bold'}} disableRipple />
+              <Tab label="Description" value="DescriptionPage"  sx={{fontWeight:'bold'}} disableRipple disabled={disabledDescriptionPage} />
+              <Tab label="Catégories" value="CategoriesPage" sx={{fontWeight:'bold'}} disableRipple disabled={disabledCategoriesPage} />
+              <Tab label="Images" value="ImagePage" sx={{fontWeight:'bold'}} disableRipple disabled={disabledImagePage}/>
 
             </StyledTabList>
           </Box>
 
-           <StyledTabPanel value="Informations">
-            <Informations/>
+           <StyledTabPanel value="InformationsPage">
+            <Informations onClick={onClickNextInforamtionsPage}/>
           </StyledTabPanel>
 
           <StyledTabPanel value="DescriptionPage">
-            <DescriptionPage/>
+            <DescriptionPage onClick={onClickNextDescriptionPage}/>
           </StyledTabPanel> 
-          <StyledTabPanel value="Categories">
-            <Categories/>
+          <StyledTabPanel value="CategoriesPage">
+            <Categories onClick={onClickNextCategoriesPage}/>
           </StyledTabPanel> 
-          <StyledTabPanel value="Image">
-            <Photo/>
+          <StyledTabPanel value="ImagePage">
+            <Photo />
           </StyledTabPanel> 
          
         

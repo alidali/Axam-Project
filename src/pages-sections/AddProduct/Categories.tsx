@@ -34,19 +34,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    
   });
 
-  const Categories:FC = () => {
+  export interface CategoriesProps {
+    onClick: () => void 
+  }
+  
+
+  export function Categories({onClick}:CategoriesProps){
     const initialValues = {
+      addCategory:"",
 
   
   };
     
-    const handleFormSubmit = async (values) => {
-      console.log(values);
-    };
+    // const handleFormSubmit = async (values) => {
+    //   console.log(values);
+    // };
     return (
       // <Card sx={{ p: 6 }}>
         <Formik
-          onSubmit={handleFormSubmit}
+          onSubmit={onClick}
           initialValues={initialValues}
           validationSchema={validationSchema}
         >
@@ -115,16 +121,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                   }
               }}
                   fullWidth
-                  name='add_category'
+                  name='addCategory'
                   label='Proposer une nouvelle catégorie pour votre produit'
                   
                   size='medium'
                   variant='outlined'
-                  // placeholder='Ajout categorie'
-                  value={values.add_categorie}
+                  
+                  value={values.addCategory}
                   onBlur={handleBlur}
-                  error={!!touched.add_category && !!errors.add_category}
-                  helperText={touched.add_category && errors.add_category}
+                  error={!!touched.addCategory && !!errors.addCategory}
+                  helperText={touched.addCategory && errors.addCategory}
                  
                 />
               </Grid>

@@ -14,23 +14,28 @@ import {
   import { Spacer } from 'ui';
   
   const validationSchema = yup.object().shape({
-    nom_produit: yup.string().required("Le nom du vendeur est obligatoire"),
-    guarantee: yup.string().required("Le prénom du vendeur est obligatoire"),
+    // nom_produit: yup.string().required("Le nom du vendeur est obligatoire"),
+    // guarantee: yup.string().required("Le prénom du vendeur est obligatoire"),
   });
 
-  const DescriptionPage:FC = () => {
+  export interface DescriptionProps {
+    onClick: () => void 
+  }
+  
+
+  export function DescriptionPage({onClick}:DescriptionProps) {
     const initialValues = {
     description:"",
   
   };
     
-    const handleFormSubmit = async (values) => {
-      console.log(values);
-    };
+    // const handleFormSubmit = async (values) => {
+    //   console.log(values);
+    // };
     return (
       // <Card sx={{ p: 6 }}>
         <Formik
-          onSubmit={handleFormSubmit}
+          onSubmit={onClick}
           initialValues={initialValues}
           validationSchema={validationSchema}
         >

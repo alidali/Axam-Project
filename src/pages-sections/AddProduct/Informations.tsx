@@ -23,7 +23,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 const validationSchema = yup.object().shape({
   nomProduit: yup.string().required("Ce champ est obligatoire"),
   guarantee: yup.string().required("Ce champ est obligatoire"),
-  country: yup.string().required("Ce champ est obligatoire"),
+  // country: yup.string().required("Ce champ est obligatoire"),
   quantity: yup.string().required("Ce champ est obligatoire"),
   price: yup.string().required("Ce champ est obligatoire"),
   specialPrice: yup.string().required("Ce champ est obligatoire"),
@@ -31,26 +31,31 @@ const validationSchema = yup.object().shape({
 
 });
 
-const Informations: FC = () => {
+export interface InformationsProps {
+  onClick: () => void 
+}
+
+export function Informations({onClick}:InformationsProps) {
   const initialValues = {
-    nom_produit: "",
+    nomProduit: "",
     guarantee: "",
-    country: "",
+    // country: "",
     quantity: "",
     price: "",
     specialPrice: "",
     stock: "",
+    weight: "0",
   };
 
-  const handleFormSubmit = async (values) => {
-    console.log(values);
-  };
+  // const handleFormSubmit = async (values) => {
+  //   console.log(values);
+  // };
 
   return (
 
     // <Card sx={{ p: 6 }}>
     <Formik
-      onSubmit={handleFormSubmit}
+      onSubmit={onClick}
       initialValues={initialValues}
       validationSchema={validationSchema}
     >
@@ -225,58 +230,37 @@ const Informations: FC = () => {
                 helperText={touched.weight && errors.weight}
               />
             </Grid>
-            <Grid item sm={5} xs={6}>
-              <TextField
-                sx={{
-                  "& .MuiInputBase-root": {
-                    color: 'black'
-                  }
-                }}
-                fullWidth
-                required
-                name='garantie'
-
-                size='medium'
-                onBlur={handleBlur}
-                value={values.garantie}
-                label='Période de garantie'
-                onChange={handleChange}
-                placeholder='Période de garantie'
-                error={!!touched.garantie && !!errors.garantie}
-                helperText={touched.garantie && errors.garantie}
-              />
-            </Grid>
-            <Grid item md={5} xs={6}>
-              <Autocomplete
-                sx={{
-                  "& .MuiInputBase-root": {
-                    color: 'black'
-                  }
-                }}
-                fullWidth
-                disablePortal
-                options={countryList}
-                value={values.country}
-                getOptionLabel={option => option.label}
-                onChange={(_, value) => setFieldValue('country', value)}
-                renderInput={params => (
-                  <TextField
-                    sx={{
-                      "& .MuiInputBase-root": {
-                        color: 'black'
-                      }
-                    }}
-                    label='Made in'
-                    variant='outlined'
-                    placeholder='Made in'
-                    error={!!touched.country && !!errors.country}
-                    helperText={touched.country && errors.country}
-                    {...params}
-                    size='medium'
-                  />
-                )}
-              />
-            </Grid>
+              {/* <Grid item md={5} xs={6}>
+                <Autocomplete
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      color: 'black'
+                    }
+                  }}
+                  fullWidth
+                  disablePortal
+                  options={countryList}
+                  value={values.country}
+                  getOptionLabel={option => option.label}
+                  onChange={(_, value) => setFieldValue('country', value)}
+                  renderInput={params => (
+                    <TextField
+                      sx={{
+                        "& .MuiInputBase-root": {
+                          color: 'black'
+                        }
+                      }}
+                      label='Made in'
+                      variant='outlined'
+                      placeholder='Made in'
+                      error={!!touched.country && !!errors.country}
+                      helperText={touched.country && errors.country}
+                      {...params}
+                      size='medium'
+                    />
+                  )}
+                />
+              </Grid> */}
             <Grid item md={5} xs={12}>
               <label style={{ fontWeight: 'bold' }}>Possibilité de retour</label>
               <BazaarSwitch color='default' sx={{ marginLeft: '38%' }} />

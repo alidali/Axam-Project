@@ -65,6 +65,7 @@ export default function PinnedSubheaderList() {
             justifyContent: 'normal',
             overflow: 'auto',
             maxHeight: 300,
+            marginLeft:'1%',
             '& ul': { padding: 0 },
           }}
           subheader={<li />}

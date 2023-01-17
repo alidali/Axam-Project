@@ -25,7 +25,7 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
     height: 16,
     margin: "2px",
     boxShadow: "none",
-    backgroundColor: theme.palette.grey[600],
+    backgroundColor: theme.palette.grey[400],
   },
   "& .MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb": {
     backgroundColor: "#00706A",

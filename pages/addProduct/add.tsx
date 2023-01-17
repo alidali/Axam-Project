@@ -8,7 +8,7 @@ import Informations from "pages-sections/AddProduct/Informations";
 import DescriptionPage from "pages-sections/AddProduct/DescriptionPage";
 import Photo from "pages-sections/AddProduct/Photo";
 import Sliders from "pages-sections/AddProduct/Sliders";
-
+import DoneIcon from '@mui/icons-material/Done';
 const StyledTabPanel = styled(TabPanel)(() => ({
   paddingLeft: 0,
   paddingRight: 0,
@@ -39,6 +39,7 @@ export default function Add() {
   const onClickNextInforamtionsPage = () => {
     setDisabledDescriptionPage(false)
     setSelectTab("DescriptionPage")
+    
   }
 
   const onClickNextDescriptionPage = () => {
@@ -57,13 +58,12 @@ export default function Add() {
       <Card sx={{ px: 3, py: 2 }}> 
         <TabContext value={selectTab}>
           <Box sx={{ borderBottom: 1, borderColor: "grey.300" }}>
-            <label style={{fontSize:'24px',color:'#2B3445',fontFamily:'Poppins', fontWeight:'bold'}}> Ajout Produit</label>
+            <label style={{fontSize:'24px',color:'#2B3445',fontFamily:'Poppins', fontWeight:'bold'}}> Ajout des produits</label>
             <StyledTabList
               onChange={(_, value) => setSelectTab(value)}
-              variant="scrollable"
-              
+              variant="scrollable" 
             >
-              <Tab label="Informations" value="InformationsPage"  sx={{fontWeight:'bold'}} disableRipple />
+              <Tab label="Informations" value="InformationsPage"  sx={{fontWeight:'bold'}}   disableRipple />
               <Tab label="Description" value="DescriptionPage"  sx={{fontWeight:'bold'}} disableRipple disabled={disabledDescriptionPage} />
               <Tab label="Catégories" value="CategoriesPage" sx={{fontWeight:'bold'}} disableRipple disabled={disabledCategoriesPage} />
               <Tab label="Images" value="ImagePage" sx={{fontWeight:'bold'}} disableRipple disabled={disabledImagePage}/>
@@ -72,7 +72,7 @@ export default function Add() {
           </Box>
 
            <StyledTabPanel value="InformationsPage">
-            <Informations onClick={onClickNextInforamtionsPage}/>
+            <Informations onClick={onClickNextInforamtionsPage} />
           </StyledTabPanel>
 
           <StyledTabPanel value="DescriptionPage">

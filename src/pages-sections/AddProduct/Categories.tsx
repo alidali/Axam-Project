@@ -23,9 +23,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: "5px 10px",
     Height:"58px",
     borderRadius: "5px",
-    border: "1px solid #D8E0E9",
+    border: "1px solid #00706A",
     marginTop:"15px",
-    marginLeft:"25px",
+    marginLeft:"3px",
     backgroundColor: "#ffff",
     [theme.breakpoints.down("md")]: { display: "none" },
   }));
@@ -66,38 +66,39 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             handleSubmit
           }) => (
             <form onSubmit={handleSubmit} encType="multipart/form-data">
-                  <Grid container spacing={2} paddingLeft={20}>
-                  <Grid item  xs={12} >
+            <Grid container spacing={2} paddingLeft={15}>
+                 
+                <Grid item  xs={12}>
+                <H4 style={{fontWeight:'bold',color:'black' , marginTop:'2'}}> Catégories recentes</H4>
+              
+              <Grid container spacing={1}  >
+                <Grid item xs={6} sm={12}  >
+                  <Button variant='contained'  type='submit'  style={{color:"#2B3445",backgroundColor:"#ffff", border: "1px solid #00706A "}}  sx={{ mt:1, height: 44, width: 130 ,Radius:'5px'}}>
+                 Maison 
+                  </Button>
+                  {/* <Spacer height={5}/> */}
+                  <Button variant='contained'  type='submit'  style={{color:"#2B3445",backgroundColor:"#ffff", border: "1px solid #00706A"}}  sx={{mt:1,  ml:1, height: 44, width: 130 , Radius:'5px'}}>
+                  Articles en verre
+                  </Button>
+                  {/* <Spacer height={5}/> */}
+                  <Button variant='contained'  type='submit'  style={{color:"#2B3445",backgroundColor:"#ffff", border: "1px solid #00706A"}}  sx={{ mt:1, ml:1, height: 44, width: 130 ,Radius:'5px'}}>
+                  Linges de cuisine
+                  </Button>
+                </Grid>
+                </Grid>
+                <Spacer height={10}/>
+                <Grid item  xs={12} >
                 <H4 style={{fontWeight:'bold',color:'black'}} marginTop={1}> Rechercher catégories</H4>
                 </Grid>
                
                   <FlexBox alignItems="center" gap={2}>
             <StyledInputBase
               placeholder="Cherche catégorie/sous catégorie..."
-              style={{fontWeight:'bold',color:'black'}}
+              style={{color:'black'}}
               startAdornment={<Search sx={{ color: "#00706A", mr: 1 ,width:16, height:16}} />}
             />
              
              </FlexBox>
-                <Grid item  xs={12}>
-                <H4 style={{fontWeight:'bold',color:'black' , marginTop:'2'}}> Catégories recentes</H4>
-              
-              <Grid container spacing={1}  >
-                <Grid item xs={6} sm={12} marginTop={2} >
-                  <Button variant='contained'  type='submit'  style={{color:"#2B3445",backgroundColor:"#ffff", border: "1px solid #00706A "}}  sx={{ ml:2, height: 44, width: 130 ,Radius:'5px'}}>
-                 Maison 
-                  </Button>
-                  {/* <Spacer height={5}/> */}
-                  <Button variant='contained'  type='submit'  style={{color:"#2B3445",backgroundColor:"#ffff", border: "1px solid #00706A"}}  sx={{ ml:2, height: 44, width: 130 , Radius:'5px'}}>
-                  Articles en verre
-                  </Button>
-                  {/* <Spacer height={5}/> */}
-                  <Button variant='contained'  type='submit'  style={{color:"#2B3445",backgroundColor:"#ffff", border: "1px solid #00706A"}}  sx={{ ml:2, height: 44, width: 130 ,Radius:'5px'}}>
-                  Linges de cuisine
-                  </Button>
-                </Grid>
-                </Grid>
-                <Spacer height={10}/>
                 <Grid item  xs={12}>
                 <H4 style={{fontWeight:'bold',color:'black',marginBottom:'15px'}}> Catégories</H4>
                 </Grid >
@@ -113,7 +114,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                   catégorie
                 </H6>
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={6} sm={6} marginLeft={0.5}>
                 <TextField
                  sx={{
                   "& .MuiInputBase-root": {
@@ -123,7 +124,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                   fullWidth
                   name='addCategory'
                   label='Proposer une nouvelle catégorie pour votre produit'
-                  
+                 
                   size='medium'
                   variant='outlined'
                   

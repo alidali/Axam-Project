@@ -16,6 +16,7 @@ import BazaarSwitch from 'components/BazaarSwitch'
 import { Formik } from 'formik'
 import React, { FC } from 'react'
 import * as yup from 'yup'
+import styled from 'styled-components'
 import { Spacer } from 'ui';
 import { Assign, ObjectShape } from 'yup/lib/object'
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -39,7 +40,7 @@ export function Informations({onClick}:InformationsProps) {
   const initialValues = {
     nomProduit: "",
     guarantee: "",
-    // country: "",
+   country: null ,
     quantity: "",
     price: "",
     specialPrice: "",
@@ -47,9 +48,29 @@ export function Informations({onClick}:InformationsProps) {
     weight: "0",
   };
 
-  // const handleFormSubmit = async (values) => {
-  //   console.log(values);
-  // };
+  const handleFormSubmit = async (values) => {
+    console.log(values);
+  };
+  const StyledButtonSwitch1 = styled.div`
+  justify-content: space-between;
+  margin: 30px 0px 0px 45px;
+  
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+
+  `
+  const StyledButtonSwitch2 = styled.div`
+  justify-content: space-between;
+  margin: 10px 0px 0px 45px;
+  
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+
+  `
+  
+
 
   return (
 
@@ -90,12 +111,39 @@ export function Informations({onClick}:InformationsProps) {
                 helperText={touched.nomProduit && errors.nomProduit}
               />
             </Grid>
-            <Grid item sm={5} xs={6} >
-              <Tags />
-            </Grid>
-
-
-
+           
+               <Grid item md={5} xs={6}  display="flex">
+                <Autocomplete
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      color: 'black'
+                    }
+                  }}
+                  fullWidth
+                  disablePortal
+                  options={countryList}
+                  value={values.country}
+                  getOptionLabel={option => option.label}
+                  onChange={(_, value) => setFieldValue('country', value)}
+                  renderInput={params => (
+                    <TextField
+                      sx={{
+                        "& .MuiInputBase-root": {
+                          color: 'black'
+                        }
+                      }}
+                      label='Made in'
+                      variant='outlined'
+                      placeholder='Made in'
+                      error={!!touched.country && !!errors.country}
+                      helperText={touched.country && errors.country}
+                      {...params}
+                      size='medium'
+                    />
+                  )}
+                />
+              </Grid>  
+          
             <Grid item sm={5} xs={12}>
               <TextField
                 sx={{
@@ -108,9 +156,9 @@ export function Informations({onClick}:InformationsProps) {
 
                 required
                 size='medium'
-                label=' période de garantie'
+                label=' période de garantie (ans)'
                 type='number'
-                placeholder=' période de garantie'
+                placeholder=' période de garantie (ans)'
                 onBlur={handleBlur}
                 value={values.guarantee}
                 onChange={handleChange}
@@ -128,7 +176,7 @@ export function Informations({onClick}:InformationsProps) {
                 fullWidth
                 required
                 name='quantity'
-                label=' Quantité minimum de commande'
+                label=' Quantité minimum de commande '
 
                 type='number'
                 size='medium'
@@ -153,9 +201,9 @@ export function Informations({onClick}:InformationsProps) {
 
                 required
                 size='medium'
-                label='Prix'
+                label='Prix (dinar)'
                 type='number'
-                placeholder=' Prix'
+                placeholder=' Prix (dinar)'
                 onBlur={handleBlur}
                 value={values.price}
                 onChange={handleChange}
@@ -175,9 +223,9 @@ export function Informations({onClick}:InformationsProps) {
                 name='specialPrice'
 
                 size='medium'
-                label='prix spécial'
+                label='prix spécial (dinar)'
                 type='number'
-                placeholder=' prix spécial'
+                placeholder=' prix spécial (dinar)'
                 onBlur={handleBlur}
                 value={values.specialPrice}
                 onChange={handleChange}
@@ -218,11 +266,11 @@ export function Informations({onClick}:InformationsProps) {
                 fullWidth
                 required
                 name='weight'
-                label=' Poids du produit'
+                label=' Poids du produit (en kg)'
 
                 type='number'
                 size='medium'
-                placeholder=' Poids du produit'
+                placeholder=' Poids du produit (en kg)'
                 onBlur={handleBlur}
                 value={values.weight}
                 onChange={handleChange}
@@ -230,62 +278,38 @@ export function Informations({onClick}:InformationsProps) {
                 helperText={touched.weight && errors.weight}
               />
             </Grid>
-              {/* <Grid item md={5} xs={6}>
-                <Autocomplete
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      color: 'black'
-                    }
-                  }}
-                  fullWidth
-                  disablePortal
-                  options={countryList}
-                  value={values.country}
-                  getOptionLabel={option => option.label}
-                  onChange={(_, value) => setFieldValue('country', value)}
-                  renderInput={params => (
-                    <TextField
-                      sx={{
-                        "& .MuiInputBase-root": {
-                          color: 'black'
-                        }
-                      }}
-                      label='Made in'
-                      variant='outlined'
-                      placeholder='Made in'
-                      error={!!touched.country && !!errors.country}
-                      helperText={touched.country && errors.country}
-                      {...params}
-                      size='medium'
-                    />
-                  )}
-                />
-              </Grid> */}
-            <Grid item md={5} xs={12}>
+             
+              <Grid item sm={10} xs={6} >
+              <Tags />
+            </Grid>
+           
+              <Grid container spacing={3}  paddingTop={2}>
+             <StyledButtonSwitch1 >
+         
               <label style={{ fontWeight: 'bold' }}>Possibilité de retour</label>
-              <BazaarSwitch color='default' sx={{ marginLeft: '38%' }} />
-            </Grid>
-            <Grid item md={5} xs={12}>
+              <BazaarSwitch color='default'/>
+   <Spacer width={78.9}/>
+          
               <label style={{ fontWeight: 'bold' }}> Possibilité d&apos;annulation</label>
-              <BazaarSwitch color='default' sx={{ marginLeft: '33%' }} />
-            </Grid>
-            <Grid item md={5} xs={12}>
+              
+               <BazaarSwitch color='default' />
+            </StyledButtonSwitch1>
 
+            <StyledButtonSwitch2>
               <label style={{ fontWeight: 'bold' }}>Paiement à la livraison</label>
-
-              <BazaarSwitch color='default' sx={{ marginLeft: '33%' }} />
-
-            </Grid>
-            <Grid item md={5} xs={12}  >
+              <BazaarSwitch color='default' />
+              <Spacer width={60}/>
               <label style={{ fontWeight: 'bold' }}>Produit fragile</label>
-              <BazaarSwitch color='default' sx={{ marginLeft: '52%' }} />
+              <BazaarSwitch color='default'  />
+            </StyledButtonSwitch2> 
             </Grid>
-
-            <Grid item sm={6} xs={12}>
+           
+           <Grid item sm={6} xs={12}>
               <Button variant='contained' type='submit' style={{ color: "white", backgroundColor: "#236C68" }} sx={{ml: '60%',  height: 44, width: 210, sm: 6, xs: 12, Radius: '5px' }}>
               Suivant
               </Button>
-            </Grid>
+            </Grid> 
+            
           </Grid>
         </form>
       )}

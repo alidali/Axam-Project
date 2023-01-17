@@ -62,7 +62,7 @@ const TableHeader: FC<TableHeaderProps> = (props) => {
           <StyledTableCell
             key={headCell.id}
             align={headCell.align}
-            sortDirection={orderBy === headCell.id ? order : false}
+            sortDirection={orderBy === headCell.id ? order :false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}

@@ -2,11 +2,10 @@ import { Delete, Edit } from '@mui/icons-material'
 import { Avatar, Box, IconButton, useTheme, styled } from '@mui/material'
 import { Done } from '@mui/icons-material'
 import ClearIcon from '@mui/icons-material/Clear'
-import BazaarSwitch from 'components/BazaarSwitch'
+import Switch from '@mui/material/Switch';
 import { useState, useEffect } from 'react'
 import { FlexBox } from 'components/flex-box'
 import { Paragraph, Small } from 'components/Typography'
-import currency from 'currency.js'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 import {
@@ -23,18 +22,14 @@ type ProductRowProps = { product: any }
 // ========================================================================
 
 const ProductRow: FC<ProductRowProps> = ({ product }) => {
-  const {
-   
-    id,
-    published,
-    payment,
-    amount
-  } = product
+  const {name, price,  id,  published, payment,total_allowed_quantity,special_price,date_added}
+   = product
 
   // state
+
   const router = useRouter()
   const [productPulish, setProductPublish] = useState(published)
-  const [productPulish1, setProductPublish1] = useState(published)
+
   const theme = useTheme()
   const StatusWrapper = styled(FlexBox)<{ payment: any }>(
     ({ theme, payment }) => ({
@@ -50,7 +45,23 @@ const ProductRow: FC<ProductRowProps> = ({ product }) => {
   // ========================================================================
   // ========================================================================
  
-  
+  const switchStyle = {
+    borderRadius: 2,
+    "& .MuiSwitch-switchBase.Mui-checked": {
+      color: " #7D879C"
+    },
+    "& .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track": {
+      backgroundColor: '#236C68'
+    },
+    "& .MuiSwitch-track": {
+      opacity: 9,
+      borderRadius: 22 / 2,
+      backgroundColor: "#EBEFF4",}
+      ,
+    "& .MuiSwitch-switchBase": {
+      color: '#236C68'
+    },
+  }
   
 
   return (
@@ -60,22 +71,20 @@ const ProductRow: FC<ProductRowProps> = ({ product }) => {
         <FlexBox alignItems='center' gap={2}>
         <Avatar src={product.image} sx={{ borderRadius: "8px" }} />
           <Box>
-            <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'} textAlign='left'>{product.name}</Paragraph>
+            <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'} textAlign='left'>{name}</Paragraph>
           </Box>
         </FlexBox>
       </StyledTableCell>
 
       <StyledTableCell  align='center'>
-      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>{product.variants?.map(product=>(product.date_added))}</Paragraph>
+      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>{product.variants[0].date_added}</Paragraph>
       </StyledTableCell>
 
       <StyledTableCell  align='center'>
-      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>
-        {product.total_allowed_quantity}</Paragraph></StyledTableCell>
+      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>{total_allowed_quantity}</Paragraph></StyledTableCell>
       
       <StyledTableCell align='center'>
-      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>
-      {product.variants[0].price}</Paragraph></StyledTableCell>                           
+      <Paragraph color="black" fontSize={'16px'} fontWeight={'bold'}>{product.variants[0].price}</Paragraph></StyledTableCell>                           
          
        
       <StyledTableCell align='center'>
@@ -85,8 +94,10 @@ const ProductRow: FC<ProductRowProps> = ({ product }) => {
 
 
       <StyledTableCell align='center'>
-        <BazaarSwitch
-          color="default"
+        <Switch 
+    
+    sx={switchStyle}
+    defaultChecked
           checked={productPulish}
           onChange={() => setProductPublish(state => !state)}
         />

@@ -28,7 +28,7 @@ const tableHeading = [
   { id: 'date_added', label: 'Date de référencement', align: 'center' },
   { id: 'total_allowed_quantity', label: 'Quantité', align: 'center' },
   { id: 'price', label: 'Prix', align: 'center' },
-  { id: 'amount', label: 'Prix Promo', align: 'center' },
+  { id: 'special_price', label: 'Prix Promo', align: 'center' },
   { id: 'published', label: 'Publié', align: 'center' },
   { id: 'payment', label: 'Validation', align: 'center' },
   { id: 'action', label: 'Action', align: 'center' }
@@ -44,16 +44,15 @@ type ProductListProps = { products: any[] }
 
 // =============================================================================
 
-export default function ProductList (props: ProductListProps) {
+export default function ProductList () {
   // ========================================================================
   // ========================================================================
-  const [data, setData] = useState([])
-  const [data2, setData2] = useState([])
+  const [dataCategories, setDataCategories] = useState([])
+  const [dataProduct, setDataProduct] = useState([])
+  const token ='Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcyI6ImVzaG9wIiwiZXhwIjoxNjY0NDEwODI2fQ.R9yCge_10pnDkSjL9aospCdvnRBGYFI4dsOsVaW7fkE'
 
 
   useEffect(() => {
-    const token =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcyI6ImVzaG9wIiwiZXhwIjoxNjY0NDEwODI2fQ.R9yCge_10pnDkSjL9aospCdvnRBGYFI4dsOsVaW7fkE'
     fetch('http://5.135.194.236:8181/app/v1/api/get_categories', {
       method: 'POST',
       headers: {
@@ -62,7 +61,7 @@ export default function ProductList (props: ProductListProps) {
     })
       .then(response => response.json())
 
-      .then(data => setData(data.data))
+      .then(fetchDataCategories => setDataCategories(fetchDataCategories.data))
 
     fetch('http://5.135.194.236:8181/app/v1/api/get_products', {
       method: 'POST',
@@ -72,11 +71,10 @@ export default function ProductList (props: ProductListProps) {
     })
       .then(response => response.json())
 
-      .then(data2 => setData2(data2.data))
+      .then(fetchDataProduct => setDataProduct(fetchDataProduct.data))
   }, [])
-  console.log(data, 'data')
-  console.log(data2.length, 'Num')
-  const { products } = props
+  console.log(dataCategories, 'data')
+  console.log(dataProduct.length, 'Num')
 
   const {
     order,
@@ -86,9 +84,13 @@ export default function ProductList (props: ProductListProps) {
     filteredList,
     handleChangePage,
     handleRequestSort
-  } = useMuiTable({ listData: products })
+  } = useMuiTable({ listData: dataProduct })
   const router = useRouter();
-
+  console.log("order : ",order)
+  console.log("orderBy : ",orderBy)
+  console.log("selected : ",selected)
+  console.log("rowsPerPage : ",rowsPerPage)
+  console.log("useMuiTable({ listData: dataProduct }) : ",useMuiTable({ listData: dataProduct }))
 
   return (
     <Box py={4}>
@@ -99,15 +101,9 @@ export default function ProductList (props: ProductListProps) {
      
         <Grid item xs={3}>
        
-          <SearchArea 
-
+          <SearchArea
             handleSearch={() => {}}
-          
-            buttonText='Ajouter un produit'
-            handleBtnClick={() => {}}
-
             searchPlaceholder='Recherche produit'
-          
           />
      
         </Grid>
@@ -122,7 +118,7 @@ export default function ProductList (props: ProductListProps) {
                   label='Catégorie'
                   
                 >
-                  {data?.map(value => (
+                  {dataCategories?.map(value => (
                     <div>
                       <MenuItem value={value.id} > {value.name}</MenuItem>
 
@@ -173,13 +169,13 @@ export default function ProductList (props: ProductListProps) {
                   hideSelectBtn
                   orderBy={orderBy}
                   heading={tableHeading}
-                  rowCount={products.length}
+                  rowCount={dataProduct.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                 />
 
                 <TableBody>
-                  {data2?.map((product, index) => (
+                  {filteredList?.map((product, index) => (
                     <ProductRow product={product} key={index} />
                   ))}
                 </TableBody>
@@ -190,7 +186,7 @@ export default function ProductList (props: ProductListProps) {
           <Stack alignItems='center' my={4}>
             <TablePagination
               onChange={handleChangePage}
-              count={Math.ceil(products.length / rowsPerPage)}
+              count={Math.ceil(dataProduct.length / rowsPerPage)}
             />
           </Stack>
         </Card>
@@ -199,8 +195,3 @@ export default function ProductList (props: ProductListProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const products = await api.products()
-
-  return { props: { products } }
-}

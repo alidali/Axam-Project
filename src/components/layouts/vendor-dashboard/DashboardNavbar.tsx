@@ -16,7 +16,7 @@ import {  Paragraph } from "components/Typography";
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   zIndex: 11,
   paddingTop: "1.5rem",
-  
+  height:"90px",
   paddingBottom: "1.5rem",
   backgroundColor: "#ffffff",
   boxShadow: theme.shadows[2],
@@ -93,16 +93,16 @@ const DashboardNavbar: FC<DashboardNavbarProps> = ({ handleDrawerToggle }) => {
           variant="outlined"
        
 
-            style={{color:"white",backgroundColor:"#E09351",width:"91px",
+            style={{color:"white",backgroundColor:"#E09351",width:"214px",
             height:"40px", marginLeft:"12px", borderRadius:"8px"}}
         >
-          <Paragraph >Contact</Paragraph>
+          <Paragraph >Sponsoriser votre produit</Paragraph>
         </Button>
         <Button
           variant="outlined"
        
 
-            style={{color:"white",backgroundColor:"#00706A",width:"180px",
+            style={{color:"white",backgroundColor:"#2B3445",width:"180px",
             height:"40px",padding: "9px 16px", marginLeft: "12px", borderRadius:"8px"}}
         >
           <Paragraph >Création de contenu</Paragraph>

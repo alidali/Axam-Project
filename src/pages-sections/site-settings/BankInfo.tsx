@@ -1,48 +1,54 @@
-import { Box, Button, Grid, styled, TextField } from '@mui/material'
-import { H4 } from 'components/Typography'
+import { Box, Button, Grid, TextField } from '@mui/material'
 import DropZone from 'components/DropZone'
 import { useState, useEffect } from 'react'
 import { Formik } from 'formik'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import React, { FC } from 'react'
 import * as yup from 'yup'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
+import styled from 'styled-components'
 
-const UploadBox = styled(Box)(({ theme }) => ({
-  cursor: 'pointer',
-  padding: '5px 10px',
-  borderRadius: '4px',
-  display: 'inline-block',
-  color: theme.palette.primary.main,
-  border: `1px solid ${theme.palette.primary.main}`
-}))
-
+const Styledbtn = styled.div`
+  display: inline-block;
+  padding: 8px 16px;
+  margin-left: 91%;
+`
 // form field validation
 const validationSchema = yup.object().shape({
-  nom_vendeur: yup.string().required('Le nom du vendeur est obligatoire'),
-  prenom_vendeur: yup.string().required('Le prénom du vendeur est obligatoire'),
-  email: yup.string().required("L'email du vendeur est obligatoire"),
-  mot_passe: yup
+  titulaireDuCompte: yup.string().required('ce champ est obligatoire'),
+  banque: yup.string().required('ce champ est obligatoire'),
+  agence: yup
     .string()
-    .required(' Le mot de passe du vendeur est obligatoire'),
-  phone: yup
-    .number()
-    .required('Le numéro de téléphone  du vendeur est obligatoire')
+    .required('ce champ est obligatoire')
+    .required('ce champ est obligatoire'),
+  code_swift: yup.string().required('ce champ est obligatoire'),
+  iban: yup.number().required('ce champ est obligatoire'),
+  code_bancaire: yup.number().required('ce champ est obligatoire'),
+  rib: yup.number().required('ce champ est obligatoire')
 })
 
 const BankInfo: FC = () => {
   const initialValues = {
-    nom_vendeur: '',
-    prenom_vendeur: '',
-    email: '',
-    mot_passe: '',
-    phone: ''
+    titulaireDuCompte: '',
+    cin: '',
+    rib: '',
+    banque: '',
+    agence: '',
+    code_swift: '',
+    iban: '',
+    code_bancaire: ''
   }
 
   const handleFormSubmit = async values => {
     console.log(values)
+  }
+
+  interface FileType extends File {
+    preview: string
+  }
+
+  const [newFiles, setNewFiles] = useState<FileType[]>([])
+  const deleteNewImage = (name: string) => {
+    setNewFiles(state => state.filter(item => item.name !== name))
   }
 
   return (
@@ -63,12 +69,39 @@ const BankInfo: FC = () => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
                 fullWidth
                 color='info'
                 size='medium'
-                name='rib'
+                name='titulaireDuCompte'
+                label='Titulaire du compte '
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.titulaireDuCompte}
+                error={
+                  !!touched.titulaireDuCompte && !!errors.titulaireDuCompte
+                }
+                helperText={
+                  touched.titulaireDuCompte && errors.titulaireDuCompte
+                }
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                size='medium'
                 type='number'
-                label='Rib '
+                name='rib'
+                label='Rib'
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.rib}
@@ -76,13 +109,22 @@ const BankInfo: FC = () => {
                 helperText={touched.rib && errors.rib}
               />
             </Grid>
-
-            <Grid item xs={12}>
-              {/* <H4>Top Bar Left Content</H4> */}
-            </Grid>
-            <DropZone />
-            <Grid item xs={12}>
+            <div style={{ marginLeft: '2%', width: '100%', marginTop: '2%' }}>
+              <DropZone
+                onChange={files => {
+                  const uploadFiles = files.map(file =>
+                    Object.assign(file, { preview: URL.createObjectURL(file) })
+                  )
+                  setNewFiles(uploadFiles)
+                }}
+              />
+            </div>
+            <Grid item md={6} xs={12}>
               <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
                 select
                 fullWidth
                 color='info'
@@ -92,7 +134,6 @@ const BankInfo: FC = () => {
                 label='Banque'
               >
                 <MenuItem value='Banque Internationale Arabe de Tunisie «BIAT»'>
-                  
                   Banque Internationale Arabe de Tunisie « BIAT »
                 </MenuItem>
                 <MenuItem value='Banque de Tunisie «BT»'>
@@ -154,8 +195,12 @@ const BankInfo: FC = () => {
                 </MenuItem>
               </TextField>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item md={6} xs={12}>
               <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
                 fullWidth
                 color='info'
                 size='medium'
@@ -164,42 +209,86 @@ const BankInfo: FC = () => {
                 name='agence'
                 label='Agence'
                 value={values.agence}
-                error={
-                  !!touched.agence &&
-                  !!errors.agence
-                }
-                helperText={
-                  touched.agence &&
-                  errors.agence
-                }
+                error={!!touched.agence && !!errors.agence}
+                helperText={touched.agence && errors.agence}
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item md={6} xs={12}>
               <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
                 fullWidth
                 color='info'
                 size='medium'
                 type='number'
-                name='cin'
-                label='CIN'
+                name='code_bancaire'
+                label='Code bancaire'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.cin}
-                error={!!touched.cin&& !!errors.cin}
-                helperText={touched.cin && errors.cin}
+                value={values.code_bancaire}
+                error={!!touched.code_bancaire && !!errors.code_bancaire}
+                helperText={touched.code_bancaire && errors.code_bancaire}
               />
             </Grid>
-            <Box sx={{ minWidth: 1090, marginLeft: 3, marginTop: 2 }}></Box>
+            <Grid item md={6} xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                size='medium'
+                name='iban'
+                label='Iban'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.iban}
+                error={!!touched.iban && !!errors.iban}
+                helperText={touched.iban && errors.iban}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                size='medium'
+                type='number'
+                name='code_swift'
+                label='Code swift'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.code_swift}
+                error={!!touched.code_swift && !!errors.code_swift}
+                helperText={touched.code_swift && errors.code_swift}
+              />
+            </Grid>
           </Grid>
 
-          <Button type='submit' color='info' variant='contained' sx={{ mt: 4 }}>
-            Valider
-          </Button>
+          <Styledbtn>
+            <Button
+              type='submit'
+              color='info'
+              variant='contained'
+              style={{
+                color: 'white',
+                backgroundColor: '#236C68',
+                maxWidth: '120px'
+              }}
+            >
+              Valider
+            </Button>
+          </Styledbtn>
         </form>
       )}
     </Formik>
   )
 }
-
 export default BankInfo

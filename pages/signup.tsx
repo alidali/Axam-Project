@@ -78,7 +78,9 @@ const SignUpPage: NextPage = ({ children }) => {
       "& .MuiStepIcon-root.MuiStepIcon-active": {color: "#E09351"},
       "& .MuiStepIcon-completed": { fill: "#236C68" }, 
       "& .Mui-disabled .MuiStepIcon-root": { fill: "crey" },
-      "& .MuiStepConnector-line":{color: "#E09351"}
+      "& .MuiStepConnector-line":{color: "#E09351"},
+      "&.MuiPaper-root":{backgroundColor:"transparent"},
+
   
     
     }})

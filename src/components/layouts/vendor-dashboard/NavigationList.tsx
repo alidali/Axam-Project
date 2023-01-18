@@ -81,13 +81,13 @@ export const navigations = [
   
 
   {
-    name: "Compte vendeur",
+    name: "Contacter chargé de vendeur",
     icon: duotone.AccountSetting,
     path: "/vendor/account-setting",
   },
 
-  {
-    name: "Contacter chargé de vendeur",
+  { name: "Compte vendeur",
+  
     icon: duotone.SiteSetting,
     path: "/vendor/site-settings",
   },

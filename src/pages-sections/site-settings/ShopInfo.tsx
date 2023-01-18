@@ -1,68 +1,57 @@
-import { Box, Button, Grid, styled, TextField } from '@mui/material'
-import { H4 } from 'components/Typography'
+import { Box, Button, Grid, TextField } from '@mui/material'
 import DropZone from 'components/DropZone'
 import { useState, useEffect } from 'react'
 import { Formik } from 'formik'
-
 import React, { FC } from 'react'
 import * as yup from 'yup'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
+import styled from 'styled-components'
 
-const UploadBox = styled(Box)(({ theme }) => ({
-  cursor: 'pointer',
-  padding: '5px 10px',
-  borderRadius: '4px',
-  display: 'inline-block',
-  color: theme.palette.primary.main,
-  border: `1px solid ${theme.palette.primary.main}`
-}))
+const Styledbtn = styled.div`
+  display: inline-block;
 
+  padding: 8px 16px;
+  margin-left: 91%;
+`
 // form field validation
 const validationSchema = yup.object().shape({
-  nom_vendeur: yup.string().required('Le nom du vendeur est obligatoire'),
-  prenom_vendeur: yup.string().required('Le prénom du vendeur est obligatoire'),
-  email: yup.string().required("L'email du vendeur est obligatoire"),
-  mot_passe: yup
-    .string()
-    .required(' Le mot de passe du vendeur est obligatoire'),
-  phone: yup
-    .number()
-    .required('Le numéro de téléphone  du vendeur est obligatoire')
+  nom_boutique: yup.string().required('ce champ est obligatoire'),
+  raison_social: yup.string().required('ce champ est obligatoire'),
+  pays: yup.string().required('ce champ est obligatoire'),
+  gouvernorat: yup.string().required('ce champ est obligatoire'),
+  delegation: yup.string().required('ce champ est obligatoire'),
+  ville: yup.string().required('ce champ est obligatoire'),
+  Addresse: yup.string().required('ce champ est obligatoire'),
+  telephone_fixe: yup.number().required('ce champ est obligatoire'),
+  codePostal: yup.number().required('ce champ est obligatoire'),
+  rne: yup.string().required('ce champ est obligatoire'),
+  matricule_fiscale: yup.string().required('ce champ est obligatoire')
 })
 
 const ShopInfo: FC = () => {
   const initialValues = {
-    nom_vendeur: '',
-    prenom_vendeur: '',
-    email: '',
-    mot_passe: '',
-    phone: ''
+    raison_social: '',
+    nom_boutique: '',
+    pays: '',
+    gouvernorat: '',
+    delegation: '',
+    ville: '',
+    Addresse: '',
+    telephone_fixe: '',
+    codePostal: '',
+    rne: '',
+    matriculeFiscale: ''
   }
-
   const handleFormSubmit = async values => {
     console.log(values)
   }
+  interface FileType extends File {
+    preview: string
+  }
 
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    const token =
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjQ0MDkwMjYsImlzcyI6ImVzaG9wIiwiZXhwIjoxNjY0NDEwODI2fQ.R9yCge_10pnDkSjL9aospCdvnRBGYFI4dsOsVaW7fkE'
-    fetch('http://5.135.194.236:8181/app/v1/api/get_categories', {
-      method: 'POST',
-      headers: {
-        Authorization: token
-      }
-    })
-      .then(response => response.json())
-
-      .then(data => setData(data.data))
-  }, [])
-  console.log(data, 'data')
-
+  const [newFiles, setNewFiles] = useState<FileType[]>([])
+  const deleteNewImage = (name: string) => {
+    setNewFiles(state => state.filter(item => item.name !== name))
+  }
   return (
     <Formik
       onSubmit={handleFormSubmit}
@@ -82,9 +71,12 @@ const ShopInfo: FC = () => {
             <Grid item xs={12}>
               {/* <H4>Top Bar Left Content</H4> */}
             </Grid>
-            <DropZone />
-            <Grid item xs={12}>
+            <Grid item md={6} xs={12}>
               <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
                 fullWidth
                 color='info'
                 size='medium'
@@ -97,100 +89,229 @@ const ShopInfo: FC = () => {
                 helperText={touched.nom_boutique && errors.nom_boutique}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item md={6} xs={12}>
               <TextField
-                rows={4}
-                multiline
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
                 fullWidth
                 color='info'
                 size='medium'
+                name='raison_social'
+                label='Raison Social '
                 onBlur={handleBlur}
                 onChange={handleChange}
-                name='boutique_description'
-                label='Description de boutique'
-                value={values.boutique_description}
+                value={values.raison_social}
+                error={!!touched.raison_social && !!errors.raison_social}
+                helperText={touched.raison_social && errors.raison_social}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                size='medium'
+                name='pays'
+                label='Pays'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.pays}
+                error={!!touched.pays && !!errors.pays}
+                helperText={touched.pays && errors.pays}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                size='medium'
+                name='gouvernorat'
+                label='Gouvernorat'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.gouvernorat}
+                error={!!touched.gouvernorat && !!errors.gouvernorat}
+                helperText={touched.gouvernorat && errors.gouvernorat}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                size='medium'
+                name='delegation'
+                label='Délégation '
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.delegation}
+                error={!!touched.delegation && !!errors.delegation}
+                helperText={touched.delegation && errors.delegation}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                size='medium'
+                name='ville'
+                label='Ville '
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.ville}
+                error={!!touched.ville && !!errors.ville}
+                helperText={touched.ville && errors.ville}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                size='medium'
+                name='Addresse'
+                label='Addresse'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.Addresse}
+                error={!!touched.Addresse && !!errors.Addresse}
+                helperText={touched.Addresse && errors.Addresse}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                color='info'
+                type='number'
+                size='medium'
+                name='telephone_fixe'
+                label='Télephone fixe'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.telephone_fixe}
+                error={!!touched.telephone_fixe && !!errors.telephone_fixe}
+                helperText={touched.telephone_fixe && errors.telephone_fixe}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
+                fullWidth
+                type='number'
+                color='info'
+                size='medium'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                name='codePostal'
+                label=' Code postal'
+                value={values.codePostal}
+                error={!!touched.codePostal && !!errors.codePostal}
+                helperText={touched.codePostal && errors.codePostal}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
                 fullWidth
                 color='info'
                 size='medium'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                name='responsable_commercial'
-                label='responsable commercial'
-                value={values.responsable_commercial}
+                name='matricule_fiscale'
+                label='matricule Fiscale'
+                value={values.matricule_fiscale}
                 error={
-                  !!touched.responsable_commercial &&
-                  !!errors.responsable_commercial
+                  !!touched.matricule_fiscale && !!errors.matricule_fiscale
                 }
                 helperText={
-                  touched.responsable_commercial &&
-                  errors.responsable_commercial
+                  touched.matricule_fiscale && errors.matricule_fiscale
                 }
               />
             </Grid>
-
+            <div style={{ marginLeft: '2%', width: '100%', marginTop: '2%' }}>
+              <DropZone
+                onChange={files => {
+                  const uploadFiles = files.map(file =>
+                    Object.assign(file, { preview: URL.createObjectURL(file) })
+                  )
+                  setNewFiles(uploadFiles)
+                }}
+              />
+            </div>
             <Grid item xs={12}>
               <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                      color: 'black'
+                  }}}
                 fullWidth
                 color='info'
                 size='medium'
-                type='number'
-                name='phone'
-                label='Téléphone du responsable  '
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.phone}
-                error={!!touched.phone && !!errors.phone}
-                helperText={touched.phone && errors.phone}
+                name='rne'
+                label='RNE'
+                value={values.rne}
+                error={!!touched.rne && !!errors.rne}
+                helperText={touched.rne && errors.rne}
               />
             </Grid>
-            <Box sx={{ minWidth: 1090, marginLeft: 3, marginTop: 2 }}>
-               <FormControl fullWidth>
-                <InputLabel id='demo-simple-select-label'>Catégorie</InputLabel>
-                <Select
-                  labelId='demo-simple-select-label'
-                  
-                  id='demo-simple-select'
-                  label='Catégorie'
-                  onChange={handleChange}
-                >
-                  {data?.map(value => (
-                    <div>
-                      <MenuItem value={value.id} > {value.name}</MenuItem>
 
-                      {value.children.map(value => (
-                        <div>
-                          <MenuItem >{value.name}</MenuItem>
-                          {value.children.map(value => (
-                            <MenuItem >{value.name}</MenuItem>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                  {/* <MenuItem value={10}></MenuItem>
-          <MenuItem value={20}></MenuItem>
-          <MenuItem value={30}></MenuItem> */}
-                </Select>
-              </FormControl> 
-              
-
-
-
-
-
-          
-
-
-            </Box>
+            <div style={{ marginLeft: '2%', width: '100%', marginTop: '2%' }}>
+              <DropZone
+                onChange={files => {
+                  const uploadFiles = files.map(file =>
+                    Object.assign(file, { preview: URL.createObjectURL(file) })
+                  )
+                  setNewFiles(uploadFiles)
+                }}
+              />
+            </div>
           </Grid>
-
-          <Button type='submit' color='info' variant='contained' sx={{ mt: 4 }}>
-            Valider
-          </Button>
+          <Styledbtn>
+            <Button
+              type='submit'
+              color='info'
+              variant='contained'
+              style={{
+                color: 'white',
+                backgroundColor: '#236C68',
+                maxWidth: '120px'
+              }}
+            >
+              Valider
+            </Button>
+          </Styledbtn>
         </form>
       )}
     </Formik>

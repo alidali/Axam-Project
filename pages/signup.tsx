@@ -1,15 +1,14 @@
-import { FlexRowCenter } from 'components/flex-box'
+
 import { H3, H6, Small } from 'components/Typography'
 import Typography from '@mui/material/Typography'
-import Logo from './logo'
-import Avatar from '@mui/material/Avatar'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import CssBaseline from '@mui/material/CssBaseline'
-import Paper from '@mui/material/Paper'
+import Logo2 from "components/Logo2";
+
 import { NextPage } from 'next'
 import Scrollbar from 'components/Scrollbar'
 import ProfileVendorSignup from 'pages-sections/sessions/ProfileVendorSignup'
 import { Box, Container, Grid, Card, Divider } from '@mui/material'
+import { makeStyles } from '@mui/styles'
+
 import { Stepper, StepLabel, Step } from '@material-ui/core'
 import { useRouter } from 'next/router'
 import { FC, useContext, useEffect, useState } from 'react'
@@ -19,35 +18,36 @@ import BankSignup from 'pages-sections/sessions/Banksignup'
 import RecapSignup from 'pages-sections/sessions/Recapsignup'
 import { multiStepContext } from 'StepContext'
 import styled from 'styled-components'
+import { color } from '@mui/system';
 
-// const StyledStepLabel = styled(StepLabel)`
-//   @media screen and (min-width: 768px) {
-//     orientation: vertical;
-//   }
-// `
-const StyledStepper = styled(Stepper)`
-`
 
 
 const StyledCard = styled.div`
 
-  padding: 20px 100px 100px 100px;   //top right bottom left
+  padding:20px 250px 100px 250px;  //top right bottom left
   margin: 1px;
-  display: 'flex',
-  justifyContent: 'left',
+   display: 'flex',
+   justifyContent: 'center',
   alignItems: 'center'
 
   @media screen and (min-width: 768px) {
     display: flex;
+    marginLeft:50px,
+   marginRight:50px,
+
   }
 `
+const myStyle={
+  backgroundImage: 
+"url('/assets/images/banners/background.png')",
+  
+  fontSize:'1px',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+};
 
-/**
- *  Used:
- *  1. cart page
- *  2. checkout page
- *  3. payment page
- */
+
+
 const SignUpPage: NextPage = ({ children }) => {
   const Context = useContext(multiStepContext)
   console.log('step', Context.currentStep)
@@ -72,24 +72,51 @@ const SignUpPage: NextPage = ({ children }) => {
     }
   }
 
-  // const socialMediaHandlesLinks = {
-  //   facebook: 'https://facebook.com/phanimurari',
-  //   instagram: 'https://www.instagram.com/im_phani_murari/?hl=en',
 
-  //   twitter: 'https://twitter.com/ImPhaniMurari'
-  // }
+  const useStyles = makeStyles(() => ({
+    root: {
+      "& .MuiStepIcon-root.MuiStepIcon-active": {color: "#E09351"},
+      "& .MuiStepIcon-completed": { fill: "#236C68" }, 
+      "& .Mui-disabled .MuiStepIcon-root": { fill: "crey" },
+      "& .MuiStepConnector-line":{color: "#E09351"}
+  
+    
+    }})
+    )
+    const c = useStyles();
+
+    const myStyle={
+      backgroundImage: 
+    "url('/assets/images/banners/bk.png')",
+      fontSize:'10px',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+    };
+
   return (
-
-    <div>
-      <Logo />
-      <Typography component='h1' variant='h4' align='center'>
+    <div style={myStyle}>
+    
+      <Logo2 />
+      <Typography component='h1' variant='h4' align='center' color='#E09351' fontWeight= '700'
+ lineHeight= '30'>
         Inscrivez-vous
       </Typography>
+      <Small
+          mb={4.5}
+          display="block"
+          fontSize="18px"
+          fontWeight="600"
+          color="grey.800"
+          textAlign="center"
+        >
+         c’est simple et rapide!
+        </Small>
       <StyledCard>
-        <Stepper activeStep={Context.currentStep - 1} alternativeLabel>
+      
+        <Stepper  className={c.root} activeStep={Context.currentStep - 1}  alternativeLabel   >
           {steps.map((label) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel  >{label}</StepLabel>
 
             </Step>
           ))}
@@ -98,7 +125,7 @@ const SignUpPage: NextPage = ({ children }) => {
       {showStep(Context.currentStep)}
       </StyledCard>
     </div>
-
+    
 
 
   )

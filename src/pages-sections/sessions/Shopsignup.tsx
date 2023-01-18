@@ -104,8 +104,10 @@ const StyledRne = styled.div`
 
 const Styledbtn = styled.div`
   display: inline-block;
-  padding: 8px 16px;
-  margin-left: 30px;
+  padding: 4px 48px;
+
+ float:right
+  
 `
 
 const ShopSignup = () => {
@@ -227,7 +229,9 @@ const ShopSignup = () => {
           error={!!touched.gouvernorat && !!errors.gouvernorat}
           helperText={touched.gouvernorat && errors.gouvernorat}
         />
+         </StyledPays>
         <Spacer width={20} />
+        <StyledPays>
         <TextField
           fullWidth
           required
@@ -249,9 +253,9 @@ const ShopSignup = () => {
         />
 
         <Spacer width={20} />
-      </StyledPays>
+     
 
-      <StyledCodePostal>
+     
         <TextField
           fullWidth
           required
@@ -268,8 +272,9 @@ const ShopSignup = () => {
           error={!!touched.ville && !!errors.ville}
           helperText={touched.ville && errors.ville}
         />
+         </StyledPays>
         <Spacer width={20} />
-
+        <StyledPays>
         <TextField
           fullWidth
           required
@@ -289,8 +294,8 @@ const ShopSignup = () => {
           error={!!touched.Addresse && !!errors.Addresse}
           helperText={touched.Addresse && errors.Addresse}
         />
-      </StyledCodePostal>
-      <StyledPhone>
+     <Spacer width={20} />
+     
         <TextField
           fullWidth
           required
@@ -311,7 +316,9 @@ const ShopSignup = () => {
           error={!!touched.telephoneFixe && !!errors.telephoneFixe}
           helperText={touched.telephoneFixe && errors.telephoneFixe}
         />
+          </StyledPays>
         <Spacer width={20} />
+        <StyledMatricule>
         <TextField
           fullWidth
           required
@@ -332,9 +339,9 @@ const ShopSignup = () => {
           error={!!touched.CodePostal && !!errors.CodePostal}
           helperText={touched.CodePostal && errors.CodePostal}
         />
-      </StyledPhone>
+    
+    <Spacer width={20} />
 
-      <StyledMatricule>
         <TextField
           fullWidth
           required
@@ -403,6 +410,17 @@ const ShopSignup = () => {
      </FlexBox>
   
      </StyledDropzone>
+     <Styledbtn>
+        <BazaarButton
+        style={{color:"white",backgroundColor:"#236C68",maxWidth:"120px"}}
+          fullWidth
+          onClick={() => Context.setStep(3)}
+          color='primary'
+          variant='contained'
+        >
+          Suivant
+        </BazaarButton>
+      </Styledbtn>
 
       <Styledbtn>
         <BazaarButton
@@ -411,20 +429,12 @@ const ShopSignup = () => {
           color='secondary'
           variant='contained'
           onClick={() => Context.setStep(1)}
+          style={{color:"white",backgroundColor:"#2B3445",maxWidth:"120px"}}
         >
-          Back
+          retour
         </BazaarButton>
       </Styledbtn>
-      <Styledbtn>
-        <BazaarButton
-          fullWidth
-          onClick={() => Context.setStep(3)}
-          color='primary'
-          variant='contained'
-        >
-          Next
-        </BazaarButton>
-      </Styledbtn>
+   
     </form>
   )
 }

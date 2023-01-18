@@ -56,11 +56,11 @@ const Stepper: React.FC<StepperProps> = ({
                 ind <= selected ? "primary.main" : "primary.light",
               color: ind <= selected ? "primary.contrastText" : "primary.main",
                 //  p: "1rem ",
-              fontSize: "22px",
-              fontWeight: "700",
+              fontSize: "30px",
+              fontWeight: "800",
               // my: "4px",
               "&:hover:not(:disabled)": {
-                backgroundColor: "primary.main",
+                backgroundColor: "#e0e0e0",
                 color: "primary.contrastText",
                  
               },

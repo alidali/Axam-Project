@@ -1,12 +1,18 @@
 import duotone from "components/icons/duotone";
 import { Children } from "react";
 
+
+
 export const navigations = [
   { type: "label", label: "Vendeur ( Compte du vendeur )" },
   {
     name: "Dashboard",
     icon: duotone.Dashboard,
     path: "/vendor/dashboard",
+  
+  
+ 
+
   },
 
   {
@@ -17,7 +23,7 @@ export const navigations = [
       { name: "Ajouter produit", path: "/admin/products/create" },
       { name: "Catégorie", path: "/admin/categories" },
       { name: "Marque", path: "/admin/brands" },
-      // { name: "Review", path: "/admin/product-reviews" },
+      
     ],
   },
 
@@ -36,6 +42,14 @@ export const navigations = [
         
       ],
   },
+  {
+    name: "Catégories",
+    icon: duotone.Order,
+    path: "/admin/customers",
+    badge:{
+      value:"+add"
+    } 
+  },
 
   {
     name: "Promotions",
@@ -48,39 +62,7 @@ export const navigations = [
     path: "/vendor/reviews",
   },
 
-  // {
-  //   name: "Refunds",
-  //   icon: duotone.Refund,
-  //   children: [
-  //     { name: "Refund Request", path: "/admin/refund-request" },
-  //     { name: "Refund Settings", path: "/admin/refund-setting" },
-  //   ],
-  // },
 
-  // {
-  //   name: "Sellers",
-  //   icon: duotone.Seller,
-  //   children: [
-  //     { name: "Seller List", path: "/admin/sellers" },
-  //     { name: "Seller Package", path: "/admin/seller-package" },
-  //     { name: "Package Payments", path: "/admin/package-payment" },
-  //     { name: "Earning History", path: "/admin/earning-history" },
-  //     { name: "Payouts", path: "/admin/payouts" },
-  //     { name: "Payout Request", path: "/admin/payout-request" },
-  //   ],
-  // },
-
-  // { type: "label", label: "Vendor" },
-  // {
-  //   name: "Earnings",
-  //   icon: duotone.ProjectChart,
-  //   children: [
-  //     { name: "Earning History", path: "/vendor/earning-history" },
-  //     { name: "Payouts", path: "/vendor/payouts" },
-  //     { name: "Payout Request", path: "/vendor/payout-requests" },
-  //     { name: "Payout Settings", path: "/vendor/payout-settings" },
-  //   ],
-  // },
 
   {
     name: "Balance de paiement",
@@ -88,11 +70,7 @@ export const navigations = [
     path: "/vendor/refund-request",
   },
 
-  // {
-  //   name: "Reviews",
-  //   icon: duotone.Review,
-  //   path: "/vendor/reviews",
-  // },
+  
 
   {
     name: "Shop Setting",
@@ -100,11 +78,7 @@ export const navigations = [
     path: "/vendor/shop-settings",
   },
 
-  // {
-  //   name: "Support Tickets",
-  //   icon: duotone.ElementHub,
-  //   path: "/vendor/support-tickets",
-  // },
+  
 
   {
     name: "Compte vendeur",

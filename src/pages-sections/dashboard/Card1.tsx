@@ -20,10 +20,10 @@ const Card1: FC<Card1Props> = (props) => {
 
   return (
     <Card sx={{ p: 2 }}>
-      <H6 mb={1} color="grey.600">
+      <H6 mb={1} color="#00706A">
         {title}
       </H6>
-      <H3 mb={0.3}>{amount1}</H3>
+      <H3 mb={0.3} color="#2B3445">{amount1}</H3>
 
       <FlexBetween>
         <Paragraph fontWeight={500} color="grey.500">

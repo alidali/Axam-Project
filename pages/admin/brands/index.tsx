@@ -45,8 +45,8 @@ export default function BrandList({ brands }: BrandListProps) {
 
       <SearchArea
         handleSearch={() => {}}
-        buttonText="Add Brand"
-        handleBtnClick={() => {}}
+       // buttonText="Add Brand"
+       // handleBtnClick={() => {}}
         searchPlaceholder="Search Brand..."
       />
 

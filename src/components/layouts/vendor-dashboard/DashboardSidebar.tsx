@@ -1,8 +1,7 @@
-import { Avatar, Box, Theme, useMediaQuery } from "@mui/material";
+import { Avatar, Box, Theme, useMediaQuery, Button } from "@mui/material";
 import { FlexBetween } from "components/flex-box";
 import Scrollbar from "components/Scrollbar";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import LayoutDrawer from "../LayoutDrawer";
 import {
@@ -19,9 +18,13 @@ import {
 } from "./LayoutStyledComponents";
 import { navigations } from "./NavigationList";
 import SidebarAccordion from "./SidebarAccordion";
+import { useRouter } from "next/router";
+import Badge from '@mui/material/Badge';
 
 const TOP_HEADER_AREA = 70;
 
+const shapeStyles = { bgcolor: 'primary.main', width: 40, height: 40 };
+const rectangle = <Box component="span" sx={shapeStyles} />;
 // -----------------------------------------------------------------------------
 type DashboardSidebarProps = {
   sidebarCompact: any;
@@ -54,7 +57,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
     router.push(path);
     setShowMobileSideBar();
   };
-
+ 
   const renderLevels = (data: any) => {
     return data.map((item: any, index: any) => {
       if (item.type === "label")
@@ -78,7 +81,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <NavItemButton key={item.name} name="child" active={0}>
+            <NavItemButton key={item.name} name="child" active={0} >
               {item.icon ? (
                 <ListIconWrapper>
                   <item.icon />
@@ -89,7 +92,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
 
               <StyledText compact={COMPACT}>{item.name}</StyledText>
 
-              {/* <Box mx="auto" /> */}
+           
 
               {item.badge && (
                 <BadgeValue compact={COMPACT}>{item.badge.value}</BadgeValue>
@@ -113,13 +116,18 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
               ) : (
                 <BulletIcon active={activeRoute(item.path)} />
               )}
-
               <StyledText compact={COMPACT}>{item.name}</StyledText>
 
-              {/* <Box mx="auto" /> */}
+           
 
               {item.badge && (
-                <BadgeValue compact={COMPACT}>{item.badge.value}</BadgeValue>
+                <BadgeValue compact={COMPACT}>
+                
+                  <Badge  onClick={() => router.push("./admin/customers")} style={{backgroundColor:"#E09351",border:' 1px solid "#E09351"' ,width:"50px", marginLeft:"49px", justifyContent: 'center' }}  >
+                 { item.badge.value} 
+                  </Badge>
+                 
+                 </BadgeValue>
               )}
             </NavItemButton>
           </Box>
@@ -140,7 +148,8 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
       <NavWrapper compact={sidebarCompact}>
         {renderLevels(navigations)}
       </NavWrapper>
-    </Scrollbar>
+      
+     </Scrollbar>
   );
 
   if (downLg) {
@@ -175,8 +184,8 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
         <Avatar
           src={
             COMPACT
-            ? "/assets/images/banners/logo.png"
-            : "/assets/images/banners/logo.png"
+              ? "/assets/images/banners/logo.png"
+              : "/assets/images/banners/logo.png"
           }
           sx={{
             borderRadius: 0,
@@ -191,6 +200,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
           onClick={setSidebarCompact}
           sidebarcompact={sidebarCompact ? 1 : undefined}
         />
+
       </FlexBetween>
 
       {content}

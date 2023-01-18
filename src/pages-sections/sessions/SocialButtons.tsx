@@ -58,8 +58,8 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
         </Box>
       </BazaarButton> */}
 
-      <FlexBox my="2rem" mr="100px"  fontFamily={'open Sans'} fontSize ={13}>
-        <Box>Vous n &apos; avez pas de compte?</Box>
+      {/* <FlexBox my="2rem" mr="100px"  fontFamily={'open Sans'} fontSize ={13}>
+      
         <Link href={redirect}>
           <a>
             <H6 ml={1} borderBottom="1px solid" borderColor="grey.900" fontFamily={'open Sans'} fontSize ={13}>
@@ -67,16 +67,16 @@ const SocialButtons: FC<SocialButtonsProps> = (props) => {
             </H6>
           </a>
         </Link>
-      </FlexBox>
+      </FlexBox> */}
 
-      <FlexBox
-       my="2" mr="100px"   fontFamily={'open Sans'} fontSize ={13}
+      <FlexBox sx={{marginLeft:'44%',marginBottom:'7%',marginTop:'1' }}
+       color="white"  fontFamily={'open Sans'} fontSize ={14}
         
       >
         Mot de passe oublié?
         <Link href="/">
           <a>
-            <H6 ml={1} borderBottom="1px solid" fontFamily={'open Sans'} fontSize ={13} >
+            <H6 color="white" borderBottom="1px solid" fontFamily={'open Sans'} fontSize ={13} >
             réinitialiser
             </H6>
           </a>

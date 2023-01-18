@@ -67,9 +67,9 @@ const Section3 = () => {
         </Grid>
       
        
-        <Spacer height={22}/>
+        <Spacer height={24}/>
         <Grid item xl={3} lg={12} md={6} xs={6}>
-          <Card2 title="Répartition du CA par catégorie" percentage="2.65%" amount="$12,260">
+          <Card2 title="Répartition du CA par catégorie" percentage="2.65%"  amount="$12,260">
             <ReactApexChart
               height={130}
               type="radialBar"

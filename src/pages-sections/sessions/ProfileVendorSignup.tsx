@@ -1,5 +1,10 @@
-import { Checkbox, FormControlLabel, MenuItem, Box, Grid } from '@mui/material'
-import BazaarButton from 'components/BazaarButton'
+import { Checkbox,  MenuItem,  Grid } from '@mui/material'
+
+import { Box, Button, Divider } from "@mui/material";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
 import { FlexBox } from 'components/flex-box'
 import DropZone from "components/DropZone";
 import { Clear } from "@mui/icons-material";
@@ -22,6 +27,7 @@ const StyledName = styled.div`
   justify-content: space-between;
   padding: 20px;
   margin: 30px;
+  
   @media screen and (min-width: 768px) {
     display: flex;
   }
@@ -45,17 +51,13 @@ const StyledPasswords = styled.div`
   }
 `
 
-const StyledSelectStatus = styled.div`
-  justify-content: space-between;
-  padding: 20px;
-  margin: 30px;
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-`
+
 const Styledbtn = styled.div`
-  padding: 8px 16px;
-  margin-left: 30px;
+display: inline-block;
+
+padding: 8px 16px;
+margin-left: 85%;
+
 `
 const StyledDropzone = styled.div`
   justify-content: space-between;
@@ -118,8 +120,19 @@ const ProfileVendorSignup = () => {
   // @refresh reset
   return (
     <form onSubmit={() => Context.setStep(2)}>
+      <div style={{marginLeft:"4.5%"}}>
+      <RadioGroup
+     aria-required
+        row
+        name="Type"
+      >
+        <FormControlLabel   style={{color:"black"}} value={'Entreprise'} control={<Radio required={true} style={{color:"#236C68"}}/>} label="Entreprise" />
+        <FormControlLabel style={{color:"black"}} value={'Particulier'} control={<Radio required={true} style={{color:"#236C68"}}/>} label="Particulier" />  
+      </RadioGroup>
+      </div>
       <StyledName>
         <TextField
+        
           required
           fullWidth
           name='Nom'
@@ -159,7 +172,7 @@ const ProfileVendorSignup = () => {
           helperText={touched.Prénom && errors.Prénom}
         />
       </StyledName>
-
+      
       <StyledProfileInformations>
         <TextField
           fullWidth
@@ -282,9 +295,9 @@ const ProfileVendorSignup = () => {
           helperText={touched.Cin && errors.Cin}
         />
       </StyledProfileInformations>
-      <StyledDropzone>
+       <StyledDropzone>
 
-        <DropZone
+         <DropZone
 
           onChange={(files) => {
             const uploadFiles = files.map((file) =>
@@ -309,31 +322,8 @@ const ProfileVendorSignup = () => {
           ))}
         </FlexBox>
 
-      </StyledDropzone>
-      <StyledSelectStatus>
-        <TextField
-          select
-          fullWidth
-          required
-          color='info'
-          size='medium'
-          name='type'
-          placeholder='vous êtes une personne ou une entreprise'
-          label='vous êtes une personne  ou une entreprise'
-          defaultValue={
-            Context.userData['type'] ? Context.userData['type'] : 'type'
-          }
-          onChange={e =>
-            Context.setUserData({
-              ...Context.userData,
-              type: e.target.value
-            })
-          }
-        >
-          <MenuItem value='Personne physique'>Personne physique</MenuItem>
-          <MenuItem value='Entreprise'>Entreprise</MenuItem>
-        </TextField>
-      </StyledSelectStatus>
+      </StyledDropzone> 
+     
 
 
       <FormControlLabel
@@ -348,15 +338,16 @@ const ProfileVendorSignup = () => {
             checked={values.agreement || false}
           />
         }
-        label={
+        label={ 
           <FlexBox
+          style={{color:"black"}}
             flexWrap='wrap'
             alignItems='center'
             justifyContent='flex-start'
           >
             En vous inscrivant, vous acceptez les
             <a href='/' target='_blank' rel='noreferrer noopener'>
-              <H6 borderBottom='1px solid' borderColor='grey.900'>
+              <H6 borderBottom='1px solid' alignItems='center'>
                 termes& Conditions
               </H6>
             </a>
@@ -365,15 +356,16 @@ const ProfileVendorSignup = () => {
       />
       <Spacer height={10} />
       <Styledbtn>
-        <BazaarButton color='primary' variant='contained' type='submit'>
-          Next
-        </BazaarButton>
+        <Button  variant='contained' type='submit' style={{color:"white",backgroundColor:"#236C68",maxWidth:"120px"}} >
+          Suivant
+        </Button>
       </Styledbtn>
     </form>
   )
 }
 
 const initialValues = {
+  Type:'',
   Nom: '',
   Prenom: '',
   email: '',
@@ -383,6 +375,7 @@ const initialValues = {
 }
 
 const formSchema = yup.object().shape({
+  Radio: yup.string().required('Name is required'),
   Nom: yup.string().required('Name is required'),
   Prenom: yup.string().required('Prenom is required'),
   email: yup

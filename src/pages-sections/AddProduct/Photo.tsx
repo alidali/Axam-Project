@@ -10,10 +10,10 @@ import {
 import { Formik } from 'formik'
 import React, { FC } from 'react'
 import * as yup from 'yup'
-import DropzoneImage from 'components/DropzoneImage'
+// import DropzoneImage from 'components/DropzoneImage'
 import styled from 'styled-components'
 import { Spacer } from 'ui';
-
+import DropZone from 'components/DropZone'
 
 
 
@@ -64,7 +64,7 @@ const Image:FC = () => {
 
 
            
-              <DropzoneImage
+              <DropZone
                 onChange={(files) => console.log(files)}/>
              
               
@@ -72,15 +72,15 @@ const Image:FC = () => {
             <Grid item xs={12}>
             <label style={{fontSize:"18px",fontWeight:'bold',color:"black"}}> Images secondaires </label>
 <StyledDropzone >
-<DropzoneImage   onChange={(files) => console.log(files)}/>
+<DropZone   onChange={(files) => console.log(files)}/>
 <Spacer width={30}/>
-<DropzoneImage   onChange={(files) => console.log(files)}/> 
+<DropZone   onChange={(files) => console.log(files)}/> 
 <Spacer width={30}/>
-<DropzoneImage   onChange={(files) => console.log(files)}/>
+<DropZone   onChange={(files) => console.log(files)}/>
 <Spacer width={30}/>
-<DropzoneImage   onChange={(files) => console.log(files)}/>
+<DropZone   onChange={(files) => console.log(files)}/>
 <Spacer width={30}/>
-<DropzoneImage   onChange={(files) => console.log(files)}/>
+<DropZone   onChange={(files) => console.log(files)}/>
 </StyledDropzone>
             
               </Grid>
